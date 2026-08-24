@@ -1,0 +1,1237 @@
+/* Riser components.
+   Square corners everywhere. Hairline rules rather than boxes. Flat surfaces —
+   paper or ink, no gradients, no tints of the orange. One orange thing per view.
+   Nothing scales on hover; nothing rotates. */
+
+/* ================================================== SectionLabel
+   The organising device: a small mono label above each section, "01 — CORE". */
+
+.riser-section-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.riser-section-label__index { color: var(--text-secondary); }
+.riser-section-label--accent .riser-section-label__index { color: var(--accent); }
+
+.riser-section-label--ruled {
+  padding-bottom: var(--space-2);
+  border-bottom: var(--hairline) solid var(--border-hairline);
+}
+
+/* ================================================== Button */
+
+.riser-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: var(--hairline) solid transparent;
+  border-radius: var(--radius-none);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: var(--shadow-none);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+/* Sizes, on the 4px rhythm. */
+.riser-button--sm { height: var(--control-height-sm); padding: 0 var(--space-3); font-size: var(--text-small); }
+.riser-button--md { height: var(--control-height-md); padding: 0 var(--space-4); font-size: var(--text-body-size); }
+.riser-button--lg { height: var(--control-height-lg); padding: 0 var(--space-5); font-size: var(--text-body-size); }
+
+.riser-button--block { width: 100%; }
+
+/* Primary — the orange.
+   Where the orange goes, resolved: if a view has a primary action, the orange is
+   on that action and nothing else in the view is orange. If a view has no primary
+   action — a listing, a public profile, a log — the orange may instead mark the
+   single most important live figure (see .riser-stat--live). Never both.
+   Ink on orange is 7.3:1. White on orange is 2.6:1 and is never used. */
+.riser-button--primary {
+  background: var(--surface-accent);
+  color: var(--text-on-accent);
+  font-weight: var(--weight-bold);
+}
+.riser-button--primary:hover:not(:disabled)  { background: var(--accent-hover); }
+.riser-button--primary:active:not(:disabled) { background: var(--accent-active); }
+
+/* Ink — the neutral commit. Use when the orange is already spent elsewhere in
+   the view, or for destructive confirmation. */
+.riser-button--ink {
+  background: var(--surface-inverse);
+  color: var(--text-on-ink);
+}
+.riser-button--ink:hover:not(:disabled) { background: var(--ink-hover); }
+
+/* Paper — a solid paper fill, the inverse of `ink`. This is the primary action
+   on an ink surface when the orange is already spent there — the hero, where
+   the word PUSHED is the orange. Paper on ink is 17.8:1. */
+.riser-button--paper {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: var(--weight-bold);
+}
+.riser-button--paper:hover:not(:disabled) { background: var(--paper-hover); }
+
+/* Secondary — a hairline box. The default for anything that is not the action. */
+.riser-button--secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-dashed);
+}
+.riser-button--secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--ink);
+}
+
+/* Ghost — no rule at all, for dense rows and table actions. */
+.riser-button--ghost {
+  background: transparent;
+  color: var(--text-primary);
+  padding-inline: var(--space-2);
+}
+.riser-button--ghost:hover:not(:disabled) { background: var(--surface-hover); }
+
+/* Danger — ink fill, not a red. There is no red in the palette; the weight of a
+   solid ink block carries the consequence, and the copy says what will happen. */
+.riser-button--danger {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--ink);
+}
+.riser-button--danger:hover:not(:disabled) {
+  background: var(--surface-inverse);
+  color: var(--text-on-ink);
+}
+
+.riser-button:disabled {
+  background: var(--surface-disabled);
+  color: var(--text-disabled);
+  border-color: var(--border-disabled);
+}
+
+/* On an ink surface the secondary and ghost rules invert. */
+.riser-surface-ink .riser-button--secondary { color: var(--paper); border-color: var(--line-on-ink-strong); }
+.riser-surface-ink .riser-button--secondary:hover:not(:disabled) { background: var(--surface-hover-on-ink); border-color: var(--paper); }
+.riser-surface-ink .riser-button--ghost { color: var(--paper); }
+.riser-surface-ink .riser-button--ghost:hover:not(:disabled) { background: var(--surface-hover-on-ink); }
+
+/* ================================================== Card */
+
+.riser-card {
+  background: var(--surface-page);
+  border: var(--hairline) solid var(--border-hairline);
+  border-radius: var(--radius-none);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-none);
+}
+
+.riser-card--flush   { padding: 0; }
+.riser-card--tight   { padding: var(--space-4); }
+.riser-card--ink     { background: var(--surface-inverse); color: var(--text-on-ink); border-color: transparent; }
+.riser-card--accent  { background: var(--surface-accent); color: var(--text-on-accent); border-color: transparent; }
+.riser-card--dashed  { border-style: dashed; border-color: var(--border-dashed); }
+
+/* A card is not a button. When a whole card is clickable the affordance is the
+   rule going solid ink, not a lift or a shadow. */
+.riser-card--interactive {
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+.riser-card--interactive:hover { border-color: var(--ink); }
+
+.riser-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+/* A badge sets white-space: nowrap, so without this the title beside it refuses
+   to shrink and the badge pushes a pixel past the viewport on a narrow phone. */
+.riser-card__header > * { min-width: 0; }
+
+.riser-card__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+.riser-card__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.riser-card__footer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--hairline) solid var(--border-hairline);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+@media (max-width: 500px) { .riser-card { padding: var(--space-4); } }
+
+/* ================================================== StatCard
+   A mono label, a big tabular figure, an optional note. The figure may be the
+   one orange thing in a view — that is what `--live` is for. */
+
+.riser-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: var(--hairline) solid var(--border-hairline);
+  background: var(--surface-page);
+}
+
+.riser-stat__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-stat__value {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  letter-spacing: var(--tracking-heading);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.riser-stat__note { font-size: var(--text-small); color: var(--text-secondary); }
+.riser-stat--live .riser-stat__value { color: var(--accent); }
+.riser-stat--ink { background: var(--surface-inverse); border-color: transparent; }
+.riser-stat--ink .riser-stat__value { color: var(--paper); }
+.riser-stat--ink .riser-stat__label { color: var(--paper-on-ink); }
+.riser-stat--ink.riser-stat--live .riser-stat__value { color: var(--orange); }
+
+/* ================================================== Badge / status
+   Status is a mono label with a 2px rule under it, not a pill and not a colour
+   wheel. Only "live" spends the orange. */
+
+.riser-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) 0;
+  border-bottom: var(--rule-heavy) solid var(--status-neutral);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.riser-badge--live    { border-bottom-color: var(--status-live); color: var(--accent); }
+.riser-badge--neutral { border-bottom-color: var(--status-neutral); color: var(--text-secondary); }
+.riser-badge--done    { border-bottom-color: var(--status-done); color: var(--text-primary); }
+.riser-badge--stopped { border-bottom-color: var(--status-stopped); color: var(--text-secondary); }
+
+/* `--boxed` is the variant for a photograph or an ink surface, where an
+   underline alone would not read. Still square, still no fill tint. */
+.riser-badge--boxed {
+  padding: var(--space-1) var(--space-2);
+  border: var(--hairline) solid currentColor;
+  border-bottom-width: var(--rule-heavy);
+}
+
+.riser-badge--on-image {
+  background: var(--surface-inverse);
+  color: var(--paper);
+  border-color: transparent;
+  border-bottom-width: var(--rule-heavy);
+  padding: var(--space-1) var(--space-2);
+}
+.riser-badge--on-image.riser-badge--live { border-bottom-color: var(--orange); color: var(--orange); }
+
+/* ================================================== Field / inputs
+   Labels are mono caps. Controls are square, hairline-ruled, and go to a 2px ink
+   rule on focus rather than a glow. */
+
+.riser-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.riser-field--full { grid-column: 1 / -1; }
+
+.riser-field__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-field__required { color: var(--accent); margin-left: var(--space-1); }
+
+.riser-input,
+.riser-select,
+.riser-textarea {
+  width: 100%;
+  min-height: var(--control-height-lg);
+  padding: var(--space-3) var(--space-3);
+  background: var(--surface-page);
+  border: var(--hairline) solid var(--border-dashed);
+  border-radius: var(--radius-none);
+  font-family: var(--font-ui);
+  font-size: var(--text-body-size);
+  line-height: 1.4;
+  color: var(--text-primary);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.riser-textarea { min-height: 120px; resize: vertical; line-height: var(--leading-body); }
+
+.riser-input::placeholder,
+.riser-textarea::placeholder { color: var(--text-disabled); }
+
+.riser-input:hover:not(:disabled),
+.riser-select:hover:not(:disabled),
+.riser-textarea:hover:not(:disabled) { border-color: var(--ink); }
+
+.riser-input:focus,
+.riser-select:focus,
+.riser-textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+  border-width: var(--rule-heavy);
+  padding: calc(var(--space-3) - 1px) calc(var(--space-3) - 1px);
+}
+
+.riser-input:disabled,
+.riser-select:disabled,
+.riser-textarea:disabled {
+  background: var(--surface-disabled);
+  color: var(--text-disabled);
+  border-color: var(--border-disabled);
+}
+
+/* Numeric and technical values are set in mono. */
+.riser-input--data { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Native select: square caret drawn in ink, no rounded chevron. */
+.riser-select {
+  appearance: none;
+  padding-right: var(--space-7);
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+                    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.riser-field__error {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.riser-field__hint { font-size: var(--text-small); color: var(--text-secondary); }
+
+.riser-field--invalid .riser-input,
+.riser-field--invalid .riser-select,
+.riser-field--invalid .riser-textarea { border-color: var(--accent); border-width: var(--rule-heavy); }
+
+/* Search — same control, a mono placeholder. */
+.riser-search { position: relative; display: flex; align-items: center; }
+.riser-search .riser-input { padding-left: var(--space-7); }
+.riser-search__icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* Checkbox and radio: square, ink fill when checked. Radio stays square too —
+   the identity has no round corners. */
+.riser-check {
+  appearance: none;
+  width: 18px; height: 18px;
+  border: var(--hairline) solid var(--border-dashed);
+  background: var(--surface-page);
+  display: inline-grid;
+  place-content: center;
+  transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.riser-check:checked { background: var(--ink); border-color: var(--ink); }
+.riser-check:checked::after {
+  content: "";
+  width: 8px; height: 8px;
+  background: var(--paper);
+}
+
+/* ================================================== Filter dropdown */
+
+.riser-filter { position: relative; }
+
+.riser-filter__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-height-md);
+  padding: 0 var(--space-3);
+  background: transparent;
+  border: var(--hairline) solid var(--border-dashed);
+  color: var(--text-primary);
+  font-size: var(--text-small);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.riser-filter__trigger:hover { border-color: var(--ink); }
+
+.riser-filter__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-filter__value { font-weight: var(--weight-medium); }
+
+.riser-filter__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--surface-page);
+  border: var(--hairline) solid var(--ink);
+  z-index: var(--z-dropdown);
+  animation: riser-rise var(--duration-fast) var(--ease-out) both;
+}
+
+.riser-filter__menu--left { right: auto; left: 0; }
+
+.riser-filter__item {
+  display: block;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.riser-filter__item:hover { background: var(--surface-hover); }
+.riser-filter__item--active { background: var(--surface-selected); font-weight: var(--weight-bold); }
+
+/* ================================================== DataGrid
+   Rows separated by hairlines, no zebra fill, no cell borders. The header is a
+   mono caps row over a 2px ink rule. */
+
+.riser-grid { display: flex; flex-direction: column; }
+
+.riser-grid__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.riser-grid__heading { display: flex; align-items: baseline; gap: var(--space-2); }
+.riser-grid__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+.riser-grid__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.riser-grid__controls { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+
+.riser-grid__table { width: 100%; }
+
+.riser-grid__head-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: var(--rule-heavy) solid var(--ink);
+}
+
+.riser-grid__head-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  min-width: 0;
+}
+
+.riser-grid__head-cell--sortable { cursor: pointer; }
+.riser-grid__head-cell--sortable:hover { color: var(--text-primary); }
+
+.riser-grid__sort {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--text-disabled);
+  line-height: 0;
+}
+.riser-grid__sort-btn { background: transparent; border: 0; padding: 0; color: inherit; line-height: 0; }
+.riser-grid__sort-btn--active { color: var(--accent); }
+
+.riser-grid__body { display: flex; flex-direction: column; }
+
+.riser-grid__row {
+  display: flex;
+  align-items: center;
+  border-bottom: var(--hairline) solid var(--border-hairline);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.riser-grid__row--clickable { cursor: pointer; }
+.riser-grid__row--clickable:hover { background: var(--surface-hover); }
+
+/* The selected row is marked by a 2px orange rule on its leading edge — one
+   orange thing, and it marks position rather than decorating.
+   The rule is drawn with an inset shadow rather than a border-left so that adding
+   it does not shift the row's cells by 2px. It is a rule, not elevation: it is
+   the single exception to the no-shadow decree in tokens/elevation.css, and the
+   only shadow anywhere in this stylesheet. */
+.riser-grid__row--active {
+  background: var(--surface-selected);
+  box-shadow: inset var(--rule-heavy) 0 0 0 var(--orange);
+}
+
+.riser-grid__cell {
+  padding: var(--space-4) var(--space-3) var(--space-4) 0;
+  font-size: var(--text-small);
+  color: var(--text-body);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.riser-grid__cell--data { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.riser-grid__cell-actions { display: flex; gap: var(--space-3); align-items: center; }
+
+.riser-grid__empty {
+  padding: var(--space-8) 0;
+  text-align: left;
+  border-bottom: var(--hairline) solid var(--border-hairline);
+}
+
+/* Below 500px the grid stops being a grid and becomes stacked records, each cell
+   labelled by its column. This is what the `responsive` widths of 0 are for. */
+@media (max-width: 500px) {
+  .riser-grid__head-row { display: none; }
+  .riser-grid__row { flex-direction: column; align-items: stretch; padding: var(--space-3) 0; }
+  .riser-grid__cell { width: 100% !important; display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) 0; }
+  .riser-grid__cell::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    flex: none;
+  }
+}
+
+/* ================================================== Pagination */
+
+.riser-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.riser-pagination__pages { display: flex; align-items: center; gap: var(--space-1); }
+
+.riser-pagination__page {
+  min-width: var(--control-height-md);
+  height: var(--control-height-md);
+  padding: 0 var(--space-2);
+  background: transparent;
+  border: var(--hairline) solid transparent;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.riser-pagination__page:hover:not(:disabled) { color: var(--text-primary); border-color: var(--border-hairline); }
+.riser-pagination__page--active {
+  color: var(--text-primary);
+  font-weight: var(--weight-medium);
+  border-bottom-color: var(--ink);
+  border-bottom-width: var(--rule-heavy);
+}
+.riser-pagination__ellipsis { color: var(--text-disabled); font-family: var(--font-mono); padding: 0 var(--space-1); }
+.riser-pagination__step { display: inline-flex; align-items: center; gap: var(--space-2); }
+.riser-pagination__step:disabled { color: var(--text-disabled); }
+
+/* On a phone the three groups will not sit on one line, so they centre and wrap
+   as one row instead of pushing Next onto a line of its own. */
+@media (max-width: 500px) {
+  .riser-pagination { justify-content: center; gap: var(--space-2); }
+  /* Numbers take the first line on their own; Prev and Next pair up under them,
+     rather than Next being orphaned on a third line. */
+  .riser-pagination__pages { order: -1; width: 100%; flex-wrap: wrap; justify-content: center; }
+  .riser-pagination__step { min-width: 96px; }
+}
+
+/* ================================================== DetailView / DetailForm
+   Both are a titled card over a two-column field grid, with actions in the
+   header and a ruled footer. Labels mono caps, values in body or mono. */
+
+.riser-detail__grid {
+  display: grid;
+  grid-template-columns: var(--grid-columns-2);
+  gap: var(--space-5) var(--grid-gap-wide);
+}
+
+@media (max-width: 768px) { .riser-detail__grid { grid-template-columns: 1fr; } }
+
+.riser-detail__field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+
+.riser-detail__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-detail__value { font-size: var(--text-body-size); color: var(--text-primary); overflow-wrap: anywhere; }
+.riser-detail__value--data { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.riser-detail__value--empty { color: var(--text-disabled); }
+
+/* ================================================== Modal
+   One overlay treatment: an ink wash. The dialog is a square paper block with a
+   hairline, entering by rising 8px. No scale, no bounce. */
+
+.riser-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  z-index: var(--z-modal);
+  animation: riser-fade var(--duration-base) var(--ease-out) both;
+}
+
+@keyframes riser-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.riser-modal {
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface-page);
+  border: var(--hairline) solid var(--ink);
+  border-radius: var(--radius-none);
+  padding: var(--space-7);
+  animation: riser-rise var(--duration-base) var(--ease-out) both;
+}
+
+.riser-modal--wide { max-width: 720px; }
+.riser-modal__title { font-size: var(--text-h2); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); margin-bottom: var(--space-3); }
+.riser-modal__message { color: var(--text-body); }
+.riser-modal__submessage { font-size: var(--text-small); color: var(--text-secondary); margin-top: var(--space-2); }
+.riser-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: var(--hairline) solid var(--border-hairline);
+}
+
+@media (max-width: 500px) {
+  .riser-modal { padding: var(--space-5); }
+  .riser-modal__actions { flex-direction: column-reverse; }
+  .riser-modal__actions .riser-button { width: 100%; }
+}
+
+/* Loading: the four bars of the mark rising in sequence. No spinner — nothing
+   in this identity rotates.
+
+   Geometry matches assets/logo/riser-mark-primary.svg exactly: 16-unit bars,
+   8-unit gaps, every bar cut on the same 10-unit shear, stage line 5 units
+   tall sitting 5 below the baseline. The mark is 88 x 84. Everything scales
+   from --rl-size.
+
+   Motion follows the brand: each bar travels --rise-distance upward,
+   --stagger-step between siblings, on --ease-out. */
+
+.riser-loader {
+  --rl-size: 64px;
+  --rl-unit: calc(var(--rl-size) / 84);
+  display: inline-flex;
+  flex-direction: column;
+  gap: calc(var(--rl-unit) * 5);
+  width: calc(var(--rl-unit) * 88);
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.riser-loader-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--rl-unit) * 8);
+  height: calc(var(--rl-unit) * 74);
+}
+
+.riser-loader-bar {
+  display: block;
+  width: calc(var(--rl-unit) * 16);
+  background: var(--ink);
+  animation: riser-loader-bar 1.4s var(--ease-out) infinite;
+}
+
+/* Bar heights and shear, straight off the mark's polygons. */
+.riser-loader-bar:nth-child(1) {
+  height: calc(var(--rl-unit) * 24);
+  clip-path: polygon(0 41.7%, 100% 0, 100% 100%, 0 100%);
+  animation-delay: 0ms;
+}
+
+.riser-loader-bar:nth-child(2) {
+  height: calc(var(--rl-unit) * 40);
+  clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%);
+  animation-delay: 45ms;
+}
+
+.riser-loader-bar:nth-child(3) {
+  height: calc(var(--rl-unit) * 56);
+  clip-path: polygon(0 17.9%, 100% 0, 100% 100%, 0 100%);
+  animation-delay: 90ms;
+}
+
+.riser-loader-bar:nth-child(4) {
+  height: calc(var(--rl-unit) * 74);
+  clip-path: polygon(0 13.5%, 100% 0, 100% 100%, 0 100%);
+  animation-delay: 135ms;
+}
+
+.riser-loader-stage {
+  display: block;
+  height: calc(var(--rl-unit) * 5);
+  width: 100%;
+  background: var(--ink);
+}
+
+/* Full: the mark's own colours — the fourth bar is the orange one. */
+.riser-loader--full .riser-loader-bar:nth-child(4) {
+  background: var(--orange);
+}
+
+/* Mono: inherits currentColor, for use inside a filled button where the
+   orange bar would disappear into the background. */
+.riser-loader--mono .riser-loader-bar,
+.riser-loader--mono .riser-loader-stage {
+  background: currentColor;
+}
+
+/* On ink: paper bars, orange fourth kept. */
+.riser-loader--on-ink .riser-loader-bar,
+.riser-loader--on-ink .riser-loader-stage {
+  background: var(--paper);
+}
+
+.riser-loader--on-ink .riser-loader-bar:nth-child(4) {
+  background: var(--orange);
+}
+
+@keyframes riser-loader-bar {
+  0% {
+    transform: translateY(var(--rise-distance));
+    opacity: 0;
+  }
+  25%,
+  70% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--rise-distance));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .riser-loader-bar {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.riser-loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-9) 0;
+}
+
+.riser-loading-screen__text {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ================================================== Notification
+   Enters by rising, like everything else. Status is a 2px leading rule, not a
+   coloured card. */
+
+.riser-notifications {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(380px, calc(100vw - var(--space-8)));
+  z-index: var(--z-notification);
+}
+
+.riser-notification {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface-inverse);
+  color: var(--text-on-ink);
+  border-left: var(--rule-heavy) solid var(--slate);
+  animation: riser-rise var(--duration-base) var(--ease-out) both;
+}
+
+.riser-notification--success { border-left-color: var(--paper); }
+.riser-notification--warning { border-left-color: var(--orange); }
+.riser-notification--error   { border-left-color: var(--orange); }
+.riser-notification--info    { border-left-color: var(--slate); }
+
+.riser-notification__header {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: var(--space-1);
+}
+
+.riser-notification__message { font-size: var(--text-small); color: var(--paper-on-ink); line-height: var(--leading-body); }
+.riser-notification__note { font-size: var(--text-label); color: var(--paper-on-ink); margin-top: var(--space-1); }
+.riser-notification__close { background: transparent; border: 0; color: var(--paper-on-ink); padding: 0; line-height: 0; }
+.riser-notification__close:hover { color: var(--paper); }
+
+@media (max-width: 500px) {
+  .riser-notifications { top: var(--space-2); right: var(--space-2); left: var(--space-2); width: auto; }
+}
+
+/* ================================================== Navbar
+   A full-bleed bar on a hairline, not a floating rounded pill. The lockup sits
+   left — the mark is the only thing that rises. */
+
+.riser-navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-navbar);
+  background: var(--surface-page);
+  border-bottom: var(--hairline) solid var(--border-hairline);
+}
+
+.riser-navbar--ink {
+  background: var(--surface-inverse);
+  border-bottom-color: var(--line-on-ink);
+  color: var(--text-on-ink);
+}
+
+.riser-navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: var(--navbar-height);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+@media (max-width: 960px) { .riser-navbar__inner { padding-inline: var(--container-gutter-sm); } }
+
+.riser-navbar__left  { display: flex; align-items: center; gap: var(--space-4); min-width: 0; }
+.riser-navbar__right { display: flex; align-items: center; gap: var(--space-4); }
+
+.riser-navbar__logo { display: flex; align-items: center; }
+.riser-navbar__logo img, .riser-navbar__logo svg { height: 28px; width: auto; display: block; }
+
+.riser-navbar__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height-md);
+  height: var(--control-height-md);
+  background: transparent;
+  border: var(--hairline) solid var(--border-dashed);
+  color: inherit;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.riser-navbar__menu-btn:hover { border-color: currentColor; }
+
+.riser-navbar__link {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  padding: var(--space-2) 0;
+  border-bottom: var(--rule-heavy) solid transparent;
+}
+.riser-navbar__link:hover { border-bottom-color: var(--ink); }
+.riser-navbar__link--active { border-bottom-color: var(--orange); }
+
+.riser-navbar__context {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) { .riser-navbar__context { display: none; } }
+
+/* ================================================== Sidebar / drawer */
+
+.riser-drawer__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-ink);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-out), visibility var(--duration-base);
+  z-index: var(--z-drawer-overlay);
+}
+.riser-drawer__overlay--open { opacity: 1; visibility: visible; }
+
+.riser-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  max-width: 86vw;
+  height: 100vh;
+  background: var(--surface-page);
+  border-right: var(--hairline) solid var(--border-hairline);
+  transform: translateX(-100%);
+  transition: transform var(--duration-slow) var(--ease-out);
+  z-index: var(--z-drawer);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.riser-drawer--open { transform: none; }
+.riser-drawer--ink { background: var(--surface-inverse); color: var(--text-on-ink); border-right-color: var(--line-on-ink); }
+
+@media (max-width: 360px) { .riser-drawer { width: var(--sidebar-width-sm); } }
+
+.riser-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: var(--hairline) solid var(--border-hairline);
+}
+.riser-drawer__header img, .riser-drawer__header svg { height: 24px; width: auto; display: block; }
+.riser-drawer__close { background: transparent; border: 0; color: inherit; padding: var(--space-1); line-height: 0; }
+
+.riser-drawer__section { padding: var(--space-5); border-bottom: var(--hairline) solid var(--border-hairline); }
+.riser-drawer__section:last-child { border-bottom: 0; }
+
+.riser-drawer__section-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.riser-drawer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+.riser-drawer__link {
+  display: block;
+  padding: var(--space-3) 0;
+  font-size: var(--text-body-size);
+  color: var(--text-primary);
+  border-left: var(--rule-heavy) solid transparent;
+  padding-left: var(--space-3);
+  margin-left: calc(var(--space-3) * -1);
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+.riser-drawer__link:hover { background: var(--surface-hover); border-left-color: var(--ink); }
+.riser-drawer__link--active { border-left-color: var(--orange); font-weight: var(--weight-bold); }
+
+/* ================================================== EventCard
+   Full-bleed image to the card edge, square, no inset and no radius. Title,
+   then mono meta lines. The status badge sits on the image over an ink block. */
+
+.riser-event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-page);
+  border: var(--hairline) solid var(--border-hairline);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.riser-event-card:hover { border-color: var(--ink); }
+
+.riser-event-card__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--surface-disabled); }
+.riser-event-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.riser-event-card__badge { position: absolute; top: 0; left: 0; }
+
+.riser-event-card__placeholder {
+  width: 100%; height: 100%;
+  display: grid; place-content: center;
+  background: var(--surface-disabled);
+  color: var(--text-disabled);
+}
+
+.riser-event-card__body { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5); }
+
+.riser-event-card__title {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-primary);
+}
+
+.riser-event-card__meta { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.riser-event-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-event-card__price {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.riser-event-card__description {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.riser-event-card__features { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.riser-event-card__footer { margin-top: auto; padding: 0 var(--space-5) var(--space-5); }
+
+/* Skeleton. A hairline block that pulses in opacity — it does not shimmer, and
+   nothing travels across it. */
+.riser-skeleton { background: var(--surface-disabled); animation: riser-pulse 1.4s var(--ease-in-out) infinite; }
+@keyframes riser-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+.riser-skeleton--text { height: 12px; }
+.riser-skeleton--title { height: 20px; }
+.riser-skeleton--media { aspect-ratio: 3 / 2; }
+
+/* ================================================== TicketCard */
+
+.riser-ticket {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: var(--hairline) solid var(--border-hairline);
+  background: var(--surface-page);
+}
+
+.riser-ticket__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.riser-ticket__header > * { min-width: 0; }
+.riser-ticket__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+
+.riser-ticket__type {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+.riser-ticket__price {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-primary);
+}
+
+/* Specification and measurement are marked with dashed hairlines. A ticket's
+   terms are specification, so this is where dashed earns its place. */
+.riser-ticket__spec {
+  display: grid;
+  grid-template-columns: var(--grid-columns-2);
+  gap: var(--space-3) var(--grid-gap);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) dashed var(--border-dashed);
+}
+
+.riser-ticket__spec-item { display: flex; flex-direction: column; gap: 2px; }
+.riser-ticket__spec-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.riser-ticket__spec-value { font-family: var(--font-mono); font-size: var(--text-small); font-variant-numeric: tabular-nums; color: var(--text-primary); }
+
+.riser-ticket__flags { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+.riser-ticket__quantity { display: inline-flex; align-items: stretch; border: var(--hairline) solid var(--border-dashed); }
+.riser-ticket__quantity button {
+  width: var(--control-height-md);
+  height: var(--control-height-md);
+  background: transparent;
+  border: 0;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+}
+.riser-ticket__quantity button:hover:not(:disabled) { background: var(--surface-hover); }
+.riser-ticket__quantity button:disabled { color: var(--text-disabled); }
+.riser-ticket__quantity output {
+  min-width: var(--control-height-md);
+  display: grid;
+  place-content: center;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  border-inline: var(--hairline) solid var(--border-hairline);
+}
+
+@media (max-width: 500px) { .riser-ticket__spec { grid-template-columns: 1fr; } }
+
+/* ================================================== Dropzone
+   Dashed hairline, because a dropzone is a specification of what goes there. */
+
+.riser-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-5);
+  border: var(--rule-heavy) dashed var(--border-dashed);
+  background: transparent;
+  color: var(--text-secondary);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.riser-dropzone:hover { border-color: var(--ink); }
+.riser-dropzone--dragging { border-color: var(--orange); background: var(--surface-selected); }
+.riser-dropzone--disabled { opacity: 0.5; pointer-events: none; }
+
+.riser-dropzone__headline { font-size: var(--text-body-size); font-weight: var(--weight-bold); color: var(--text-primary); }
+.riser-dropzone__hint {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* The expected-columns line. Mono, because column names are technical data, but
+   not uppercased and not tracked out — caps at 0.16em is a label device and
+   stops working the moment the string runs to more than a few words. */
+.riser-dropzone__spec {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  max-width: 56ch;
+}
+.riser-dropzone__file { display: flex; align-items: center; gap: var(--space-3); }
+
+/* ================================================== EmptyState / ErrorScreen */
+
+.riser-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-8) 0;
+}
+
+.riser-empty__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.riser-empty__headline { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+.riser-empty__body { font-size: var(--text-small); color: var(--text-body); max-width: 52ch; }
+.riser-empty__actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); flex-wrap: wrap; }
+
+/* ================================================== Notice
+   An inline advisory bar. Promo shows one above the grid when you are acting as
+   a team member rather than the organiser owner; the credit screen shows the
+   same string. It is one component with a `tone`, not two inline blocks. */
+
+.riser-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-left: var(--rule-heavy) solid var(--slate);
+  background: var(--surface-hover);
+  font-size: var(--text-small);
+  color: var(--text-body);
+}
+
+.riser-notice--attention { border-left-color: var(--orange); }
+.riser-notice--ink { border-left-color: var(--ink); }
+.riser-notice__text { min-width: 0; }
+.riser-notice strong { font-weight: var(--weight-bold); color: var(--text-primary); }

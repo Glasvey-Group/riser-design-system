@@ -1,0 +1,108 @@
+/* Riser tokens as a Tailwind v4 theme.
+   promo.riser.events is Tailwind v4; riser.events is plain CSS. Both read the same
+   custom properties, so this file only re-exports them into Tailwind's namespace —
+   it defines no values of its own. Import it after styles.css:
+
+     @import "tailwindcss";
+     @import "riser-design-system/styles.css";
+     @import "riser-design-system/tokens/tailwind.css";
+
+   Then `bg-ink`, `text-accent`, `border-hairline`, `font-mono`, `text-label`,
+   `p-4` (16px) and so on resolve to the tokens. */
+
+@theme inline {
+  /* Colour */
+  --color-orange: var(--orange);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-slate: var(--slate);
+  --color-slate-text: var(--slate-text);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+
+  --color-surface-page: var(--surface-page);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-accent: var(--surface-accent);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-selected: var(--surface-selected);
+  --color-surface-disabled: var(--surface-disabled);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-body: var(--text-body);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-on-ink: var(--text-on-ink);
+  --color-text-on-accent: var(--text-on-accent);
+  --color-text-disabled: var(--text-disabled);
+
+  --color-status-live: var(--status-live);
+  --color-status-neutral: var(--status-neutral);
+  --color-status-done: var(--status-done);
+  --color-status-stopped: var(--status-stopped);
+
+  /* Rules. Tailwind's border-* utilities read the colour namespace. */
+  --color-hairline: var(--line);
+  --color-hairline-strong: var(--line-strong);
+  --color-hairline-on-ink: var(--line-on-ink);
+
+  /* Type */
+  --font-display: var(--font-display);
+  --font-ui: var(--font-ui);
+  --font-mono: var(--font-mono);
+
+  --text-display: var(--text-display);
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-h1: var(--text-h1);
+  --text-h1--line-height: var(--leading-heading);
+  --text-h1--letter-spacing: var(--tracking-heading);
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--leading-heading);
+  --text-h2--letter-spacing: var(--tracking-heading);
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--leading-heading);
+  --text-h3--letter-spacing: var(--tracking-heading);
+  --text-body: var(--text-body-size);
+  --text-body--line-height: var(--leading-body);
+  --text-small: var(--text-small);
+  --text-label: var(--text-label);
+  --text-label--letter-spacing: var(--tracking-label);
+
+  --font-weight-regular: var(--weight-regular);
+  --font-weight-medium: var(--weight-medium);
+  --font-weight-bold: var(--weight-bold);
+  --font-weight-black: var(--weight-black);
+
+  /* Spacing. Tailwind's numeric scale is remapped onto the brief's steps, so
+     `p-4` is 16px and `gap-6` is 26px — the brief's values, not Tailwind's. */
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-7: var(--space-7);
+  --spacing-8: var(--space-8);
+  --spacing-9: var(--space-9);
+
+  /* Radii. Square everywhere; the tile is the one exception. */
+  --radius-none: var(--radius-none);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-tile: var(--radius-tile);
+
+  /* Motion */
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+
+  /* Breakpoints */
+  --breakpoint-sm: 500px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+
+  /* Flat by decree — see tokens/elevation.css. */
+  --shadow-none: none;
+}

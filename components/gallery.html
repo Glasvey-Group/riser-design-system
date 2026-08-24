@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riser — Components</title>
+<link rel="icon" href="../assets/logo/riser-favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../foundations/foundations.css">
+</head>
+<body>
+<div class="riser-container spec-page">
+
+  <header class="spec-masthead">
+    <div>
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="200" style="display:block;margin-bottom:var(--space-4)">
+      <span class="riser-label">Design system — components</span>
+    </div>
+    <nav class="spec-nav">
+      <a href="../foundations/index.html">Foundations</a>
+      <a href="gallery.html" aria-current="page">Components</a>
+      <a href="../kits/promo-dashboard.html">Promo kit</a>
+      <a href="../kits/ticket-buyer.html">Buyer kit</a>
+      <a href="../kits/marketing-site.html">Marketing kit</a>
+    </nav>
+  </header>
+
+  <p class="spec-lede">Every primitive, with its states. Each one is recreated from the two codebases rather than invented: RiserEvents is canonical for shared primitives, RiserPromo supplies the dashboard components Events does not have. Where a component existed in both, it is here once, with the Promo difference folded in as a prop. Prop contracts are in <span class="riser-data">components/*.tsx</span>; the migration notes are in <span class="riser-data">docs/MIGRATION.md</span>.</p>
+
+  <!-- BUTTON -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">01 —</span><span>Button</span></div>
+    <p class="spec-lede">Sizes are Events' contract exactly: sm, md, lg. <span class="riser-data">primary</span> is the orange — one per view. Hover darkens the fill or fills the rule over 140ms; nothing scales.</p>
+    <div class="spec-demo">
+      <button class="riser-button riser-button--primary riser-button--md">Run campaign</button>
+      <button class="riser-button riser-button--ink riser-button--md">Add campaign</button>
+      <button class="riser-button riser-button--secondary riser-button--md">Cancel</button>
+      <button class="riser-button riser-button--ghost riser-button--md">View</button>
+      <button class="riser-button riser-button--danger riser-button--md">Delete</button>
+      <button class="riser-button riser-button--primary riser-button--md" disabled>Disabled</button>
+    </div>
+    <span class="spec-caption">Variants — primary · ink · secondary · ghost · danger · disabled</span>
+    <div class="spec-demo" style="margin-top:var(--space-4)">
+      <button class="riser-button riser-button--primary riser-button--sm">Small</button>
+      <button class="riser-button riser-button--primary riser-button--md">Medium</button>
+      <button class="riser-button riser-button--primary riser-button--lg">Large</button>
+    </div>
+    <span class="spec-caption">Sizes — 28 · 36 · 44px, on the 4px rhythm</span>
+    <div class="spec-demo spec-demo--ink riser-surface-ink" style="margin-top:var(--space-4)">
+      <button class="riser-button riser-button--primary riser-button--md">Buy credits</button>
+      <button class="riser-button riser-button--secondary riser-button--md">Not now</button>
+      <button class="riser-button riser-button--ghost riser-button--md">View</button>
+    </div>
+    <span class="spec-caption">On ink — secondary and ghost rules invert</span>
+  </section>
+
+  <!-- BADGE -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">02 —</span><span>StatusBadge</span></div>
+    <p class="spec-lede">Mono caps over a 2px rule. Both codebases had drifted — Events used <span class="riser-data">rounded-full</span> pills, Promo had a commented-out six-shade grey ramp. Six greys cannot be told apart at 11px, and the brand has one signal colour, so only <span class="riser-data">live</span> spends the orange.</p>
+    <div class="spec-demo">
+      <span class="riser-badge riser-badge--neutral">Draft</span>
+      <span class="riser-badge riser-badge--neutral">Scheduled</span>
+      <span class="riser-badge riser-badge--live">Running</span>
+      <span class="riser-badge riser-badge--done">Complete</span>
+      <span class="riser-badge riser-badge--stopped">Cancelled</span>
+    </div>
+    <span class="spec-caption">CampaignStatus 1–5, mapped in <span class="riser-data">CAMPAIGN_STATUS_TONE</span></span>
+    <div class="spec-demo" style="margin-top:var(--space-4)">
+      <span class="riser-badge riser-badge--neutral riser-badge--boxed">Queued</span>
+      <span class="riser-badge riser-badge--done riser-badge--boxed">Delivered</span>
+      <span class="riser-badge riser-badge--live riser-badge--boxed">Opened</span>
+      <span class="riser-badge riser-badge--stopped riser-badge--boxed">Bounced</span>
+    </div>
+    <span class="spec-caption">Boxed — for ink surfaces and over photography</span>
+  </section>
+
+  <!-- FIELDS -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">03 —</span><span>Field, Input, Select, Textarea</span></div>
+    <p class="spec-lede">Labels are mono caps. Focus takes the rule to 2px ink rather than a glow. Errors carry real text — Events rendered the literal string “Required” whatever went wrong.</p>
+    <div class="spec-demo spec-demo--stack">
+      <div class="riser-detail__grid">
+        <div class="riser-field">
+          <label class="riser-field__label" for="g-name">Campaign name<span class="riser-field__required">*</span></label>
+          <input class="riser-input" id="g-name" value="Belfast · Autumn push">
+        </div>
+        <div class="riser-field">
+          <label class="riser-field__label" for="g-audience">Audience<span class="riser-field__required">*</span></label>
+          <select class="riser-select" id="g-audience">
+            <option>Select audience</option>
+            <option selected>Limelight regulars — 4,812</option>
+          </select>
+        </div>
+        <div class="riser-field">
+          <label class="riser-field__label" for="g-credits">Required credits</label>
+          <input class="riser-input riser-input--data" id="g-credits" value="4812" inputmode="numeric">
+        </div>
+        <div class="riser-field riser-field--invalid">
+          <label class="riser-field__label" for="g-date">Schedule date<span class="riser-field__required">*</span></label>
+          <input class="riser-input riser-input--data" id="g-date" type="datetime-local">
+          <span class="riser-field__error">Schedule date must be in the future</span>
+        </div>
+        <div class="riser-field">
+          <label class="riser-field__label" for="g-disabled">Owner</label>
+          <input class="riser-input" id="g-disabled" value="Karim Ainsworth" disabled>
+          <span class="riser-field__hint">Set from the organiser account</span>
+        </div>
+        <div class="riser-field">
+          <label class="riser-field__label" for="g-search">Search</label>
+          <div class="riser-search"><input class="riser-input" id="g-search" type="search" placeholder="Search campaigns"></div>
+        </div>
+        <div class="riser-field riser-field--full">
+          <label class="riser-field__label" for="g-body">Message body<span class="riser-field__required">*</span></label>
+          <textarea class="riser-textarea" id="g-body" rows="3">Doors 9pm Friday at the Limelight. Last 40 tickets — riser.events/lmnl</textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">04 —</span><span>StatCard</span></div>
+    <p class="spec-lede">Events' <span class="riser-data">PRUStatsSection</span>, Promo's upload statistics row and the WelcomeBanner credit balance were three shapes doing one job. The 40px icon in a tinted rounded tile is gone — the brief rules that out twice over.</p>
+    <div class="riser-grid-4">
+      <div class="riser-stat"><span class="riser-stat__label">Total records</span><span class="riser-stat__value">5,204</span></div>
+      <div class="riser-stat"><span class="riser-stat__label">Ready</span><span class="riser-stat__value">4,812</span><span class="riser-stat__note">Valid MSISDN, no duplicates</span></div>
+      <div class="riser-stat"><span class="riser-stat__label">Failed</span><span class="riser-stat__value">392</span></div>
+      <div class="riser-stat riser-stat--live"><span class="riser-stat__label">Credits</span><span class="riser-stat__value">12,480</span><span class="riser-stat__note">Current balance</span></div>
+    </div>
+    <span class="spec-caption">The live figure is the view's one orange thing</span>
+  </section>
+
+  <!-- CARD -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">05 —</span><span>Card</span></div>
+    <div class="riser-grid-2">
+      <div class="riser-card">
+        <div class="riser-card__header"><h2 class="riser-card__title">Paper</h2></div>
+        <p class="riser-small" style="margin:0">1px hairline on paper. Square corners, no shadow. The default surface.</p>
+      </div>
+      <div class="riser-card riser-card--ink">
+        <div class="riser-card__header"><h2 class="riser-card__title" style="color:var(--paper)">Ink</h2></div>
+        <p class="riser-small" style="margin:0;color:var(--paper-on-ink)">A solid ink block. Rules invert automatically inside it.</p>
+      </div>
+      <div class="riser-card riser-card--dashed">
+        <div class="riser-card__header"><h2 class="riser-card__title">Dashed</h2></div>
+        <p class="riser-small" style="margin:0">Measurement and specification only. Never decoration.</p>
+      </div>
+      <div class="riser-card riser-card--accent">
+        <div class="riser-card__header"><h2 class="riser-card__title">Accent</h2></div>
+        <p class="riser-small" style="margin:0;color:var(--ink)">Rare. Ink on orange is 7.3:1. Everything inside goes ink.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATAGRID -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">06 —</span><span>DataGrid</span></div>
+    <p class="spec-lede">Events' implementation is canonical, including its responsive breakpoint algorithm — that is not styling, it decides which columns exist at a given width. Promo's copy was identical except that it fetched team membership inside the component and rendered a banner; that is now the <span class="riser-data">notice</span> prop.</p>
+    <div class="riser-card">
+      <div class="riser-grid">
+        <div class="riser-grid__header">
+          <div class="riser-grid__heading"><h2 class="riser-grid__title">Campaigns</h2><span class="riser-grid__count">24</span></div>
+          <div class="riser-grid__controls">
+            <div class="riser-filter"><button class="riser-filter__trigger" type="button"><span class="riser-filter__label">Brand</span><span class="riser-filter__value">All</span></button></div>
+            <div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div>
+          </div>
+        </div>
+        <div class="riser-notice riser-notice--attention"><div class="riser-notice__text">Operating as a <strong>Glasvey Group</strong> team member — organiser</div></div>
+        <div class="riser-grid__table" style="margin-top:var(--space-4)">
+          <div class="riser-grid__head-row">
+            <div class="riser-grid__head-cell" style="width:15%">Date</div>
+            <div class="riser-grid__head-cell riser-grid__head-cell--sortable" style="width:12%">Type</div>
+            <div class="riser-grid__head-cell riser-grid__head-cell--sortable" style="width:12%">Status</div>
+            <div class="riser-grid__head-cell riser-grid__head-cell--sortable" style="width:30%">Name</div>
+            <div class="riser-grid__head-cell riser-grid__head-cell--sortable" style="width:20%">Brand</div>
+            <div class="riser-grid__head-cell" style="width:11%">Actions</div>
+          </div>
+          <div class="riser-grid__body">
+            <div class="riser-grid__row riser-grid__row--clickable riser-grid__row--active">
+              <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-24 21:00</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--live">Running</span></div>
+              <div class="riser-grid__cell" style="width:30%" data-label="Name">Belfast · Autumn push</div>
+              <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
+              <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+            </div>
+            <div class="riser-grid__row riser-grid__row--clickable">
+              <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-30 18:30</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Type">WhatsApp</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--neutral">Scheduled</span></div>
+              <div class="riser-grid__cell" style="width:30%" data-label="Name">Yangon · Warehouse series</div>
+              <div class="riser-grid__cell" style="width:20%" data-label="Brand">Pop Alibi</div>
+              <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+            </div>
+            <div class="riser-grid__row riser-grid__row--clickable">
+              <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-12 20:00</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--done">Complete</span></div>
+              <div class="riser-grid__cell" style="width:30%" data-label="Name">Re-engage · 90-day lapsed</div>
+              <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
+              <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+            </div>
+            <div class="riser-grid__row riser-grid__row--clickable">
+              <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-07-29 12:00</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--stopped">Cancelled</span></div>
+              <div class="riser-grid__cell" style="width:30%" data-label="Name">Bangkok · Soft launch</div>
+              <div class="riser-grid__cell" style="width:20%" data-label="Brand">Riser</div>
+              <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+            </div>
+          </div>
+        </div>
+        <nav class="riser-pagination">
+          <button class="riser-pagination__page riser-pagination__step" disabled>Prev</button>
+          <div class="riser-pagination__pages">
+            <button class="riser-pagination__page riser-pagination__page--active">1</button>
+            <button class="riser-pagination__page">2</button>
+            <button class="riser-pagination__page">3</button>
+            <button class="riser-pagination__page">4</button>
+            <span class="riser-pagination__ellipsis">…</span>
+            <button class="riser-pagination__page">5</button>
+          </div>
+          <button class="riser-pagination__page riser-pagination__step">Next</button>
+        </nav>
+      </div>
+    </div>
+    <span class="spec-caption">Selected row carries a 2px orange rule on its leading edge · below 500px the grid becomes stacked labelled records</span>
+  </section>
+
+  <!-- DETAIL -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">07 —</span><span>DetailView &amp; DetailForm</span></div>
+    <div class="riser-grid-2" style="align-items:start">
+      <div class="riser-card">
+        <div class="riser-card__header">
+          <h2 class="riser-card__title">Belfast · Autumn push</h2>
+          <div class="riser-card__actions">
+            <button class="riser-button riser-button--secondary riser-button--sm">Copy</button>
+            <button class="riser-button riser-button--secondary riser-button--sm">Edit</button>
+            <button class="riser-button riser-button--danger riser-button--sm">Delete</button>
+          </div>
+        </div>
+        <div class="riser-detail__grid">
+          <div class="riser-detail__field"><span class="riser-detail__label">Status</span><div class="riser-detail__value"><span class="riser-badge riser-badge--live">Running</span></div></div>
+          <div class="riser-detail__field"><span class="riser-detail__label">Audience</span><div class="riser-detail__value">Limelight regulars</div></div>
+          <div class="riser-detail__field"><span class="riser-detail__label">Required credits</span><div class="riser-detail__value riser-detail__value--data">4,812</div></div>
+          <div class="riser-detail__field"><span class="riser-detail__label">Brand</span><div class="riser-detail__value">Limelight</div></div>
+          <div class="riser-detail__field"><span class="riser-detail__label">Schedule date</span><div class="riser-detail__value riser-detail__value--data">2026-08-24 21:00</div></div>
+          <div class="riser-detail__field"><span class="riser-detail__label">Message template</span><div class="riser-detail__value riser-detail__value--empty">—</div></div>
+        </div>
+        <div class="riser-card__footer"><button class="riser-button riser-button--primary riser-button--md">Run now</button></div>
+      </div>
+
+      <div class="riser-card">
+        <h2 class="riser-card__title" style="margin-bottom:var(--space-5)">Create campaign</h2>
+        <div class="riser-detail__grid">
+          <div class="riser-field"><label class="riser-field__label">Name<span class="riser-field__required">*</span></label><input class="riser-input" placeholder="Enter campaign name"></div>
+          <div class="riser-field"><label class="riser-field__label">Audience<span class="riser-field__required">*</span></label><select class="riser-select"><option>Select audience</option><option>+ Add audience</option></select></div>
+          <div class="riser-field"><label class="riser-field__label">Brand<span class="riser-field__required">*</span></label><select class="riser-select"><option>Select brand</option></select></div>
+          <div class="riser-field"><label class="riser-field__label">Campaign type<span class="riser-field__required">*</span></label><select class="riser-select"><option>Select campaign type</option></select></div>
+        </div>
+        <div class="riser-card__footer">
+          <button class="riser-button riser-button--secondary riser-button--md">Cancel</button>
+          <button class="riser-button riser-button--primary riser-button--md">Create</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL / NOTIFICATION / LOADER -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">08 —</span><span>Modal, Notification, Loader</span></div>
+    <p class="spec-lede">Promo's confirm dialog had a gradient background, a 20–24px radius, a coloured shadow, a 150px logo and a springy <span class="riser-data">cubic-bezier(0.175, 0.885, 0.32, 1.275)</span> entrance. All of it is out: square, flat paper, firm ease-out with no bounce.</p>
+    <div class="riser-grid-2" style="align-items:start">
+      <div>
+        <div class="riser-modal" style="position:static;animation:none">
+          <h2 class="riser-modal__title">Delete campaign</h2>
+          <p class="riser-modal__message">Are you sure you want to delete “Belfast · Autumn push”?</p>
+          <p class="riser-modal__submessage">This action cannot be undone.</p>
+          <div class="riser-modal__actions">
+            <button class="riser-button riser-button--secondary riser-button--md">Cancel</button>
+            <button class="riser-button riser-button--ink riser-button--md">Yes, delete</button>
+          </div>
+        </div>
+        <span class="spec-caption">ConfirmModal · destructive uses the ink fill, not the orange</span>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div class="riser-notification riser-notification--warning" style="animation:none">
+            <div style="flex:1;min-width:0">
+              <p class="riser-notification__header">Insufficient credits</p>
+              <p class="riser-notification__message">You do not have enough credits to run this campaign.</p>
+              <p class="riser-notification__note">4,812 required · 1,200 available</p>
+            </div>
+            <button class="riser-notification__close" aria-label="Dismiss">×</button>
+          </div>
+          <div class="riser-notification riser-notification--success" style="animation:none">
+            <div style="flex:1;min-width:0">
+              <p class="riser-notification__header">Campaign started</p>
+              <p class="riser-notification__message">Delivery logs will appear as messages are sent.</p>
+            </div>
+            <button class="riser-notification__close" aria-label="Dismiss">×</button>
+          </div>
+        </div>
+        <span class="spec-caption">Ink blocks with a 2px leading rule — not the four-colour notification palette both codebases carried</span>
+        <div class="spec-demo" style="margin-top:var(--space-4)">
+          <div class="riser-loading-screen" style="padding:0">
+            <span class="riser-loader riser-loader--full" style="--rl-size:64px"><span class="riser-loader-bars"><span class="riser-loader-bar"></span><span class="riser-loader-bar"></span><span class="riser-loader-bar"></span><span class="riser-loader-bar"></span></span><span class="riser-loader-stage"></span></span>
+            <span class="riser-loading-screen__text">Loading campaigns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT / TICKET CARD -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">09 —</span><span>EventCard &amp; TicketCard</span></div>
+    <p class="spec-lede">EventCard's prop surface had grown to 24 props, five of which were whole unfiltered collections the card filtered itself in three useEffects. It now takes resolved strings. TicketCard's emoji row — 💰 📦 🛒 📅 — is replaced by a mono spec block under a dashed rule.</p>
+    <div class="riser-grid-4" style="align-items:start">
+      <article class="riser-event-card">
+        <div class="riser-event-card__media" style="background:linear-gradient(160deg,#3a2410,#121212 70%)">
+          <span class="riser-event-card__badge"><span class="riser-badge riser-badge--on-image riser-badge--live">Published</span></span>
+        </div>
+        <div class="riser-event-card__body">
+          <h3 class="riser-event-card__title">Warehouse Series 04</h3>
+          <div class="riser-event-card__meta">
+            <span class="riser-event-card__meta-item">Limelight, Belfast</span>
+            <span class="riser-event-card__meta-item">Fri 12 Sep · 9:00 PM</span>
+          </div>
+          <span class="riser-event-card__price">£12 – £28</span>
+        </div>
+      </article>
+      <article class="riser-event-card">
+        <div class="riser-event-card__media" style="background:linear-gradient(160deg,#2a1a0d,#121212 60%)">
+          <span class="riser-event-card__badge"><span class="riser-badge riser-badge--on-image riser-badge--neutral">Draft</span></span>
+        </div>
+        <div class="riser-event-card__body">
+          <h3 class="riser-event-card__title">Yangon Rooftop</h3>
+          <div class="riser-event-card__meta">
+            <span class="riser-event-card__meta-item">Pansodan, Yangon</span>
+            <span class="riser-event-card__meta-item">Sat 20 Sep · 8:00 PM</span>
+          </div>
+        </div>
+      </article>
+      <div class="riser-event-card" aria-hidden>
+        <div class="riser-skeleton riser-skeleton--media"></div>
+        <div class="riser-event-card__body">
+          <span class="riser-skeleton riser-skeleton--title" style="width:70%;display:block"></span>
+          <span class="riser-skeleton riser-skeleton--text" style="width:50%;display:block"></span>
+          <span class="riser-skeleton riser-skeleton--text" style="width:40%;display:block"></span>
+        </div>
+      </div>
+      <div class="riser-ticket">
+        <div class="riser-ticket__header">
+          <div><h3 class="riser-ticket__title">Early bird</h3><div class="riser-ticket__type">General admission</div></div>
+          <span class="riser-badge riser-badge--done">Published</span>
+        </div>
+        <div class="riser-ticket__price">£12.00</div>
+        <div class="riser-ticket__spec">
+          <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Quantity</span><span class="riser-ticket__spec-value">120 available</span></div>
+          <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Per order</span><span class="riser-ticket__spec-value">1 – 6</span></div>
+          <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Sales open</span><span class="riser-ticket__spec-value">2026-08-01 09:00</span></div>
+          <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Sales close</span><span class="riser-ticket__spec-value">2026-09-12 20:00</span></div>
+        </div>
+        <div class="riser-ticket__flags"><span class="riser-label riser-label--ink">Refundable</span><span class="riser-label riser-label--ink">Service charge</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROPZONE / EMPTY -->
+  <section class="spec-section">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">10 —</span><span>Dropzone &amp; EmptyState</span></div>
+    <div class="riser-grid-2" style="align-items:start">
+      <div>
+        <div class="riser-dropzone">
+          <span class="riser-dropzone__headline">Drag and drop a CSV file</span>
+          <span class="riser-dropzone__hint">or click to browse</span>
+          <span class="riser-dropzone__spec">CSV should include FirstName, LastName, Email, Mobile (required), WhatsApp, DOB, Gender, City</span>
+        </div>
+        <span class="spec-caption">Recreated from Promo's upload-audience screen. Dashed because a dropzone is a specification of what belongs there.</span>
+      </div>
+      <div>
+        <div class="riser-card">
+          <div class="riser-empty" style="padding:var(--space-6) 0">
+            <span class="riser-empty__label">No results</span>
+            <h3 class="riser-empty__headline">No campaigns yet</h3>
+            <p class="riser-empty__body">Campaigns push an audience to an event over SMS or WhatsApp. Create one to start.</p>
+            <div class="riser-empty__actions"><button class="riser-button riser-button--primary riser-button--md">Add campaign</button></div>
+          </div>
+        </div>
+        <span class="spec-caption">Replaces the bare <span class="riser-data">&lt;p&gt;No brands found&lt;/p&gt;</span> strings across Promo</span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:var(--rule-heavy) solid var(--ink);padding-top:var(--space-5)">
+    <span class="riser-label">Riser design system · components · Events canonical, Promo folded in as props</span>
+  </footer>
+
+</div>
+</body>
+</html>

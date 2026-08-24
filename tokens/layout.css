@@ -1,0 +1,36 @@
+:root {
+  /* Page container. Both codebases already settle on a 1440px measure with a
+     3rem gutter each side, narrowing to full-bleed on small screens. */
+  --container-max: 1440px;
+  --container-gutter: 48px;
+  --container-gutter-sm: 16px;
+  --container-gutter-xs: 8px;
+
+  /* Grid. The brief asks for two- and four-column grids with 16–20px gaps. */
+  --grid-gap: 16px;
+  --grid-gap-wide: 20px;
+  --grid-columns-2: repeat(2, minmax(0, 1fr));
+  --grid-columns-4: repeat(4, minmax(0, 1fr));
+
+  /* Breakpoints. Declared as tokens for documentation; media queries cannot read
+     custom properties, so the same numbers are written literally in component CSS
+     and passed to DataGrid's `responsive` prop. */
+  --bp-sm: 500px;
+  --bp-md: 768px;
+  --bp-lg: 960px;
+  --bp-xl: 1200px;
+  --bp-2xl: 1440px;
+
+  /* Fixed chrome */
+  --navbar-height: 64px;
+  --sidebar-width: 320px;
+  --sidebar-width-sm: 250px;
+
+  /* Control sizing, on the 4px rhythm. */
+  --control-height-sm: 28px;
+  --control-height-md: 36px;
+  --control-height-lg: 44px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+}

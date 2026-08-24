@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riser — Ticket Buyer kit</title>
+<link rel="icon" href="../assets/logo/riser-favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../foundations/foundations.css">
+<link rel="stylesheet" href="kits.css">
+</head>
+<body>
+<div class="riser-container spec-page">
+
+  <header class="spec-masthead">
+    <div>
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="200" style="display:block;margin-bottom:var(--space-4)">
+      <span class="riser-label">UI kit — the ticket-buyer web flow</span>
+    </div>
+    <nav class="spec-nav">
+      <a href="../foundations/index.html">Foundations</a>
+      <a href="../components/gallery.html">Components</a>
+      <a href="promo-dashboard.html">Promo kit</a>
+      <a href="ticket-buyer.html" aria-current="page">Buyer kit</a>
+      <a href="marketing-site.html">Marketing kit</a>
+    </nav>
+  </header>
+
+  <p class="spec-lede">The buyer path on <span class="riser-data">riser.events</span>, from a category listing to a scanned ticket. Recreated from RiserEvents — <span class="riser-data">EventCard</span>, <span class="riser-data">Filter</span>, <span class="riser-data">Pagination</span>, <span class="riser-data">EventDetails</span>, <span class="riser-data">TicketsList</span> and the public organiser and venue pages. The image blocks below are placeholders: see the imagery audit in the foundations.</p>
+
+  <!-- ------------------------------------------------ LISTING -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">01 —</span><span>Category listing</span></div>
+      <span class="kit-screen__route">/category/[id] · /category/all-events</span>
+    </div>
+    <p class="kit-screen__note">Filter, then a four-column card grid, then pagination. The cards' images run full-bleed to the card edge — Events inset them in a 12px-radius container. Card hover takes the hairline to solid ink; nothing lifts and nothing scales.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events/category/all-events</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+          <header>
+            <div class="riser-section-label"><span class="riser-section-label__index">01 —</span><span>Belfast · this month</span></div>
+            <div class="riser-row" style="justify-content:space-between;align-items:flex-end;flex-wrap:wrap">
+              <h1 class="riser-h1">All events.</h1>
+              <div class="riser-filter"><button class="riser-filter__trigger" type="button"><span class="riser-filter__label">Filter by</span><span class="riser-filter__value">All categories</span></button></div>
+            </div>
+          </header>
+
+          <div class="riser-grid-4 riser-stagger">
+            <article class="riser-event-card">
+              <div class="riser-event-card__media" style="background:linear-gradient(160deg,#3a2410,#121212 70%)"></div>
+              <div class="riser-event-card__body">
+                <h3 class="riser-event-card__title">Warehouse Series 04</h3>
+                <div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Limelight, Belfast</span><span class="riser-event-card__meta-item">Fri 12 Sep · 9:00 PM</span></div>
+                <span class="riser-event-card__price">£12 – £28</span>
+              </div>
+            </article>
+            <article class="riser-event-card">
+              <div class="riser-event-card__media" style="background:linear-gradient(160deg,#2a1a0d,#121212 60%)"></div>
+              <div class="riser-event-card__body">
+                <h3 class="riser-event-card__title">Late Night Soul</h3>
+                <div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Ulster Sports Club, Belfast</span><span class="riser-event-card__meta-item">Sat 13 Sep · 10:00 PM</span></div>
+                <span class="riser-event-card__price">£15</span>
+              </div>
+            </article>
+            <article class="riser-event-card">
+              <div class="riser-event-card__media" style="background:linear-gradient(160deg,#331f0e,#121212 65%)"></div>
+              <div class="riser-event-card__body">
+                <h3 class="riser-event-card__title">Pop Alibi presents: Room 2</h3>
+                <div class="riser-event-card__meta"><span class="riser-event-card__meta-item">The Deer's Head, Belfast</span><span class="riser-event-card__meta-item">Thu 18 Sep · 8:00 PM</span></div>
+                <span class="riser-event-card__price">£8 – £14</span>
+              </div>
+            </article>
+            <article class="riser-event-card">
+              <div class="riser-event-card__media"><div class="riser-event-card__placeholder"><svg class="riser-icon riser-icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 5h18v14H3z"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg></div></div>
+              <div class="riser-event-card__body">
+                <h3 class="riser-event-card__title">Sunrise Rooftop</h3>
+                <div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Pansodan, Yangon</span><span class="riser-event-card__meta-item">Sat 20 Sep · 8:00 PM</span></div>
+                <span class="riser-event-card__price">15,000 MMK</span>
+              </div>
+            </article>
+          </div>
+
+          <nav class="riser-pagination" style="justify-content:flex-start">
+            <div class="riser-pagination__pages">
+              <button class="riser-pagination__page" disabled>«</button>
+              <button class="riser-pagination__page" disabled>‹</button>
+              <button class="riser-pagination__page riser-pagination__page--active">1</button>
+              <button class="riser-pagination__page">2</button>
+              <button class="riser-pagination__page">3</button>
+              <button class="riser-pagination__page">›</button>
+              <button class="riser-pagination__page">»</button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ EVENT DETAIL -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">02 —</span><span>Event page</span></div>
+      <span class="kit-screen__route">/sites/[subdomain]/events/[eventId] · components/EventDetails.tsx</span>
+    </div>
+    <p class="kit-screen__note">Banner full-bleed with an ink scrim carrying the title, then the schedule as a hairline-ruled list, features as mono labels, and the description. Events set feature rows with a duotone tag icon per item; the mono label does that work now. Buy Tickets is the page's one orange thing.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events/events/warehouse-series-04</span></div>
+      <div class="kit-frame__body kit-frame__body--flush">
+        <figure class="riser-figure riser-figure--scrim" style="aspect-ratio:21/7;background:linear-gradient(150deg,#4a2c10,#121212 65%)">
+          <figcaption style="position:absolute;inset:auto 0 0 0;padding:var(--space-7);z-index:1">
+            <span class="riser-label riser-label--on-ink">Limelight · Belfast</span>
+            <div class="riser-h1" style="color:var(--paper);margin-top:var(--space-2)">Warehouse Series 04</div>
+          </figcaption>
+        </figure>
+        <div style="padding:var(--space-7)">
+          <div style="display:grid;grid-template-columns:1fr 320px;gap:var(--space-8);align-items:start">
+            <div class="kit-stack">
+              <div>
+                <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">01 —</span><span>Schedule</span></div>
+                <div class="riser-grid__table">
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:50%">Doors</div><div class="riser-grid__cell riser-grid__cell--data" style="width:50%">Fri 12 Sep · 9:00 PM</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:50%">Bicep (DJ set)</div><div class="riser-grid__cell riser-grid__cell--data" style="width:50%">11:00 PM – 1:00 AM</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:50%">Last entry</div><div class="riser-grid__cell riser-grid__cell--data" style="width:50%">12:30 AM</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:50%">Curfew</div><div class="riser-grid__cell riser-grid__cell--data" style="width:50%">3:00 AM</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">02 —</span><span>Features</span></div>
+                <div class="riser-row" style="flex-wrap:wrap;gap:var(--space-4)">
+                  <span class="riser-label riser-label--ink">Over 18s</span>
+                  <span class="riser-label riser-label--ink">Cloakroom</span>
+                  <span class="riser-label riser-label--ink">Step-free access</span>
+                  <span class="riser-label riser-label--ink">Card only</span>
+                </div>
+              </div>
+              <div>
+                <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">03 —</span><span>About</span></div>
+                <p class="riser-body" style="max-width:62ch">Fourth in the Warehouse Series. Two rooms, one lineup, doors at nine. Room 1 runs house and breaks until curfew; Room 2 is a soul and disco floor curated by Pop Alibi. Tickets are non-transferable and ID is checked at the door.</p>
+              </div>
+            </div>
+
+            <aside class="riser-card">
+              <div class="riser-section-label"><span>From</span></div>
+              <div class="riser-ticket__price" style="margin-bottom:var(--space-5)">£12.00</div>
+              <div class="riser-detail__grid" style="grid-template-columns:1fr;gap:var(--space-4)">
+                <div class="riser-detail__field"><span class="riser-detail__label">Venue</span><div class="riser-detail__value">Limelight, Belfast</div></div>
+                <div class="riser-detail__field"><span class="riser-detail__label">Date</span><div class="riser-detail__value riser-detail__value--data">2026-09-12 21:00</div></div>
+                <div class="riser-detail__field"><span class="riser-detail__label">Organiser</span><div class="riser-detail__value">Glasvey Group</div></div>
+              </div>
+              <div class="riser-card__footer" style="justify-content:stretch">
+                <button class="riser-button riser-button--primary riser-button--lg riser-button--block">Buy tickets</button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ TICKETS -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">03 —</span><span>Ticket selection</span></div>
+      <span class="kit-screen__route">components/TicketsList.tsx</span>
+    </div>
+    <p class="kit-screen__note">Each tier is a TicketCard in buyer mode: price, terms under a dashed rule, a square quantity stepper. The summary is a sticky ink block — the running total is set in mono with tabular figures so it does not jump as the number changes. Sold-out tiers keep their rule and go slate; they are not hidden.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events/events/warehouse-series-04/tickets</span></div>
+      <div class="kit-frame__body">
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:var(--space-6);align-items:start">
+          <div class="kit-stack">
+            <div class="riser-ticket">
+              <div class="riser-ticket__header">
+                <div><h3 class="riser-ticket__title">Early bird</h3><div class="riser-ticket__type">General admission</div></div>
+                <span class="riser-badge riser-badge--stopped">Sold out</span>
+              </div>
+              <div class="riser-ticket__price" style="color:var(--text-secondary)">£12.00</div>
+              <div class="riser-ticket__spec">
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Remaining</span><span class="riser-ticket__spec-value">0</span></div>
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Per order</span><span class="riser-ticket__spec-value">1 – 6</span></div>
+              </div>
+            </div>
+
+            <div class="riser-ticket">
+              <div class="riser-ticket__header">
+                <div><h3 class="riser-ticket__title">Second release</h3><div class="riser-ticket__type">General admission</div></div>
+                <span class="riser-badge riser-badge--done">On sale</span>
+              </div>
+              <div class="riser-ticket__price">£18.00</div>
+              <div class="riser-ticket__spec">
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Remaining</span><span class="riser-ticket__spec-value">143</span></div>
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Per order</span><span class="riser-ticket__spec-value">1 – 6</span></div>
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Sales close</span><span class="riser-ticket__spec-value">2026-09-12 20:00</span></div>
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Booking fee</span><span class="riser-ticket__spec-value">£1.80</span></div>
+              </div>
+              <div class="riser-ticket__flags"><span class="riser-label riser-label--ink">Refundable</span></div>
+              <div class="riser-row" style="justify-content:space-between">
+                <div class="riser-ticket__quantity">
+                  <button type="button" aria-label="Fewer">−</button><output>2</output><button type="button" aria-label="More">+</button>
+                </div>
+                <span class="riser-data">£36.00</span>
+              </div>
+            </div>
+
+            <div class="riser-ticket">
+              <div class="riser-ticket__header">
+                <div><h3 class="riser-ticket__title">Room 2 only</h3><div class="riser-ticket__type">Restricted access</div></div>
+                <span class="riser-badge riser-badge--done">On sale</span>
+              </div>
+              <div class="riser-ticket__price">£8.00</div>
+              <div class="riser-ticket__spec">
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Remaining</span><span class="riser-ticket__spec-value">60</span></div>
+                <div class="riser-ticket__spec-item"><span class="riser-ticket__spec-label">Per order</span><span class="riser-ticket__spec-value">1 – 4</span></div>
+              </div>
+              <div class="riser-row" style="justify-content:space-between">
+                <div class="riser-ticket__quantity">
+                  <button type="button" aria-label="Fewer" disabled>−</button><output>0</output><button type="button" aria-label="More">+</button>
+                </div>
+                <span class="riser-data" style="color:var(--text-secondary)">£0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="riser-card riser-card--ink riser-surface-ink">
+            <div class="riser-section-label" style="color:var(--paper-on-ink)"><span>Your order</span></div>
+            <div class="riser-grid__table" style="margin-bottom:var(--space-5)">
+              <div class="riser-grid__row" style="border-color:var(--line-on-ink)"><div class="riser-grid__cell" style="width:70%;color:var(--paper)">2 × Second release</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%;color:var(--paper);text-align:right">£36.00</div></div>
+              <div class="riser-grid__row" style="border-color:var(--line-on-ink)"><div class="riser-grid__cell" style="width:70%;color:var(--paper-on-ink)">Booking fee</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%;color:var(--paper-on-ink);text-align:right">£3.60</div></div>
+            </div>
+            <div class="riser-row" style="justify-content:space-between;align-items:baseline">
+              <span class="riser-label" style="color:var(--paper-on-ink)">Total</span>
+              <span class="riser-stat__value" style="color:var(--paper)">£39.60</span>
+            </div>
+            <div class="riser-card__footer" style="justify-content:stretch;border-top-color:var(--line-on-ink)">
+              <button class="riser-button riser-button--primary riser-button--lg riser-button--block">Get tickets</button>
+            </div>
+            <p class="riser-small" style="margin:var(--space-4) 0 0;color:var(--paper-on-ink)">You will be asked to sign in before payment. Tickets are held for 10 minutes.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ PUBLIC PAGES -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">04 —</span><span>Organiser, venue and performer pages</span></div>
+      <span class="kit-screen__route">/organizers/[slug] · /sites/[subdomain]/venues/[slug] · PublicReUseableComponents</span>
+    </div>
+    <p class="kit-screen__note">Events' <span class="riser-data">PRUStatsSection</span> put each figure beside a 40px icon in a tinted rounded tile; those are StatCards now. The cover image is full-bleed and the profile image sits square on the rule rather than as a circle with a 4px white ring and a coloured shadow.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events/organizers/glasvey-group</span></div>
+      <div class="kit-frame__body kit-frame__body--flush">
+        <figure class="riser-figure" style="aspect-ratio:24/5;background:linear-gradient(150deg,#3a2410,#121212 70%)"></figure>
+        <div style="padding:var(--space-7)">
+          <div class="kit-stack">
+            <header class="riser-row" style="gap:var(--space-5);align-items:flex-end">
+              <div style="width:96px;height:96px;background:var(--ink);flex:none;display:grid;place-content:center">
+                <img src="../assets/logo/riser-mark-knockout.svg" alt="" width="44">
+              </div>
+              <div>
+                <div class="riser-section-label" style="margin-bottom:var(--space-1)"><span>Organiser</span></div>
+                <h1 class="riser-h1">Glasvey Group</h1>
+              </div>
+            </header>
+
+            <div class="riser-grid-4">
+              <div class="riser-stat"><span class="riser-stat__label">Events</span><span class="riser-stat__value">42</span></div>
+              <div class="riser-stat"><span class="riser-stat__label">Venues</span><span class="riser-stat__value">6</span></div>
+              <div class="riser-stat"><span class="riser-stat__label">Performers</span><span class="riser-stat__value">88</span></div>
+              <div class="riser-stat riser-stat--live"><span class="riser-stat__label">On sale now</span><span class="riser-stat__value">7</span></div>
+            </div>
+
+            <div>
+              <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">01 —</span><span>Upcoming</span></div>
+              <div class="riser-grid-4 riser-stagger">
+                <article class="riser-event-card">
+                  <div class="riser-event-card__media" style="background:linear-gradient(160deg,#3a2410,#121212 70%)"></div>
+                  <div class="riser-event-card__body"><h3 class="riser-event-card__title">Warehouse Series 04</h3><div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Fri 12 Sep</span></div></div>
+                </article>
+                <article class="riser-event-card">
+                  <div class="riser-event-card__media" style="background:linear-gradient(160deg,#2a1a0d,#121212 60%)"></div>
+                  <div class="riser-event-card__body"><h3 class="riser-event-card__title">Late Night Soul</h3><div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Sat 13 Sep</span></div></div>
+                </article>
+                <article class="riser-event-card">
+                  <div class="riser-event-card__media" style="background:linear-gradient(160deg,#331f0e,#121212 65%)"></div>
+                  <div class="riser-event-card__body"><h3 class="riser-event-card__title">Room 2</h3><div class="riser-event-card__meta"><span class="riser-event-card__meta-item">Thu 18 Sep</span></div></div>
+                </article>
+                <div class="riser-event-card" aria-hidden>
+                  <div class="riser-skeleton riser-skeleton--media"></div>
+                  <div class="riser-event-card__body"><span class="riser-skeleton riser-skeleton--title" style="width:70%;display:block"></span><span class="riser-skeleton riser-skeleton--text" style="width:45%;display:block"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:var(--rule-heavy) solid var(--ink);padding-top:var(--space-5)">
+    <span class="riser-label">Riser design system · ticket-buyer kit · recreated from riser.events</span>
+  </footer>
+
+</div>
+</body>
+</html>

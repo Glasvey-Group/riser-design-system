@@ -1,0 +1,63 @@
+:root {
+  /* Base — four colours, settled August 2026 */
+  --orange: #F28600;
+  --ink: #121212;
+  --paper: #FAF9F7;
+  --slate: #708090;
+
+  /* Derived. --slate-text is the slate darkened to clear 4.5:1 on paper (5.2:1).
+     --ink-soft is body copy at a lower weight than headlines. */
+  --slate-text: #5F6B7A;
+  --ink-soft: #3A3A3A;
+  --line: rgba(18, 18, 18, 0.14);
+  --line-strong: rgba(18, 18, 18, 0.3);
+  --paper-on-ink: rgba(250, 249, 247, 0.6);
+
+  /* Semantic */
+  --surface-page: var(--paper);
+  --surface-inverse: var(--ink);
+  --surface-accent: var(--orange);
+  --text-primary: var(--ink);
+  --text-body: var(--ink-soft);
+  --text-secondary: var(--slate-text);
+  --text-on-ink: var(--paper);
+  --text-on-accent: var(--ink);
+  --border-hairline: var(--line);
+  --border-dashed: var(--line-strong);
+  --accent: var(--orange);
+
+  /* ---- Added by the design system, not new colour ---- */
+
+  /* On ink surfaces the hairline has to invert or it disappears. */
+  --line-on-ink: rgba(250, 249, 247, 0.16);
+  --line-on-ink-strong: rgba(250, 249, 247, 0.34);
+
+  /* Interaction. Nothing scales or glows; state is carried by fill and rule only.
+     Orange hover darkens rather than lightens — a lighter orange drops below 4.5:1
+     against ink. */
+  --accent-hover: #D97800;
+  --accent-active: #C06A00;
+  --ink-hover: #2A2A2A;
+  --paper-hover: #F0EEEA;
+  --surface-hover: rgba(18, 18, 18, 0.04);
+  --surface-hover-on-ink: rgba(250, 249, 247, 0.08);
+  --surface-selected: rgba(242, 134, 0, 0.08);
+  --focus-ring: var(--ink);
+  --focus-ring-on-ink: var(--paper);
+
+  /* Disabled. Slate is the disabled colour per the brief. */
+  --text-disabled: var(--slate);
+  --border-disabled: var(--line);
+  --surface-disabled: rgba(112, 128, 144, 0.08);
+
+  /* Status. The identity has one signal colour, so status is carried by the
+     mono label and a 2px rule, not by a palette of hues. Only "live" spends
+     the orange — it is the live figure the brief reserves it for. */
+  --status-live: var(--orange);
+  --status-neutral: var(--slate);
+  --status-done: var(--ink);
+  --status-stopped: var(--slate-text);
+
+  /* Scrim for text over photography — the brief's 70% ink. */
+  --scrim-ink: rgba(18, 18, 18, 0.7);
+}

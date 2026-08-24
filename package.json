@@ -1,0 +1,22 @@
+{
+  "name": "@riser/design-system",
+  "version": "1.0.0",
+  "description": "Riser design system — tokens, primitives and UI kits for riser.events and promo.riser.events.",
+  "private": true,
+  "main": "components/index.ts",
+  "types": "components/index.ts",
+  "exports": {
+    ".": "./components/index.ts",
+    "./styles.css": "./styles.css",
+    "./tokens/tailwind.css": "./tokens/tailwind.css",
+    "./tokens/*": "./tokens/*"
+  },
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

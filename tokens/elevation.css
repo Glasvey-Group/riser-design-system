@@ -1,0 +1,26 @@
+:root {
+  /* Surfaces are flat. There is no shadow scale, and that is deliberate: the brief
+     says cards are 1px hairlines on paper or solid ink blocks, square corners, no
+     shadows. `--shadow-none` exists so component CSS can state flatness explicitly
+     and so a shadow added later has one obvious place to be argued about.
+
+     Depth is carried by three things instead:
+       1. a hairline rule            (--border-hairline)
+       2. a change of surface        (paper on ink, or ink on paper)
+       3. a scrim, over photography  (--scrim-ink) */
+  --shadow-none: none;
+
+  /* Overlays do use a wash, because a modal must detach from the page behind it. */
+  --overlay-ink: rgba(18, 18, 18, 0.72);
+
+  /* Stacking. The numbers match what the two codebases already use so that a
+     migrated component keeps its place in the stack. */
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-navbar: 1000;
+  --z-drawer-overlay: 1000;
+  --z-drawer: 1001;
+  --z-dropdown: 1200;
+  --z-modal: 9000;
+  --z-notification: 9500;
+}

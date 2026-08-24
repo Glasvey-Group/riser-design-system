@@ -1,0 +1,10 @@
+:root {
+  /* Things enter by rising, and stagger like the bars of the mark. */
+  --duration-fast: 140ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --ease-out: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --rise-distance: 8px;
+  --stagger-step: 45ms;
+}

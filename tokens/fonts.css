@@ -1,0 +1,20 @@
+/* Riser — font loading.
+   Archivo is the brand face: variable, with a width axis (the wordmark uses 88% width).
+   Self-hosted from Archivo-VariableFont_wdth,wght.ttf, converted to woff2 (186 KB,
+   wght 100–900 and wdth 62–125 in one file).
+
+   JetBrains Mono is the label and data face and is still pulled from Google Fonts —
+   no binaries were supplied for it. To self-host it, drop the woff2 files into
+   assets/fonts/ and replace the @import with @font-face rules in the same shape as
+   Archivo's below. */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../assets/fonts/Archivo-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");

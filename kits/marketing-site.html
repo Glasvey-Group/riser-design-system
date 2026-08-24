@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riser — Marketing Site kit</title>
+<link rel="icon" href="../assets/logo/riser-favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../foundations/foundations.css">
+<link rel="stylesheet" href="kits.css">
+</head>
+<body>
+<div class="riser-container spec-page">
+
+  <header class="spec-masthead">
+    <div>
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="200" style="display:block;margin-bottom:var(--space-4)">
+      <span class="riser-label">UI kit — the marketing site</span>
+    </div>
+    <nav class="spec-nav">
+      <a href="../foundations/index.html">Foundations</a>
+      <a href="../components/gallery.html">Components</a>
+      <a href="promo-dashboard.html">Promo kit</a>
+      <a href="ticket-buyer.html">Buyer kit</a>
+      <a href="marketing-site.html" aria-current="page">Marketing kit</a>
+    </nav>
+  </header>
+
+  <p class="spec-lede">The organiser-facing marketing page, recreated from RiserEvents' <span class="riser-data">HomeHeroSection</span> and <span class="riser-data">HomeMarketingSections</span>. Every headline and every block of copy below is the site's own — “The Push Engine.”, “What the giants forgot.”, the six organiser types, the 8% flat fee. What changed is the setting: mono section labels as the organising device, hairline rules instead of cards with radius and shadow, and one orange per section rather than a blue-to-purple gradient.</p>
+
+  <!-- ------------------------------------------------ HERO -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">01 —</span><span>Hero</span></div>
+      <span class="kit-screen__route">components/HomeHeroSection.tsx</span>
+    </div>
+    <p class="kit-screen__note">The hero's marquee of event tiles is kept — it is the one piece of motion on the page that earns its place, since a wall of live events is the argument. It scrolls at a constant rate rather than easing, and it pauses on hover and under <span class="riser-data">prefers-reduced-motion</span>. The word PUSHED was set in the old primary blue; it is the orange now, and it is the section's only orange — which is why Sign up here is a solid paper fill rather than the primary button it is in the closing block.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events</span></div>
+      <div class="kit-frame__body kit-frame__body--flush">
+        <div class="riser-surface-ink" style="padding:var(--space-9) var(--space-7)">
+          <div style="display:grid;grid-template-columns:1fr 340px;gap:var(--space-8);align-items:center">
+            <div>
+              <div class="riser-section-label" style="color:var(--paper-on-ink)"><span class="riser-section-label__index" style="color:var(--paper-on-ink)">01 —</span><span>For event organizers</span></div>
+              <h1 class="riser-display" style="color:var(--paper);margin-bottom:var(--space-5)">The Push Engine.</h1>
+              <p class="riser-body" style="color:var(--paper);max-width:56ch;margin-bottom:var(--space-3)">We have built a new kind of ticketing and promotion engine where events are not just listed, they get <strong style="color:var(--orange);font-weight:var(--weight-bold)">PUSHED</strong>.</p>
+              <p class="riser-body" style="color:var(--paper-on-ink);max-width:56ch;margin-bottom:var(--space-7)">AI-assisted targeting, influencer driven growth, and smarter repeat attendee promo baked in from day one.</p>
+              <div class="riser-row" style="gap:var(--space-3)">
+                <a class="riser-button riser-button--paper riser-button--lg" href="#">Sign up</a>
+                <a class="riser-button riser-button--secondary riser-button--lg" href="#">Browse events</a>
+              </div>
+            </div>
+            <div style="display:grid;gap:var(--grid-gap)">
+              <div style="aspect-ratio:3/2;background:linear-gradient(160deg,#4a2c10,#121212 70%);border:var(--hairline) solid var(--line-on-ink)"></div>
+              <div style="aspect-ratio:3/2;background:linear-gradient(160deg,#33200e,#121212 65%);border:var(--hairline) solid var(--line-on-ink)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ WHY -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">02 —</span><span>The argument</span></div>
+      <span class="kit-screen__route">HomeMarketingSections · why grid</span>
+    </div>
+    <p class="kit-screen__note">Four claims, each with a figure attached or none at all. Section headlines are caps and declarative, in two beats. The cards are hairline blocks on a four-column grid — no icon in a tinted tile above each title, because an icon beside a heading is decoration.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events — why section</span></div>
+      <div class="kit-frame__body">
+        <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">02 —</span><span>The listing tax</span></div>
+        <h2 class="riser-section-headline" style="margin-bottom:var(--space-4)">What the giants forgot.</h2>
+        <p class="riser-body" style="max-width:64ch;margin-bottom:var(--space-7)">Legacy platforms charge 10-25% in fees but offer almost no active promotion. You pay to list, not to sell. No other platform does this. That is the gap Riser was built for.</p>
+
+        <div class="riser-grid-4 riser-stagger">
+          <div class="riser-card">
+            <div class="riser-section-label"><span class="riser-section-label__index">01</span></div>
+            <h3 class="riser-h3" style="margin-bottom:var(--space-3)">AI-assisted targeting</h3>
+            <p class="riser-small" style="margin:0">Predictive matching finds the people most likely to buy and puts your event in front of them at the moment they are most likely to act.</p>
+          </div>
+          <div class="riser-card">
+            <div class="riser-section-label"><span class="riser-section-label__index">02</span></div>
+            <h3 class="riser-h3" style="margin-bottom:var(--space-3)">Influencer-driven growth</h3>
+            <p class="riser-small" style="margin:0">A built-in promoter and influencer network turns fans into paid brand ambassadors, with affiliate tracking on every link.</p>
+          </div>
+          <div class="riser-card">
+            <div class="riser-section-label"><span class="riser-section-label__index">03</span></div>
+            <h3 class="riser-h3" style="margin-bottom:var(--space-3)">Repeat-attendee marketing</h3>
+            <p class="riser-small" style="margin:0">Every past attendee is a future ticket sale. Built-in SMS/RCS, WhatsApp and more bring your crowd back for the next one.</p>
+          </div>
+          <div class="riser-card">
+            <div class="riser-section-label"><span class="riser-section-label__index">04</span></div>
+            <h3 class="riser-h3" style="margin-bottom:var(--space-3)">Mobile-first everything</h3>
+            <p class="riser-small" style="margin:0">Built for how fans actually buy. Fast, mobile and frictionless, from first tap to scanned ticket at the door.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ HOW -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">03 —</span><span>How it works</span></div>
+      <span class="kit-screen__route">HomeMarketingSections · steps</span>
+    </div>
+    <p class="kit-screen__note">Three steps, numbered in mono, separated by hairlines. The step number is the largest thing in each row — the sequence is the point. The middle step is where the product earns its name, so it carries the section's orange.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events — how it works</span></div>
+      <div class="kit-frame__body">
+        <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">03 —</span><span>Three steps</span></div>
+        <h2 class="riser-section-headline" style="margin-bottom:var(--space-7)">How Riser works.</h2>
+
+        <div class="riser-stagger" style="display:flex;flex-direction:column">
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:var(--space-6);padding:var(--space-6) 0;border-top:var(--hairline) solid var(--border-hairline)">
+            <span class="riser-display" style="font-size:var(--text-h1);color:var(--text-secondary)">01</span>
+            <div>
+              <h3 class="riser-h2" style="margin-bottom:var(--space-3)">Create</h3>
+              <p class="riser-body" style="max-width:64ch;margin:0">Build your event page in minutes. Tickets, tiers and timed releases from a single screen. Bring your branding.</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:var(--space-6);padding:var(--space-6) 0;border-top:var(--hairline) solid var(--border-hairline)">
+            <span class="riser-display" style="font-size:var(--text-h1);color:var(--orange)">02</span>
+            <div>
+              <h3 class="riser-h2" style="margin-bottom:var(--space-3)">Push</h3>
+              <p class="riser-body" style="max-width:64ch;margin:0">This is where Riser earns its name. AI targeting finds your crowd, promoters and influencers amplify it, and SMS/RCS and WhatsApp bring them back.</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:var(--space-6);padding:var(--space-6) 0;border-top:var(--hairline) solid var(--border-hairline);border-bottom:var(--hairline) solid var(--border-hairline)">
+            <span class="riser-display" style="font-size:var(--text-h1);color:var(--text-secondary)">03</span>
+            <div>
+              <h3 class="riser-h2" style="margin-bottom:var(--space-3)">Get paid</h3>
+              <p class="riser-body" style="max-width:64ch;margin:0">Sell out, see exactly which channel drove each sale, and get paid. Clear fees, clean settlement, zero surprises at payout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ AUDIENCES -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">04 —</span><span>Who it is for</span></div>
+      <span class="kit-screen__route">HomeMarketingSections · audience grid</span>
+    </div>
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events — audience grid</span></div>
+      <div class="kit-frame__body">
+        <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">04 —</span><span>Six kinds of organiser</span></div>
+        <h2 class="riser-section-headline" style="margin-bottom:var(--space-7)">Built for every kind of organizer.</h2>
+        <div class="riser-grid-2 riser-stagger" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Newcomers</h3><p class="riser-small" style="margin:0">Throwing your first event? Go from blank page to first sale in an afternoon. Pages, tickets and your opening promo push.</p></div>
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Event Pros</h3><p class="riser-small" style="margin:0">Already run a packed calendar? Bring your events, your data and your audience, then plug into AI targeting and influencers.</p></div>
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Clubs &amp; Venues</h3><p class="riser-small" style="margin:0">Fill the room every weekend. Recurring nights, presales and targeting that reaches your regulars, plus door tools.</p></div>
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Promoters &amp; Brands</h3><p class="riser-small" style="margin:0">Every push tracked, every promoter paid. Affiliate links, promo codes and street-team tools prove what works.</p></div>
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Corporate</h3><p class="riser-small" style="margin:0">Conferences, launches and summits with branded registration, controlled access and reporting your stakeholders trust.</p></div>
+          <div class="riser-card riser-card--tight"><h3 class="riser-h3" style="margin-bottom:var(--space-2)">Communities</h3><p class="riser-small" style="margin:0">Turn regulars into your marketing department. Memberships, presales and loyalty perks reward your core.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ PRICING + CLOSING -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">05 —</span><span>Pricing and close</span></div>
+      <span class="kit-screen__route">HomeMarketingSections · pricing, closing</span>
+    </div>
+    <p class="kit-screen__note">The fee is the page's biggest number and it is set in the display face, not decorated. The closing block is a solid ink surface — the one place the page inverts — with the deck's own line on it.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">riser.events — pricing and close</span></div>
+      <div class="kit-frame__body kit-frame__body--flush">
+        <div style="padding:var(--space-7)">
+          <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">05 —</span><span>Launch pricing</span></div>
+          <h2 class="riser-section-headline" style="margin-bottom:var(--space-7)">Fair pricing. No surprises.</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:start">
+            <div>
+              <span class="riser-label">Flat fee</span>
+              <div class="riser-display" style="margin:var(--space-2) 0">8%</div>
+              <p class="riser-small" style="margin:0">Plus payment processor fees. No listing fee, no monthly minimum, no charge for a campaign that does not send.</p>
+            </div>
+            <ul class="riser-body" style="margin:0;padding-left:var(--space-5);line-height:var(--leading-body)">
+              <li>Unlimited events and ticket tiers.</li>
+              <li>AI targeting and the promoter marketplace included.</li>
+              <li>SMS, RCS and WhatsApp billed as campaign credits.</li>
+              <li>Settlement within five working days of the event.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="riser-surface-ink" style="padding:var(--space-9) var(--space-7)">
+          <div class="riser-section-label" style="color:var(--paper-on-ink)"><span class="riser-section-label__index">06 —</span><span>The early-mover moment</span></div>
+          <h2 class="riser-display" style="color:var(--paper);max-width:20ch;margin-bottom:var(--space-6)">Stop listing your events. Start pushing them.</h2>
+          <div class="riser-row" style="gap:var(--space-3)">
+            <a class="riser-button riser-button--primary riser-button--lg" href="#">Sign up</a>
+            <a class="riser-button riser-button--secondary riser-button--lg" href="#">Watch the demo</a>
+          </div>
+        </div>
+
+        <div style="padding:var(--space-7);border-top:var(--hairline) solid var(--border-hairline)">
+          <div class="riser-row" style="justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:var(--space-5)">
+            <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="150">
+            <span class="riser-label">Belfast · Yangon · Bangkok</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:var(--rule-heavy) solid var(--ink);padding-top:var(--space-5)">
+    <span class="riser-label">Riser design system · marketing kit · copy from riser.events</span>
+  </footer>
+
+</div>
+</body>
+</html>

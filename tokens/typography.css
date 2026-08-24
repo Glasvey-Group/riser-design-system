@@ -1,0 +1,33 @@
+:root {
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-ui: "Archivo", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* Weights actually in use. 800 is the wordmark and headline weight; 900 for the largest display. */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 800;
+  --weight-black: 900;
+
+  /* Width axis. The wordmark is 88%; UI text stays at 100%. */
+  --width-wordmark: 88%;
+  --width-normal: 100%;
+
+  /* Scale */
+  --text-display: 52px;
+  --text-h1: 36px;
+  --text-h2: 26px;
+  --text-h3: 20px;
+  --text-body-size: 15px;
+  --text-small: 13.5px;
+  --text-label: 11px;
+
+  --leading-display: 0.95;
+  --leading-heading: 1.15;
+  --leading-body: 1.6;
+
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.02em;
+  --tracking-body: 0;
+  --tracking-label: 0.16em;
+}

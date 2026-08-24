@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riser — Foundations</title>
+<link rel="icon" href="../assets/logo/riser-favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<div class="riser-container spec-page">
+
+  <header class="spec-masthead">
+    <div>
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="200" style="display:block;margin-bottom:var(--space-4)">
+      <span class="riser-label">Design system — foundations</span>
+    </div>
+    <nav class="spec-nav">
+      <a href="index.html" aria-current="page">Foundations</a>
+      <a href="../components/gallery.html">Components</a>
+      <a href="../kits/promo-dashboard.html">Promo kit</a>
+      <a href="../kits/ticket-buyer.html">Buyer kit</a>
+      <a href="../kits/marketing-site.html">Marketing kit</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================ COLOUR -->
+  <section class="spec-section" id="colour">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">01 —</span><span>Colour</span></div>
+    <h2>Four colours.</h2>
+    <p class="spec-lede">Signal Orange is about 10% of any surface. It marks the action, the live figure, the rising bar — it does not decorate. One orange thing per view. Ink carries all text and every dark surface. Paper is the light ground. Slate is for lines, borders, dividers and disabled states, and never for body text.</p>
+
+    <div class="spec-grid spec-grid--4" style="margin-bottom:var(--space-7)">
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#F28600"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Signal Orange</span>
+          <span class="spec-swatch__hex">#F28600 · --orange</span>
+          <span class="spec-swatch__use">Primary. The last bar of the logo, fills, display type on dark. Never body text on light.</span>
+        </div>
+      </div>
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#121212"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Ink</span>
+          <span class="spec-swatch__hex">#121212 · --ink</span>
+          <span class="spec-swatch__use">All text, dark surfaces, the logo's dark bars and stage line.</span>
+        </div>
+      </div>
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#FAF9F7;border-bottom:1px solid var(--line)"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Paper</span>
+          <span class="spec-swatch__hex">#FAF9F7 · --paper</span>
+          <span class="spec-swatch__use">Light surfaces.</span>
+        </div>
+      </div>
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#708090"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Slate</span>
+          <span class="spec-swatch__hex">#708090 · --slate</span>
+          <span class="spec-swatch__use">Lines, borders, dividers, disabled states.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="riser-section-label"><span>Derived — not a fifth colour</span></div>
+    <div class="spec-grid spec-grid--3" style="margin-bottom:var(--space-7)">
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#5F6B7A;height:72px"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Slate text</span>
+          <span class="spec-swatch__hex">#5F6B7A · --slate-text</span>
+          <span class="spec-swatch__use">The slate darkened to clear 4.5:1 on paper. Secondary copy.</span>
+        </div>
+      </div>
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#3A3A3A;height:72px"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Ink soft</span>
+          <span class="spec-swatch__hex">#3A3A3A · --ink-soft</span>
+          <span class="spec-swatch__use">Body copy, a step down from headline ink.</span>
+        </div>
+      </div>
+      <div class="spec-swatch">
+        <div class="spec-swatch__block" style="background:#D97800;height:72px"></div>
+        <div class="spec-swatch__meta">
+          <span class="spec-swatch__name">Orange hover</span>
+          <span class="spec-swatch__hex">#D97800 · --accent-hover</span>
+          <span class="spec-swatch__use">Added by the system. Hover darkens the orange — lightening it drops ink below 4.5:1.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="riser-section-label"><span>Measured pairings</span></div>
+    <table class="spec-table" style="margin-bottom:var(--space-6)">
+      <thead>
+        <tr><th style="width:180px">Pairing</th><th style="width:120px">Ratio</th><th style="width:160px">Sample</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ink on paper</td><td class="num">17.8:1</td><td><span class="spec-pair" style="background:#FAF9F7;color:#121212">Aa 15px</span></td><td>Body and headline. Passes AAA.</td></tr>
+        <tr><td>Paper on ink</td><td class="num">17.8:1</td><td><span class="spec-pair" style="background:#121212;color:#FAF9F7">Aa 15px</span></td><td>Inverse surfaces. Passes AAA.</td></tr>
+        <tr><td>Ink soft on paper</td><td class="num">10.8:1</td><td><span class="spec-pair" style="background:#FAF9F7;color:#3A3A3A">Aa 15px</span></td><td>Body copy. Passes AAA.</td></tr>
+        <tr><td>Orange on ink</td><td class="num">7.3:1</td><td><span class="spec-pair" style="background:#121212;color:#F28600">Aa 15px</span></td><td>Display type on dark. Passes AAA.</td></tr>
+        <tr><td>Ink on orange</td><td class="num">7.3:1</td><td><span class="spec-pair" style="background:#F28600;color:#121212">Aa 15px</span></td><td>The primary button. Passes AAA.</td></tr>
+        <tr><td>Ink on orange hover</td><td class="num">5.9:1</td><td><span class="spec-pair" style="background:#D97800;color:#121212">Aa 15px</span></td><td>Hover state. Passes AA.</td></tr>
+        <tr><td>Slate text on paper</td><td class="num">5.2:1</td><td><span class="spec-pair" style="background:#FAF9F7;color:#5F6B7A">Aa 15px</span></td><td>Secondary copy and mono labels. Passes AA.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="riser-section-label"><span>Do not use</span></div>
+    <table class="spec-table">
+      <thead><tr><th style="width:180px">Pairing</th><th style="width:120px">Ratio</th><th style="width:160px">Sample</th><th>Why not</th></tr></thead>
+      <tbody>
+        <tr><td>Slate as body text</td><td class="num">3.9:1</td><td><span class="spec-pair" style="background:#FAF9F7;color:#708090">Aa 15px</span></td><td>Below 4.5:1. Use <span class="riser-data">--slate-text</span> instead.</td></tr>
+        <tr><td>White on orange</td><td class="num">2.6:1</td><td><span class="spec-pair" style="background:#F28600;color:#FFFFFF">Aa 15px</span></td><td>The orange bar disappears into the background. On orange the whole mark goes ink.</td></tr>
+        <tr><td>Orange as text on paper</td><td class="num">2.4:1</td><td><span class="spec-pair" style="background:#FAF9F7;color:#F28600">Aa 15px</span></td><td>Unreadable at body size. Orange on light is for fills, not letters.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="riser-card riser-card--dashed" style="margin-top:var(--space-6)">
+      <div class="riser-section-label"><span>Rejected — Azure #00A3F2</span></div>
+      <div class="riser-row" style="gap:var(--space-5);align-items:flex-start;flex-wrap:wrap">
+        <div style="display:flex">
+          <div style="width:80px;height:80px;background:#F28600"></div>
+          <div style="width:80px;height:80px;background:#00A3F2"></div>
+        </div>
+        <p class="riser-small" style="max-width:52ch;margin:0">Azure sits at almost the same luminance as the orange — <span class="riser-data">1.09:1</span> against each other — and is a near-complement, so the two vibrate side by side and collapse into the same tone in greyscale, one-colour print and embroidery. One signal colour only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== TYPE -->
+  <section class="spec-section" id="type">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">02 —</span><span>Type</span></div>
+    <h2>Archivo, and a mono that does the work.</h2>
+    <p class="spec-lede">Archivo variable, with its width axis. Weight 800 is the wordmark and headline weight; 900 for the largest display; 400–500 for body and labels. The wordmark is set at 88% width — UI text stays at 100%. JetBrains Mono carries every small label and all numeric or technical data, uppercase with 0.16em tracking. That is load-bearing: it is what keeps the identity feeling like infrastructure rather than a flyer.</p>
+
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">Display</span>
+        <span class="riser-small">52 / 0.95 · weight 900 · tracking −0.03em</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-display">Stop listing events.</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">H1</span>
+        <span class="riser-small">36 / 1.15 · weight 800 · tracking −0.02em</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-h1">The listing tax.</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">H2</span>
+        <span class="riser-small">26 / 1.15 · weight 800</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-h2">Beyond the ticket.</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">H3</span>
+        <span class="riser-small">20 / 1.15 · weight 800</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-h3">ROI on autopilot.</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">Body</span>
+        <span class="riser-small">15 / 1.6 · weight 400 · #3A3A3A</span>
+      </div>
+      <div class="spec-type-row__sample"><p class="riser-body" style="max-width:60ch;margin:0">Legacy platforms charge 10-25% in fees but offer almost no active promotion. You pay to list, not to sell.</p></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">Small</span>
+        <span class="riser-small">13.5 / 1.6 · secondary</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-small">Launch markets are Belfast and Yangon/Bangkok.</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">Label</span>
+        <span class="riser-small">JetBrains Mono 11 · caps · tracking 0.16em · slate</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-label">01 — Core · Campaign status · Delivery logs</span></div>
+    </div>
+    <div class="spec-type-row">
+      <div class="spec-type-row__meta">
+        <span class="riser-label">Data</span>
+        <span class="riser-small">JetBrains Mono 500 · tabular figures</span>
+      </div>
+      <div class="spec-type-row__sample"><span class="riser-data">12,480 credits · 2026-08-23 21:00 · TXN-4F2A91</span></div>
+    </div>
+
+    <div class="spec-do-dont" style="margin-top:var(--space-7)">
+      <div class="spec-do-dont__item">
+        <span class="spec-do-dont__verdict">Do</span>
+        <p class="riser-small">Section headlines in caps, declarative, often two beats. Body in sentence case, short, factual, numbers-forward.</p>
+        <div style="margin-top:var(--space-4)">
+          <div class="riser-label">04 — Distribution</div>
+          <div class="riser-section-headline" style="font-size:var(--text-h2)">The early-mover moment.</div>
+        </div>
+      </div>
+      <div class="spec-do-dont__item spec-do-dont__item--dont">
+        <span class="spec-do-dont__verdict">Don't</span>
+        <p class="riser-small">Mono for body copy. It is for labels, data, figures, timestamps, codes and IDs only — using it for prose spends the one device that makes the identity read as infrastructure.</p>
+        <p class="riser-data" style="margin-top:var(--space-4);font-size:var(--text-small);color:var(--text-secondary)">Legacy platforms charge 10-25% in fees but offer almost no active promotion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== SPACING -->
+  <section class="spec-section" id="spacing">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">03 —</span><span>Spacing &amp; grid</span></div>
+    <h2>Square, on a 4px rhythm.</h2>
+    <p class="spec-lede">Left-aligned, generous whitespace, hairline rules rather than boxes. Two-column and four-column grids with 16–20px gaps. Corners are square everywhere; the only radius in the identity is the app icon tile at 22% of its side.</p>
+
+    <div class="spec-ruler" style="margin-bottom:var(--space-7)">
+      <div class="spec-ruler__row"><span class="riser-label">4 · space-1</span><span class="spec-ruler__bar" style="width:4px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">8 · space-2</span><span class="spec-ruler__bar" style="width:8px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">12 · space-3</span><span class="spec-ruler__bar" style="width:12px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">16 · space-4</span><span class="spec-ruler__bar" style="width:16px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">20 · space-5</span><span class="spec-ruler__bar" style="width:20px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">26 · space-6</span><span class="spec-ruler__bar" style="width:26px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">34 · space-7</span><span class="spec-ruler__bar" style="width:34px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">52 · space-8</span><span class="spec-ruler__bar" style="width:52px"></span></div>
+      <div class="spec-ruler__row"><span class="riser-label">76 · space-9</span><span class="spec-ruler__bar spec-ruler__bar--accent" style="width:76px"></span></div>
+    </div>
+
+    <div class="riser-section-label"><span>Rules, not boxes</span></div>
+    <div style="margin-bottom:var(--space-4)">
+      <hr class="riser-rule"><span class="spec-caption">Hairline — 1px, --line. Separating content.</span>
+    </div>
+    <div style="margin-bottom:var(--space-4)">
+      <hr class="riser-rule riser-rule--heavy"><span class="spec-caption">Heavy — 2px ink. Under a grid header, or a section break.</span>
+    </div>
+    <div style="margin-bottom:var(--space-6)">
+      <hr class="riser-rule riser-rule--dashed"><span class="spec-caption">Dashed — measurement and specification only. Never decoration.</span>
+    </div>
+
+    <div class="riser-section-label"><span>Corners</span></div>
+    <div class="riser-row" style="gap:var(--space-6);align-items:flex-start;flex-wrap:wrap">
+      <div>
+        <div style="width:96px;height:96px;background:var(--ink)"></div>
+        <span class="spec-caption">Everything · radius 0</span>
+      </div>
+      <div>
+        <img src="../assets/logo/riser-app-icon.svg" alt="Riser app icon" width="96" height="96" style="display:block">
+        <span class="spec-caption">App icon tile · 22% of side</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ MOTION -->
+  <section class="spec-section" id="motion">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">04 —</span><span>Motion</span></div>
+    <h2>Things enter by rising.</h2>
+    <p class="spec-lede">Entrances travel 8px upward and stagger in sequence like the bars of the mark, 45ms between siblings. 140ms for state changes, 200ms for entrances, 320ms only for a full view transition. <span class="riser-data">cubic-bezier(0.16, 0.84, 0.44, 1)</span> — a firm ease-out, no bounce, no spring. Nothing scales on hover; nothing rotates.</p>
+
+    <div class="spec-demo spec-demo--stack" style="margin-bottom:var(--space-4)">
+      <div class="riser-grid-4 riser-stagger" id="stagger-demo">
+        <div class="riser-stat"><span class="riser-stat__label">Sent</span><span class="riser-stat__value">4,812</span></div>
+        <div class="riser-stat"><span class="riser-stat__label">Delivered</span><span class="riser-stat__value">4,690</span></div>
+        <div class="riser-stat"><span class="riser-stat__label">Opened</span><span class="riser-stat__value">1,204</span></div>
+        <div class="riser-stat riser-stat--live"><span class="riser-stat__label">Running</span><span class="riser-stat__value">3</span></div>
+      </div>
+      <button class="riser-button riser-button--secondary riser-button--sm" style="align-self:flex-start" onclick="const n=document.getElementById('stagger-demo');const c=n.cloneNode(true);n.replaceWith(c);c.id='stagger-demo';">Replay</button>
+    </div>
+    <span class="spec-caption">Rise 8px · 200ms · 45ms stagger · the fourth figure is the view's one orange thing</span>
+
+    <div class="riser-grid-2" style="margin-top:var(--space-7)">
+      <div>
+        <div class="riser-section-label"><span>Loading — the mark in motion</span></div>
+        <div class="spec-demo"><div class="riser-loader"><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span></div></div>
+        <span class="spec-caption">Four bars on the same 10-unit shear. Nothing in this identity rotates, so there is no spinner.</span>
+      </div>
+      <div>
+        <div class="riser-section-label"><span>Durations</span></div>
+        <table class="spec-table">
+          <tbody>
+            <tr><td>State change</td><td class="num">140ms</td></tr>
+            <tr><td>Entrance</td><td class="num">200ms</td></tr>
+            <tr><td>View transition</td><td class="num">320ms</td></tr>
+            <tr><td>Stagger step</td><td class="num">45ms</td></tr>
+            <tr><td>Rise distance</td><td class="num">8px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= ICONS -->
+  <section class="spec-section" id="icons">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">05 —</span><span>Iconography</span></div>
+    <h2>Lucide, squared.</h2>
+    <p class="spec-lede">Lucide ships round caps and joins by default. CSS wins over the presentation attributes in the SVGs, so squaring them costs one rule and brings the icon set in line with an identity that has no round corners anywhere except the app icon tile. Sizes 16, 20 and 24, on the same 4px rhythm as everything else.</p>
+
+    <div class="spec-code" style="margin-bottom:var(--space-6)">.icon { stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; }</div>
+
+    <div class="spec-grid spec-grid--2">
+      <div class="spec-do-dont__item">
+        <span class="spec-do-dont__verdict">Squared — correct</span>
+        <svg width="220" height="64" viewBox="0 0 220 64" fill="none" stroke="#121212" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" style="margin-top:var(--space-3)">
+          <path d="M16 44 L32 20 L48 44"/><path d="M70 44 L70 20 L94 32 Z"/><rect x="118" y="22" width="28" height="20"/><path d="M170 44 L170 20 M170 20 L194 20 M170 32 L188 32"/>
+        </svg>
+        <p class="riser-small" style="margin-top:var(--space-3)">Mitred joins, square terminals. Sits with the sheared bars of the mark.</p>
+      </div>
+      <div class="spec-do-dont__item spec-do-dont__item--dont">
+        <span class="spec-do-dont__verdict">Lucide default — override it</span>
+        <svg width="220" height="64" viewBox="0 0 220 64" fill="none" stroke="#708090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top:var(--space-3)">
+          <path d="M16 44 L32 20 L48 44"/><path d="M70 44 L70 20 L94 32 Z"/><rect x="118" y="22" width="28" height="20" rx="4"/><path d="M170 44 L170 20 M170 20 L194 20 M170 32 L188 32"/>
+        </svg>
+        <p class="riser-small" style="margin-top:var(--space-3)">Rounded caps and joins. Reads as a different, softer system.</p>
+      </div>
+    </div>
+
+    <div class="riser-card riser-card--dashed" style="margin-top:var(--space-6)">
+      <p class="riser-small" style="margin:0">Icons are ink, or slate when secondary. One icon per view may be orange — the same discipline as everything else. Icons are never filled, never boxed in a circle or a tinted tile, and never used decoratively beside a heading. Emoji are not used. Unicode symbols are not used as icons. Where a glyph is genuinely unavailable in Lucide, add it as a hand-built SVG on the same grid and stroke, and document it — do not swap in a second icon library.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================== LOGO -->
+  <section class="spec-section" id="logo">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">06 —</span><span>The logo</span></div>
+    <h2>Four bars rising off a stage line.</h2>
+    <p class="spec-lede">Bar width 16 units, gap 8, shear 10. The first three bars step 16 units each; the orange bar steps 18, so it clears the wordmark's cap line by a hair and is the only element above the name. The wordmark sits on the stage line with its cap height locked to the third bar's top point, 15 units to the right of the mark. It reads as a rising signal, a waveform, a stage, and a growth curve at once.</p>
+
+    <div class="spec-grid spec-grid--2" style="margin-bottom:var(--space-6)">
+      <div>
+        <div class="riser-card" style="display:grid;place-content:center;padding:var(--space-8)">
+          <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser primary lockup" width="280">
+        </div>
+        <span class="spec-caption">Primary — ink + orange, for paper and light photography</span>
+      </div>
+      <div>
+        <div class="riser-card riser-card--ink" style="display:grid;place-content:center;padding:var(--space-8)">
+          <img src="../assets/logo/riser-lockup-knockout.svg" alt="Riser knockout lockup" width="280">
+        </div>
+        <span class="spec-caption">Knockout — paper + orange, for ink and dark photography</span>
+      </div>
+      <div>
+        <div class="riser-card riser-surface-accent" style="display:grid;place-content:center;padding:var(--space-8)">
+          <img src="../assets/logo/riser-lockup-mono-ink.svg" alt="Riser mono ink lockup" width="280">
+        </div>
+        <span class="spec-caption">Mono ink — on orange the whole mark goes ink. Also for stamps, faxes, engraving.</span>
+      </div>
+      <div>
+        <div class="riser-card riser-card--ink" style="display:grid;place-content:center;padding:var(--space-8)">
+          <img src="../assets/logo/riser-lockup-mono-paper.svg" alt="Riser mono paper lockup" width="280">
+        </div>
+        <span class="spec-caption">Mono paper — dark backgrounds where orange cannot be used</span>
+      </div>
+    </div>
+
+    <div class="riser-section-label"><span>Mark, tile, favicon</span></div>
+    <div class="riser-row" style="gap:var(--space-7);align-items:flex-end;flex-wrap:wrap;margin-bottom:var(--space-6)">
+      <div><img src="../assets/logo/riser-mark-primary.svg" alt="" width="88"><span class="spec-caption">Mark · min 20px</span></div>
+      <div><img src="../assets/logo/riser-app-icon.svg" alt="" width="72"><span class="spec-caption">App icon · 1024²</span></div>
+      <div><img src="../assets/logo/riser-favicon.svg" alt="" width="32"><span class="spec-caption">Favicon · 32px preferred</span></div>
+    </div>
+
+    <div class="riser-section-label"><span>Clear space &amp; minimums</span></div>
+    <div class="riser-card riser-card--dashed" style="display:inline-block;padding:calc(280px / 347 * 16 * 1px)">
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="" width="280" style="display:block">
+    </div>
+    <span class="spec-caption">Clear space is one bar width — 16 units, a sixth of the lockup's height — on all sides. Minimum sizes: lockup 90px or 24mm wide, mark 20px, favicon 32px preferred over 16px.</span>
+
+    <div class="riser-card" style="margin-top:var(--space-6);border-left:var(--rule-heavy) solid var(--ink)">
+      <div class="riser-section-label"><span>Never</span></div>
+      <ul class="riser-small" style="margin:0;padding-left:var(--space-5);line-height:var(--leading-body)">
+        <li>Recolour the orange bar.</li>
+        <li>Restack the bars.</li>
+        <li>Add a container the mark does not have.</li>
+        <li>Set the wordmark in another face.</li>
+        <li>Use white on orange — 2.6:1, and the orange bar disappears into the background.</li>
+      </ul>
+      <p class="riser-small" style="margin-top:var(--space-4);margin-bottom:0;color:var(--text-secondary)">The previous violet rounded-square R monogram is retired, along with its indigo #554CF5.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================== IMAGERY -->
+  <section class="spec-section" id="imagery">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">07 —</span><span>Imagery</span></div>
+    <h2>Real rooms, underexposed.</h2>
+    <p class="spec-lede">Live event photography, in colour, underexposed. Warm stage light, deep shadow, and real rooms — shot from inside the crowd or the booth rather than from a balcony. No duotone, no orange wash, no filters, no grain overlay: the frames already carry warmth that sits with the orange, and tinting them would spend the signal colour on decoration.</p>
+
+    <div class="spec-grid spec-grid--2" style="margin-bottom:var(--space-6)">
+      <div>
+        <figure class="riser-figure riser-figure--scrim" style="aspect-ratio:16/9;background:linear-gradient(160deg,#2a1a0d,#121212 60%)">
+          <figcaption style="position:absolute;inset:auto var(--space-5) var(--space-5) var(--space-5);z-index:1">
+            <span class="riser-label riser-label--on-ink">Limelight · Belfast</span>
+            <div class="riser-h2" style="color:var(--paper);margin-top:var(--space-2)">Text over an image</div>
+          </figcaption>
+        </figure>
+        <span class="spec-caption">Ink scrim at 70%, or set the type in the darkest third of the frame</span>
+      </div>
+      <div>
+        <figure class="riser-figure" style="aspect-ratio:16/9;background:linear-gradient(160deg,#3a2410,#121212 70%)">
+          <figcaption class="riser-figure__caption" style="position:absolute;inset:auto var(--space-4) var(--space-4) var(--space-4);color:var(--paper-on-ink)">Warehouse Series 04 · Limelight, Belfast · 2026</figcaption>
+        </figure>
+        <span class="spec-caption">Full-bleed to the grid edge, never inset in a rounded card. Captions are mono, slate, 11px caps.</span>
+      </div>
+    </div>
+
+    <div class="riser-card" style="border-left:var(--rule-heavy) solid var(--orange)">
+      <div class="riser-section-label riser-section-label--accent"><span class="riser-section-label__index">Audit —</span><span>The current library does not meet this standard</span></div>
+      <p class="riser-small" style="margin-bottom:var(--space-4)">The 18 frames in <span class="riser-data">RiserSolutions/public/images/events</span> were reviewed against the rules above. They are generic stock event photography and every one of them fails on at least one count. They are not included in this system as approved examples.</p>
+      <table class="spec-table">
+        <thead><tr><th style="width:220px">Frame</th><th>Why it fails</th></tr></thead>
+        <tbody>
+          <tr><td class="num">hero-stage.jpg</td><td>Cool blue and magenta club lighting, which fights the orange. Raised hands and lit phone screens throughout.</td></tr>
+          <tr><td class="num">g-dj.jpg</td><td>Bright daylight festival, shot from behind the booth over a wide crowd. Not underexposed; no stage light.</td></tr>
+          <tr><td class="num">g-performer.jpg</td><td>Blown-out white smoke, blue and red gels. Raised hand, centred subject — a stock frame.</td></tr>
+          <tr><td class="num">g-mic.jpg</td><td>Teal-graded, shallow-focus microphone. A prop, not a room.</td></tr>
+          <tr><td class="num">the remaining 14</td><td>Same library, same treatment: bright, cool-graded, balcony or stock vantage.</td></tr>
+        </tbody>
+      </table>
+      <p class="riser-small" style="margin-top:var(--space-4);margin-bottom:0"><strong>What is needed:</strong> two or three frames shot from inside the crowd or the booth, warm stage light, deep shadow, no watermark and no competitor branding on a wristband or screen. With those the hero and card treatments can be built for real rather than with the gradient placeholders above.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= VOICE -->
+  <section class="spec-section" id="voice">
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">08 —</span><span>Voice</span></div>
+    <h2>Claims come with a figure attached.</h2>
+    <div class="spec-grid spec-grid--2">
+      <div class="spec-do-dont__item">
+        <span class="spec-do-dont__verdict">Do</span>
+        <ul class="riser-small" style="padding-left:var(--space-5);line-height:var(--leading-body)">
+          <li>Section headlines in caps, declarative, often two beats.</li>
+          <li>Body in sentence case, short, factual, numbers-forward.</li>
+          <li>Verbs of motion: push, drive, amplify, reach, convert.</li>
+          <li>The company is “we”; the organiser is “you”.</li>
+          <li>Name things plainly: The Promo Dashboard, The Heat Map, Influencer Bridge, Campaign Credits.</li>
+        </ul>
+      </div>
+      <div class="spec-do-dont__item spec-do-dont__item--dont">
+        <span class="spec-do-dont__verdict">Don't</span>
+        <ul class="riser-small" style="padding-left:var(--space-5);line-height:var(--leading-body)">
+          <li>No emoji.</li>
+          <li>No exclamation marks.</li>
+          <li>No “revolutionary” or “game-changing”.</li>
+          <li>No claim without a figure attached.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:var(--rule-heavy) solid var(--ink);padding-top:var(--space-5)">
+    <span class="riser-label">Riser design system · foundations · built from the brand foundation brief</span>
+  </footer>
+
+</div>
+</body>
+</html>

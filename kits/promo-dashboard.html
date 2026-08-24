@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riser — Promo Dashboard kit</title>
+<link rel="icon" href="../assets/logo/riser-favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../foundations/foundations.css">
+<link rel="stylesheet" href="kits.css">
+</head>
+<body>
+<div class="riser-container spec-page">
+
+  <header class="spec-masthead">
+    <div>
+      <img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" width="200" style="display:block;margin-bottom:var(--space-4)">
+      <span class="riser-label">UI kit — the Promo Dashboard</span>
+    </div>
+    <nav class="spec-nav">
+      <a href="../foundations/index.html">Foundations</a>
+      <a href="../components/gallery.html">Components</a>
+      <a href="promo-dashboard.html" aria-current="page">Promo kit</a>
+      <a href="ticket-buyer.html">Buyer kit</a>
+      <a href="marketing-site.html">Marketing kit</a>
+    </nav>
+  </header>
+
+  <p class="spec-lede">Eight screens, recreated from <span class="riser-data">promo.riser.events</span> — every route, field, column, status and empty string taken from the code in <span class="riser-data">src/app/organizer/[slug]/</span>, not invented. The shell is the same on all of them: a sticky navbar with the lockup left and the organiser context right, a drawer behind the menu button, and a 1440px page.</p>
+
+  <!-- ------------------------------------------------ SHELL -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">01 —</span><span>The shell</span></div>
+      <span class="kit-screen__route">components/Navbar.tsx · components/Sidebar.tsx</span>
+    </div>
+    <p class="kit-screen__note">Promo's navbar was a floating pill: fixed, <span class="riser-data">calc(100% − 6rem)</span> wide, 4px radius, a 10px backdrop blur and a 30px shadow. Flat, square and hairline-ruled means a bar that sits on the page. The logo moves centre to left, because left-aligned is the layout rule. The “as {organizer}” string stays — it is the one piece of state the bar carries.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey</span></div>
+      <nav class="riser-navbar" style="position:static">
+        <div class="riser-navbar__inner" style="padding-inline:var(--space-6)">
+          <div class="riser-navbar__left">
+            <button class="riser-navbar__menu-btn" aria-label="Open menu">
+              <svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <span class="riser-navbar__logo"><img src="../assets/logo/riser-lockup-primary.svg" alt="Riser" height="28"></span>
+          </div>
+          <div class="riser-navbar__right">
+            <span class="riser-navbar__context">as Glasvey Group</span>
+            <button class="riser-button riser-button--ghost riser-button--sm">Karim A.</button>
+          </div>
+        </div>
+      </nav>
+      <div class="kit-frame__body" style="display:grid;grid-template-columns:280px 1fr;gap:var(--space-6);align-items:start">
+        <aside style="border-right:var(--hairline) solid var(--border-hairline);padding-right:var(--space-5)">
+          <div class="riser-drawer__section" style="padding:0 0 var(--space-5)">
+            <div class="riser-drawer__section-title">as Glasvey Group</div>
+            <ul class="riser-drawer__list">
+              <li><a class="riser-drawer__link riser-drawer__link--active" href="#">Home</a></li>
+              <li><a class="riser-drawer__link" href="#">Campaigns</a></li>
+              <li><a class="riser-drawer__link" href="#">Credits</a></li>
+              <li><a class="riser-drawer__link" href="#">Message Templates</a></li>
+              <li><a class="riser-drawer__link" href="#">Audiences</a></li>
+            </ul>
+          </div>
+          <div class="riser-drawer__section" style="padding:var(--space-5) 0 0;border-top:var(--hairline) solid var(--border-hairline);border-bottom:0">
+            <div class="riser-drawer__section-title">Account</div>
+            <ul class="riser-drawer__list"><li><a class="riser-drawer__link" href="#">Logout</a></li></ul>
+          </div>
+        </aside>
+        <div>
+          <p class="riser-small" style="max-width:56ch">The drawer's five links are Promo's exactly — Home, Campaigns, Credits, Message Templates, Audiences — each resolved against <span class="riser-data">/organizer/{slug}</span>. The active link carries a 2px orange rule on its leading edge; hover takes it to ink.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ HOME -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">02 —</span><span>Dashboard home</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">WelcomeBanner over the Campaigns grid, then the Manage button — exactly Promo's composition. The greeting was 3xl Anton with <span class="riser-data">0.2rem</span> tracking and centred text inside a left-aligned flex column; it is now an H1 with the credit balance as a StatCard, which is what the number actually is. The balance is the one orange thing on this screen.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+
+          <header>
+            <div class="riser-section-label"><span class="riser-section-label__index">01 —</span><span>Overview</span></div>
+            <h1 class="riser-h1">Welcome, Karim.</h1>
+          </header>
+
+          <div class="riser-grid-4 riser-stagger">
+            <div class="riser-stat">
+              <span class="riser-stat__label">Credits</span>
+              <span class="riser-stat__value">12,480</span>
+              <span class="riser-stat__note">Current balance</span>
+            </div>
+            <div class="riser-stat"><span class="riser-stat__label">Campaigns</span><span class="riser-stat__value">24</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Audiences</span><span class="riser-stat__value">7</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Brands</span><span class="riser-stat__value">3</span></div>
+          </div>
+
+          <div class="riser-row" style="justify-content:flex-end">
+            <button class="riser-button riser-button--primary riser-button--md">Buy credits</button>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Campaigns</h2><span class="riser-grid__count">24</span></div>
+                <div class="riser-grid__controls">
+                  <div class="riser-filter"><button class="riser-filter__trigger" type="button"><span class="riser-filter__label">Brand</span><span class="riser-filter__value">All</span></button></div>
+                  <div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div>
+                </div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:15%">Date</div>
+                  <div class="riser-grid__head-cell" style="width:12%">Type</div>
+                  <div class="riser-grid__head-cell" style="width:12%">Status</div>
+                  <div class="riser-grid__head-cell" style="width:30%">Name</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Brand</div>
+                  <div class="riser-grid__head-cell" style="width:11%">Actions</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row riser-grid__row--clickable">
+                    <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-24 21:00</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--live">Running</span></div>
+                    <div class="riser-grid__cell" style="width:30%" data-label="Name">Belfast · Autumn push</div>
+                    <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
+                    <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+                  </div>
+                  <div class="riser-grid__row riser-grid__row--clickable">
+                    <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-30 18:30</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Type">WhatsApp</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--neutral">Scheduled</span></div>
+                    <div class="riser-grid__cell" style="width:30%" data-label="Name">Yangon · Warehouse series</div>
+                    <div class="riser-grid__cell" style="width:20%" data-label="Brand">Pop Alibi</div>
+                    <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm" title="Run">Run</button><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+                  </div>
+                  <div class="riser-grid__row riser-grid__row--clickable">
+                    <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-12 20:00</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--done">Complete</span></div>
+                    <div class="riser-grid__cell" style="width:30%" data-label="Name">Re-engage · 90-day lapsed</div>
+                    <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
+                    <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+                  </div>
+                  <div class="riser-grid__row riser-grid__row--clickable">
+                    <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-02 19:00</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--neutral">Draft</span></div>
+                    <div class="riser-grid__cell" style="width:30%" data-label="Name">Bangkok · Soft launch</div>
+                    <div class="riser-grid__cell" style="width:20%" data-label="Brand">Riser</div>
+                    <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">Run</button><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+                  </div>
+                  <div class="riser-grid__row riser-grid__row--clickable">
+                    <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-07-29 12:00</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
+                    <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--stopped">Cancelled</span></div>
+                    <div class="riser-grid__cell" style="width:30%" data-label="Name">Limelight · Test send</div>
+                    <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
+                    <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">Run</button><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>
+                  </div>
+                </div>
+              </div>
+              <nav class="riser-pagination">
+                <button class="riser-pagination__page riser-pagination__step" disabled>Prev</button>
+                <div class="riser-pagination__pages">
+                  <button class="riser-pagination__page riser-pagination__page--active">1</button>
+                  <button class="riser-pagination__page">2</button>
+                  <button class="riser-pagination__page">3</button>
+                  <button class="riser-pagination__page">4</button>
+                  <span class="riser-pagination__ellipsis">…</span>
+                  <button class="riser-pagination__page">5</button>
+                </div>
+                <button class="riser-pagination__page riser-pagination__step">Next</button>
+              </nav>
+            </div>
+            <div class="riser-card__footer"><button class="riser-button riser-button--ink riser-button--md">Manage</button></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ CAMPAIGNS -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">03 —</span><span>Campaigns</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/campaigns/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">The composition is Promo's, in order: DetailView (or DetailForm when <span class="riser-data">?new=true</span> / <span class="riser-data">?edit=true</span>), the Add button, the Audience Members grid when the campaign is not yet running, the Delivery Logs grid once it is, and the Campaigns grid at the bottom with the selected row marked. Copy, Edit and Delete only appear for None, Draft, Scheduled and Cancelled; Run Now is the footer action for those same four.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey/campaigns?id=4f2a91</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+
+          <div class="riser-card">
+            <div class="riser-card__header">
+              <h2 class="riser-card__title">Belfast · Autumn push</h2>
+              <div class="riser-card__actions">
+                <button class="riser-button riser-button--secondary riser-button--sm">Copy</button>
+                <button class="riser-button riser-button--secondary riser-button--sm">Edit</button>
+                <button class="riser-button riser-button--danger riser-button--sm">Delete</button>
+              </div>
+            </div>
+            <div class="riser-detail__grid">
+              <div class="riser-detail__field"><span class="riser-detail__label">Name</span><div class="riser-detail__value">Belfast · Autumn push</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Status</span><div class="riser-detail__value"><span class="riser-badge riser-badge--neutral">Draft</span></div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Owner</span><div class="riser-detail__value">Karim Ainsworth</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Audience</span><div class="riser-detail__value">Limelight regulars</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Required credits</span><div class="riser-detail__value riser-detail__value--data">4,812</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Brand</span><div class="riser-detail__value">Limelight</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Campaign type</span><div class="riser-detail__value">SMS broadcast</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Schedule date</span><div class="riser-detail__value riser-detail__value--data">2026-08-24 21:00</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Creation time</span><div class="riser-detail__value riser-detail__value--data">2026-08-19 14:32</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Message template</span><div class="riser-detail__value">Autumn · doors 9pm</div></div>
+            </div>
+            <div class="riser-card__footer"><button class="riser-button riser-button--primary riser-button--md">Run now</button></div>
+          </div>
+
+          <div class="riser-row" style="justify-content:flex-end"><button class="riser-button riser-button--ink riser-button--md">Add campaign</button></div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Audience Members</h2></div>
+                <div class="riser-grid__controls"><div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div></div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:30%">Name</div>
+                  <div class="riser-grid__head-cell" style="width:35%">Email</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Mobile</div>
+                  <div class="riser-grid__head-cell" style="width:15%">Location</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Aoife Donnelly</div><div class="riser-grid__cell riser-grid__cell--data" style="width:35%" data-label="Email">aoife.d@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Mobile">447700900412</div><div class="riser-grid__cell" style="width:15%" data-label="Location">Belfast</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Ciarán Boyle</div><div class="riser-grid__cell riser-grid__cell--data" style="width:35%" data-label="Email">c.boyle@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Mobile">447700900188</div><div class="riser-grid__cell" style="width:15%" data-label="Location">Belfast</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Thura Win</div><div class="riser-grid__cell riser-grid__cell--data" style="width:35%" data-label="Email">thura.w@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Mobile">959770112233</div><div class="riser-grid__cell" style="width:15%" data-label="Location">Yangon</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Delivery Logs</h2></div>
+                <div class="riser-grid__controls"><div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div></div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:30%">Name</div>
+                  <div class="riser-grid__head-cell" style="width:30%">Email</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Status</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Date sent</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Aoife Donnelly</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">aoife.d@example.com</div><div class="riser-grid__cell" style="width:20%" data-label="Status"><span class="riser-badge riser-badge--live">Opened</span></div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Date sent">2026-08-24 21:00</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Ciarán Boyle</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">c.boyle@example.com</div><div class="riser-grid__cell" style="width:20%" data-label="Status"><span class="riser-badge riser-badge--done">Delivered</span></div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Date sent">2026-08-24 21:00</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell" style="width:30%" data-label="Name">Thura Win</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">thura.w@example.com</div><div class="riser-grid__cell" style="width:20%" data-label="Status"><span class="riser-badge riser-badge--stopped">Bounced</span></div><div class="riser-grid__cell riser-grid__cell--data" style="width:20%" data-label="Date sent">2026-08-24 21:01</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ AUDIENCES -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">04 —</span><span>Audiences</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/audiences/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">Same composition, Promo's fields exactly: Audience Type, Name, Parent Audience, External Audience Reference URL, Description. Parent Audience is disabled unless the type is Derived — that predicate is Promo's, and it now lives in the screen rather than inside DetailForm. Type is disabled in edit mode. The grid is Type / Name / Actions.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey/audiences?new=true</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+          <div class="riser-card">
+            <h2 class="riser-card__title" style="margin-bottom:var(--space-5)">Create audience</h2>
+            <div class="riser-detail__grid">
+              <div class="riser-field"><label class="riser-field__label">Audience type<span class="riser-field__required">*</span></label><select class="riser-select"><option>Select audience type</option><option selected>User provided</option><option>Derived</option></select></div>
+              <div class="riser-field"><label class="riser-field__label">Name<span class="riser-field__required">*</span></label><input class="riser-input" placeholder="Enter audience name"></div>
+              <div class="riser-field"><label class="riser-field__label">Parent audience</label><select class="riser-select" disabled><option>Select parent audience</option></select><span class="riser-field__hint">Available when the type is Derived</span></div>
+              <div class="riser-field"><label class="riser-field__label">External audience reference URL</label><input class="riser-input" placeholder="Enter external audience reference URL"></div>
+              <div class="riser-field riser-field--full"><label class="riser-field__label">Description</label><input class="riser-input" placeholder="Enter description"></div>
+            </div>
+            <div class="riser-card__footer">
+              <button class="riser-button riser-button--secondary riser-button--md">Cancel</button>
+              <button class="riser-button riser-button--primary riser-button--md">Create</button>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Audiences</h2><span class="riser-grid__count">7</span></div>
+                <div class="riser-grid__controls"><div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div></div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:30%">Type</div>
+                  <div class="riser-grid__head-cell" style="width:50%">Name</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Actions</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row riser-grid__row--clickable"><div class="riser-grid__cell" style="width:30%" data-label="Type">User provided</div><div class="riser-grid__cell" style="width:50%" data-label="Name">Limelight regulars</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                  <div class="riser-grid__row riser-grid__row--clickable"><div class="riser-grid__cell" style="width:30%" data-label="Type">Derived</div><div class="riser-grid__cell" style="width:50%" data-label="Name">Lapsed 90 days — from Limelight regulars</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                  <div class="riser-grid__row riser-grid__row--clickable"><div class="riser-grid__cell" style="width:30%" data-label="Type">User provided</div><div class="riser-grid__cell" style="width:50%" data-label="Name">Yangon warehouse list</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ UPLOAD AUDIENCE -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">05 —</span><span>Upload audience</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/upload-audience/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">Promo's flow, step for step: pick a phone country code so numbers normalise to MSISDN, drop a CSV, then read the five counters and the Ready / Failed lists. Only User Provided audiences can be uploaded to — the screen refuses others. The dropzone no longer scales 5% on drag; the dashed rule goes orange instead.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey/upload-audience?audienceId=8c11</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+
+          <div class="riser-card">
+            <div class="riser-card__header">
+              <h2 class="riser-card__title">Limelight regulars</h2>
+              <div class="riser-card__actions"><button class="riser-button riser-button--secondary riser-button--sm">Edit</button></div>
+            </div>
+            <div class="riser-detail__grid">
+              <div class="riser-detail__field"><span class="riser-detail__label">Audience type</span><div class="riser-detail__value">User provided</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Name</span><div class="riser-detail__value">Limelight regulars</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Description</span><div class="riser-detail__value">Opted-in attendees, 2024 onward</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">External audience reference URL</span><div class="riser-detail__value riser-detail__value--empty">—</div></div>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-section-label"><span class="riser-section-label__index">01 —</span><span>Upload audience</span></div>
+            <div class="riser-row" style="justify-content:space-between;margin-bottom:var(--space-5)">
+              <span class="riser-small"><span class="riser-label">Country code</span> &nbsp; United Kingdom · +44</span>
+              <button class="riser-button riser-button--ghost riser-button--sm">Change</button>
+            </div>
+            <div class="riser-dropzone">
+              <span class="riser-dropzone__headline">Drag and drop a CSV file</span>
+              <span class="riser-dropzone__hint">or click to browse</span>
+              <span class="riser-dropzone__spec">CSV should include FirstName, LastName, Email, Mobile (required), WhatsApp (optional), DOB, Gender, City</span>
+            </div>
+          </div>
+
+          <div class="riser-grid-4 riser-stagger" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+            <div class="riser-stat"><span class="riser-stat__label">Total records</span><span class="riser-stat__value">5,204</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Ready</span><span class="riser-stat__value">4,812</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Failed</span><span class="riser-stat__value">392</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Duplicates</span><span class="riser-stat__value">218</span></div>
+            <div class="riser-stat"><span class="riser-stat__label">Bad numbers</span><span class="riser-stat__value">174</span></div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-card__header">
+              <h2 class="riser-card__title">Ready to create <span class="riser-grid__count">4,812</span></h2>
+              <div class="riser-card__actions"><button class="riser-button riser-button--primary riser-button--md">Create audience</button></div>
+            </div>
+            <div class="riser-grid__table">
+              <div class="riser-grid__head-row">
+                <div class="riser-grid__head-cell" style="width:26%">Name</div>
+                <div class="riser-grid__head-cell" style="width:30%">Email</div>
+                <div class="riser-grid__head-cell" style="width:22%">Mobile</div>
+                <div class="riser-grid__head-cell" style="width:14%">City</div>
+                <div class="riser-grid__head-cell" style="width:8%"></div>
+              </div>
+              <div class="riser-grid__body">
+                <div class="riser-grid__row"><div class="riser-grid__cell" style="width:26%" data-label="Name">Aoife Donnelly</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">aoife.d@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:22%" data-label="Mobile">447700900412</div><div class="riser-grid__cell" style="width:14%" data-label="City">Belfast</div><div class="riser-grid__cell" style="width:8%"><button class="riser-button riser-button--ghost riser-button--sm">Remove</button></div></div>
+                <div class="riser-grid__row"><div class="riser-grid__cell" style="width:26%" data-label="Name">Ciarán Boyle</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">c.boyle@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:22%" data-label="Mobile">447700900188</div><div class="riser-grid__cell" style="width:14%" data-label="City">Belfast</div><div class="riser-grid__cell" style="width:8%"><button class="riser-button riser-button--ghost riser-button--sm">Remove</button></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-card__header"><h2 class="riser-card__title">Failed <span class="riser-grid__count">392</span></h2></div>
+            <div class="riser-grid__table">
+              <div class="riser-grid__head-row">
+                <div class="riser-grid__head-cell" style="width:26%">Name</div>
+                <div class="riser-grid__head-cell" style="width:30%">Email</div>
+                <div class="riser-grid__head-cell" style="width:22%">Mobile</div>
+                <div class="riser-grid__head-cell" style="width:22%">Reason</div>
+              </div>
+              <div class="riser-grid__body">
+                <div class="riser-grid__row"><div class="riser-grid__cell" style="width:26%" data-label="Name">Sean Murphy</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">sean.m@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:22%" data-label="Mobile">07700 900 41</div><div class="riser-grid__cell" style="width:22%" data-label="Reason"><span class="riser-badge riser-badge--stopped">Bad number</span></div></div>
+                <div class="riser-grid__row"><div class="riser-grid__cell" style="width:26%" data-label="Name">Aoife Donnelly</div><div class="riser-grid__cell riser-grid__cell--data" style="width:30%" data-label="Email">aoife.d@example.com</div><div class="riser-grid__cell riser-grid__cell--data" style="width:22%" data-label="Mobile">447700900412</div><div class="riser-grid__cell" style="width:22%" data-label="Reason"><span class="riser-badge riser-badge--stopped">Duplicate</span></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ MESSAGE TEMPLATES -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">06 —</span><span>Message templates</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/messageTemplates/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">Promo's six fields: Campaign Channel, Template Name, Message Subject, Message Body, Tracking Code, Tracking URL. Grid is Channel / Name / Actions. Message body is the one full-width field — it is the only one with a length worth the room.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey/messageTemplates?id=b71c</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+          <div class="riser-card">
+            <div class="riser-card__header">
+              <h2 class="riser-card__title">Autumn · doors 9pm</h2>
+              <div class="riser-card__actions">
+                <button class="riser-button riser-button--secondary riser-button--sm">Copy</button>
+                <button class="riser-button riser-button--secondary riser-button--sm">Edit</button>
+                <button class="riser-button riser-button--danger riser-button--sm">Delete</button>
+              </div>
+            </div>
+            <div class="riser-detail__grid">
+              <div class="riser-detail__field"><span class="riser-detail__label">Campaign channel</span><div class="riser-detail__value">SMS</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Template name</span><div class="riser-detail__value">Autumn · doors 9pm</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Message subject</span><div class="riser-detail__value riser-detail__value--empty">—</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Tracking code</span><div class="riser-detail__value riser-detail__value--data">AUT26-LMNL</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Tracking URL</span><div class="riser-detail__value riser-detail__value--data">riser.events/lmnl</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Message body</span><div class="riser-detail__value">Doors 9pm Friday at the Limelight. Last 40 tickets — riser.events/lmnl</div></div>
+            </div>
+          </div>
+
+          <div class="riser-row" style="justify-content:flex-end"><button class="riser-button riser-button--primary riser-button--md">Add message template</button></div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Message Templates</h2><span class="riser-grid__count">5</span></div>
+                <div class="riser-grid__controls"><div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div></div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:25%">Channel</div>
+                  <div class="riser-grid__head-cell" style="width:55%">Name</div>
+                  <div class="riser-grid__head-cell" style="width:20%">Actions</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row riser-grid__row--clickable riser-grid__row--active"><div class="riser-grid__cell" style="width:25%" data-label="Channel">SMS</div><div class="riser-grid__cell" style="width:55%" data-label="Name">Autumn · doors 9pm</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                  <div class="riser-grid__row riser-grid__row--clickable"><div class="riser-grid__cell" style="width:25%" data-label="Channel">WhatsApp</div><div class="riser-grid__cell" style="width:55%" data-label="Name">Warehouse series · lineup drop</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                  <div class="riser-grid__row riser-grid__row--clickable"><div class="riser-grid__cell" style="width:25%" data-label="Channel">SMS</div><div class="riser-grid__cell" style="width:55%" data-label="Name">Re-engage · we miss you</div><div class="riser-grid__cell" style="width:20%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button><button class="riser-button riser-button--ghost riser-button--sm">Edit</button></span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ CREDITS -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">07 —</span><span>Credits</span></div>
+      <span class="kit-screen__route">/organizer/[slug]/credit/page.tsx</span>
+    </div>
+    <p class="kit-screen__note">Three stacked cards, as Promo has them: the Buy Credits form with its live GBP / USD / MMK conversion, the Credit Information card, and the Credit Transactions grid. The team-member advisory is the same Notice used above the campaigns grid. Transaction types are Promo's seven: None, Purchased, Spend, Refund, Cancelled, Complimentary, Expired.</p>
+
+    <div class="kit-frame">
+      <div class="kit-frame__chrome"><span class="kit-frame__url">promo.riser.events/organizer/glasvey/credit</span></div>
+      <div class="kit-frame__body">
+        <div class="kit-stack">
+
+          <div class="riser-card">
+            <div class="riser-card__header"><h2 class="riser-card__title">Buy credits</h2></div>
+            <div class="riser-notice riser-notice--attention" style="margin-bottom:var(--space-5)">
+              <div class="riser-notice__text">Operating as a <strong>Glasvey Group</strong> team member — organiser</div>
+            </div>
+            <div class="riser-detail__grid">
+              <div class="riser-field"><label class="riser-field__label">Amount (credits)<span class="riser-field__required">*</span></label><input class="riser-input riser-input--data" value="5000" inputmode="numeric"></div>
+              <div class="riser-field"><label class="riser-field__label">Notes</label><input class="riser-input" placeholder="Add notes about this transaction"></div>
+            </div>
+            <div class="riser-card__footer" style="justify-content:space-between;align-items:flex-end">
+              <div style="display:flex;gap:var(--space-6)">
+                <div><span class="riser-label">Cost GBP</span><div class="riser-data" style="font-size:var(--text-h3)">£50.00</div></div>
+                <div><span class="riser-label">Cost USD</span><div class="riser-data" style="font-size:var(--text-h3)">$63.00</div></div>
+                <div><span class="riser-label">Cost MMK</span><div class="riser-data" style="font-size:var(--text-h3)">210,000</div></div>
+              </div>
+              <button class="riser-button riser-button--primary riser-button--md">Buy credits</button>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-card__header"><h2 class="riser-card__title">Credit information</h2></div>
+            <div class="riser-detail__grid">
+              <div class="riser-detail__field"><span class="riser-detail__label">Wallet name</span><div class="riser-detail__value">Glasvey Group — main</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Current balance</span><div class="riser-detail__value riser-detail__value--data">12,480 credits</div></div>
+              <div class="riser-detail__field"><span class="riser-detail__label">Last transaction</span><div class="riser-detail__value riser-detail__value--data">2026-08-19 14:32</div></div>
+            </div>
+            <div class="riser-card__footer" style="justify-content:flex-start">
+              <p class="riser-small" style="margin:0;max-width:64ch">Credits are used to create and run campaigns. You can purchase credits at any time, and they will be added to your account balance. Credits never expire and can be used for all campaign types.</p>
+            </div>
+          </div>
+
+          <div class="riser-card">
+            <div class="riser-grid">
+              <div class="riser-grid__header">
+                <div class="riser-grid__heading"><h2 class="riser-grid__title">Credit Transactions</h2><span class="riser-grid__count">18</span></div>
+                <div class="riser-grid__controls"><div class="riser-search"><input class="riser-input" type="search" placeholder="Search"></div></div>
+              </div>
+              <div class="riser-grid__table">
+                <div class="riser-grid__head-row">
+                  <div class="riser-grid__head-cell" style="width:25%">Date</div>
+                  <div class="riser-grid__head-cell" style="width:25%">Type</div>
+                  <div class="riser-grid__head-cell" style="width:25%">Amount</div>
+                  <div class="riser-grid__head-cell" style="width:25%">Notes</div>
+                </div>
+                <div class="riser-grid__body">
+                  <div class="riser-grid__row"><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Date">2026-08-19 14:32</div><div class="riser-grid__cell" style="width:25%" data-label="Type">Purchased</div><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Amount">+10,000 credits</div><div class="riser-grid__cell" style="width:25%" data-label="Notes">Autumn top-up</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Date">2026-08-12 20:04</div><div class="riser-grid__cell" style="width:25%" data-label="Type">Spend</div><div class="riser-grid__cell riser-grid__cell--data" style="width:25%;color:var(--text-secondary)" data-label="Amount">−4,690 credits</div><div class="riser-grid__cell" style="width:25%" data-label="Notes">Re-engage · 90-day lapsed</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Date">2026-08-02 09:15</div><div class="riser-grid__cell" style="width:25%" data-label="Type">Complimentary</div><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Amount">+2,000 credits</div><div class="riser-grid__cell" style="width:25%" data-label="Notes">Beta allowance</div></div>
+                  <div class="riser-grid__row"><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Date">2026-07-29 12:10</div><div class="riser-grid__cell" style="width:25%" data-label="Type">Refund</div><div class="riser-grid__cell riser-grid__cell--data" style="width:25%" data-label="Amount">+1,200 credits</div><div class="riser-grid__cell" style="width:25%" data-label="Notes">Cancelled — Limelight test send</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ STATES -->
+  <section class="kit-screen">
+    <div class="kit-screen__meta">
+      <div class="riser-section-label" style="margin:0"><span class="riser-section-label__index">08 —</span><span>Payment result, and the states in between</span></div>
+      <span class="kit-screen__route">/success · /cancel · /no-organizer · /access-denied</span>
+    </div>
+    <p class="kit-screen__note">Promo's <span class="riser-data">/success</span> screen animated in with <span class="riser-data">translate-y-8</span>, a 2xl radius, an xl shadow and a <span class="riser-data">hover:scale-105</span> button, and marked pending with three bouncing dots. The bounce, the scale, the shadow and the radius are gone; the state is carried by the label and the summary, and pending uses the rising-bars loader.</p>
+
+    <div class="riser-grid-2" style="align-items:start">
+      <div class="kit-frame">
+        <div class="kit-frame__chrome"><span class="kit-frame__url">/organizer/glasvey/success?session_id=cs_test_4f2a</span></div>
+        <div class="kit-frame__body">
+          <div class="riser-section-label riser-section-label--accent"><span class="riser-section-label__index">Payment —</span><span>Paid</span></div>
+          <h2 class="riser-h2" style="margin-bottom:var(--space-5)">Credits added.</h2>
+          <div class="riser-detail__grid">
+            <div class="riser-detail__field"><span class="riser-detail__label">Product</span><div class="riser-detail__value">5,000 campaign credits</div></div>
+            <div class="riser-detail__field"><span class="riser-detail__label">Total paid</span><div class="riser-detail__value riser-detail__value--data">£50.00</div></div>
+            <div class="riser-detail__field"><span class="riser-detail__label">Transaction ID</span><div class="riser-detail__value riser-detail__value--data">cs_test_4f2a…</div></div>
+            <div class="riser-detail__field"><span class="riser-detail__label">New balance</span><div class="riser-detail__value riser-detail__value--data">17,480 credits</div></div>
+          </div>
+          <div class="riser-card__footer"><button class="riser-button riser-button--primary riser-button--md">Return to dashboard</button></div>
+        </div>
+      </div>
+
+      <div class="kit-stack">
+        <div class="kit-frame">
+          <div class="kit-frame__chrome"><span class="kit-frame__url">/organizer/glasvey/cancel</span></div>
+          <div class="kit-frame__body">
+            <div class="riser-empty" style="padding:0">
+              <span class="riser-empty__label">Payment cancelled</span>
+              <h3 class="riser-empty__headline">No credits were purchased.</h3>
+              <p class="riser-empty__body">Your card was not charged. You can start the purchase again whenever you are ready.</p>
+              <div class="riser-empty__actions">
+                <button class="riser-button riser-button--primary riser-button--md">Try again</button>
+                <button class="riser-button riser-button--secondary riser-button--md">Return to dashboard</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kit-frame">
+          <div class="kit-frame__chrome"><span class="kit-frame__url">/no-organizer</span></div>
+          <div class="kit-frame__body">
+            <div class="riser-empty" style="padding:0">
+              <span class="riser-empty__label">No organiser account</span>
+              <h3 class="riser-empty__headline">You are signed in, but not attached to an organiser.</h3>
+              <p class="riser-empty__body">The Promo Dashboard runs against an organiser account. Create one, or ask an organiser to add you to their team.</p>
+              <div class="riser-empty__actions">
+                <button class="riser-button riser-button--primary riser-button--md">Create organiser account</button>
+                <button class="riser-button riser-button--secondary riser-button--md">Go home</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kit-frame">
+          <div class="kit-frame__chrome"><span class="kit-frame__url">Loading</span></div>
+          <div class="kit-frame__body">
+            <div class="riser-loading-screen" style="padding:var(--space-5) 0">
+              <div class="riser-loader"><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span><span class="riser-loader__bar"></span></div>
+              <span class="riser-loading-screen__text">Loading campaigns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:var(--rule-heavy) solid var(--ink);padding-top:var(--space-5)">
+    <span class="riser-label">Riser design system · Promo Dashboard kit · recreated from promo.riser.events</span>
+  </footer>
+
+</div>
+</body>
+</html>

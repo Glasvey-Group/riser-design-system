@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 16 347 84" width="347" height="84" role="img" aria-label="Riser">
+  <title>Riser</title>
+  <polygon points="8,90 8,76 24,66 24,90" fill="#FAF9F7"></polygon>
+  <polygon points="32,90 32,60 48,50 48,90" fill="#FAF9F7"></polygon>
+  <polygon points="56,90 56,44 72,34 72,90" fill="#FAF9F7"></polygon>
+  <polygon points="80,90 80,26 96,16 96,90" fill="#FAF9F7"></polygon>
+  <rect x="8" y="95" width="88" height="5" fill="#FAF9F7"></rect>
+  <text x="111" y="90" font-family="Archivo" font-weight="800" font-size="80" font-stretch="88%" letter-spacing="2.6" fill="#FAF9F7">RISER</text>
+</svg>

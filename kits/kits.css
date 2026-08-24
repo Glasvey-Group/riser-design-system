@@ -1,0 +1,54 @@
+/* Kit-page furniture. Frames each recreated screen so it reads as a screen
+   rather than as page content. */
+
+.kit-screen { margin-bottom: var(--space-9); }
+
+.kit-screen__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--rule-heavy) solid var(--ink);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.kit-screen__route {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-secondary);
+}
+
+.kit-screen__note { max-width: 72ch; color: var(--text-body); font-size: var(--text-small); margin-bottom: var(--space-5); }
+
+/* The frame. A hairline box holding a recreated screen at page scale. */
+.kit-frame {
+  border: var(--hairline) solid var(--line-strong);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.kit-frame__chrome {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: var(--hairline) solid var(--border-hairline);
+  background: var(--surface-hover);
+}
+
+.kit-frame__url {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.kit-frame__body { padding: var(--space-6); }
+.kit-frame__body--flush { padding: 0; }
+
+.kit-stack { display: flex; flex-direction: column; gap: var(--space-6); }
+
+@media (max-width: 500px) { .kit-frame__body { padding: var(--space-4); } }

@@ -1,0 +1,141 @@
+/* Specimen-page furniture. Not part of the system — these classes exist only to
+   lay out the specimen cards themselves. */
+
+.spec-page { padding-block: var(--space-8) var(--space-9); }
+
+.spec-masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: var(--rule-heavy) solid var(--ink);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.spec-nav { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.spec-nav a {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-bottom: 2px;
+  border-bottom: var(--rule-heavy) solid transparent;
+}
+.spec-nav a:hover { color: var(--text-primary); border-bottom-color: var(--ink); }
+.spec-nav a[aria-current="page"] { color: var(--text-primary); border-bottom-color: var(--orange); }
+
+.spec-section { margin-bottom: var(--space-9); }
+.spec-section > h2 {
+  font-size: var(--text-h1);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+.spec-lede { max-width: 68ch; color: var(--text-body); margin-bottom: var(--space-6); }
+
+.spec-grid { display: grid; gap: var(--grid-gap); }
+.spec-grid--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.spec-grid--3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.spec-grid--4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+
+/* Colour chips */
+.spec-swatch { border: var(--hairline) solid var(--border-hairline); display: flex; flex-direction: column; }
+.spec-swatch__block { height: 120px; }
+.spec-swatch__meta { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+.spec-swatch__name { font-weight: var(--weight-bold); font-size: var(--text-body-size); color: var(--text-primary); }
+.spec-swatch__hex { font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: var(--tracking-label); color: var(--text-secondary); }
+.spec-swatch__use { font-size: var(--text-small); color: var(--text-body); }
+
+/* Contrast table */
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4) var(--space-3) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: var(--rule-heavy) solid var(--ink);
+  font-weight: var(--weight-medium);
+}
+.spec-table td {
+  padding: var(--space-3) var(--space-4) var(--space-3) 0;
+  border-bottom: var(--hairline) solid var(--border-hairline);
+  font-size: var(--text-small);
+  vertical-align: middle;
+}
+.spec-table td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.spec-pair { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-2) var(--space-3); font-weight: var(--weight-bold); }
+
+/* Type specimens */
+.spec-type-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--grid-gap-wide);
+  padding: var(--space-5) 0;
+  border-bottom: var(--hairline) solid var(--border-hairline);
+  align-items: baseline;
+}
+.spec-type-row__meta { display: flex; flex-direction: column; gap: var(--space-1); }
+.spec-type-row__sample { min-width: 0; overflow: hidden; }
+@media (max-width: 768px) { .spec-type-row { grid-template-columns: 1fr; } }
+
+/* Spacing ruler */
+.spec-ruler { display: flex; flex-direction: column; gap: var(--space-2); }
+.spec-ruler__row { display: grid; grid-template-columns: 116px 1fr; gap: var(--space-4); align-items: center; }
+.spec-ruler__bar { height: 14px; background: var(--ink); }
+.spec-ruler__bar--accent { background: var(--orange); }
+
+/* Motion / demo panels */
+.spec-demo {
+  border: var(--hairline) dashed var(--border-dashed);
+  padding: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}
+/* nowrap matters: a column flex container that is allowed to wrap builds extra
+   columns and stretches its lines, inflating the panel's height. */
+.spec-demo--stack { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
+.spec-demo--ink { background: var(--ink); border-color: var(--line-on-ink-strong); }
+
+/* Explanatory captions are sentences, not labels — mono, but without the caps and
+   the 0.16em tracking, which stop working past a few words. */
+.spec-caption {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  max-width: 92ch;
+}
+
+.spec-do-dont { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--grid-gap-wide); }
+.spec-do-dont__item { border-top: var(--rule-heavy) solid var(--ink); padding-top: var(--space-3); }
+.spec-do-dont__item--dont { border-top-color: var(--slate); }
+.spec-do-dont__verdict {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+.spec-do-dont__item--dont .spec-do-dont__verdict { color: var(--text-secondary); }
+
+.spec-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  background: var(--surface-hover);
+  padding: var(--space-4);
+  overflow-x: auto;
+  border-left: var(--rule-heavy) solid var(--line-strong);
+  white-space: pre;
+}
