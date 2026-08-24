@@ -21,19 +21,41 @@ npm install                 # peer deps: react >= 18
 
 ```css
 /* one import gives you tokens, base layer and every component style */
-@import "riser-design-system/styles.css";
+@import "@riser/design-system/styles.css";
 ```
 
 ```tsx
-import { Button, DataGrid, StatusBadge } from 'riser-design-system';
+import { Button, DataGrid, StatusBadge } from '@riser/design-system';
 ```
+
+**Next.js apps use the fonts-free entry point instead.** `styles.css` pulls in
+`tokens/fonts.css`, which `@font-face`s a self-hosted Archivo and fetches JetBrains Mono
+from Google. An app using `next/font` already has both, so that import downloads Archivo
+twice and adds a blocking Google Fonts request:
+
+```css
+@import "@riser/design-system/styles-no-fonts.css";
+```
+
+The app then points the family tokens at whatever `next/font` loaded:
+
+```css
+:root {
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-ui:      var(--font-archivo), system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+}
+```
+
+Next also needs `transpilePackages: ['@riser/design-system']` in `next.config.ts`, because
+this package ships TypeScript source rather than built JS.
 
 Tailwind v4 (this is how `promo.riser.events` consumes it):
 
 ```css
 @import "tailwindcss";
-@import "riser-design-system/styles.css";
-@import "riser-design-system/tokens/tailwind.css";
+@import "@riser/design-system/styles-no-fonts.css";
+@import "@riser/design-system/tokens/tailwind.css";
 ```
 
 `tokens/tailwind.css` re-exports the same custom properties into Tailwind's namespace and
@@ -49,7 +71,9 @@ primitives, and `kits/*.html` for the three surfaces.
 
 ```
 tokens/          colors · typography · spacing · motion · fonts · layout · elevation · tailwind
-styles.css       entry point: tokens + base layer + components
+styles.css       entry point: fonts + tokens + components + base
+styles-no-fonts.css  same, minus fonts — for apps loading Archivo themselves
+base.css         element defaults, type/layout utilities, icon, motion, imagery
 components/      22 React primitives (.tsx), one stylesheet, a static gallery
 foundations/     colour, type, spacing, motion, icons, logo, imagery, voice
 kits/            promo-dashboard · ticket-buyer · marketing-site

@@ -1,0 +1,19 @@
+/* Riser design system — entry point for apps that load the fonts themselves.
+
+   Identical to styles.css but without tokens/fonts.css, which @font-faces a
+   self-hosted Archivo and pulls JetBrains Mono from Google. A Next.js app
+   using next/font already has both, so importing fonts.css there downloads
+   Archivo a second time and adds a blocking Google Fonts request.
+
+   tokens/typography.css still names "Archivo" and "JetBrains Mono" as the
+   families. An app using this entry point is responsible for pointing
+   --font-display, --font-ui and --font-mono at whatever it actually loaded. */
+
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/motion.css";
+@import "tokens/layout.css";
+@import "tokens/elevation.css";
+@import "components/components.css";
+@import "base.css";

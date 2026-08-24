@@ -7,7 +7,9 @@ description: Build UI for Riser — riser.events, promo.riser.events, the market
 
 Four colours, Archivo, JetBrains Mono for labels and data, square corners, hairline rules,
 flat surfaces, one signal colour. Import `styles.css` and use the primitives in
-`components/`; do not restyle them inline.
+`components/`; do not restyle them inline. In a Next.js app import
+`styles-no-fonts.css` instead and let `next/font` supply Archivo and JetBrains Mono —
+see the README.
 
 ## Before writing any UI
 
