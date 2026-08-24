@@ -4,8 +4,11 @@
    it defines no values of its own. Import it after styles.css:
 
      @import "tailwindcss";
-     @import "riser-design-system/styles.css";
-     @import "riser-design-system/tokens/tailwind.css";
+     @import "@riser/design-system/styles-no-fonts.css";
+     @import "@riser/design-system/tokens/tailwind.css";
+
+   (styles.css rather than styles-no-fonts.css if the app is not loading Archivo
+   and JetBrains Mono itself — see the README.)
 
    Then `bg-ink`, `text-accent`, `border-hairline`, `font-mono`, `text-label`,
    `p-4` (16px) and so on resolve to the tokens. */
