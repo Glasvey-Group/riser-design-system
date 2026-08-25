@@ -15,6 +15,22 @@ implementation is canonical and Promo's difference is a prop.
 
 ## Start here
 
+Install it into a Riser app, pinned to a tag:
+
+```bash
+npm install "git+https://github.com/Glasvey-Group/riser-design-system.git#v1.1.3"
+```
+
+npm records the resolved URL as `git+ssh://` — that is its canonical form for any
+GitHub dependency and cannot be changed from the consuming repo. It does not require
+an SSH key: this repository is public, so npm falls back to HTTPS. Verified with
+`GIT_SSH_COMMAND=false npm ci`, which is what a build agent without a key looks like.
+
+Pin a tag rather than a branch, so a design system change never lands in an app
+without someone choosing it.
+
+To work on the design system itself:
+
 ```bash
 npm install                 # peer deps: react >= 18
 ```
