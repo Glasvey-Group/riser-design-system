@@ -169,7 +169,13 @@ button:disabled { cursor: not-allowed; }
 
 /* Lucide ships round caps and joins. CSS wins over the presentation attributes in
    the SVGs, so squaring them costs one rule and brings the icon set in line with an
-   identity that has no round corners anywhere except the app icon tile. */
+   identity that has no round corners anywhere except the app icon tile.
+
+   An icon is the colour of whatever it sits in. This was `color: var(--text-primary)`,
+   a fixed ink, which meant an icon inside a filled button overrode the colour the
+   button had just set on itself and came out ink-on-ink. The `tone` modifiers below
+   still override deliberately; the default now inherits, which is right in every
+   context — ink on paper, paper on ink, slate inside secondary text. */
 .icon,
 .riser-icon {
   stroke-width: 1.5;
@@ -178,7 +184,7 @@ button:disabled { cursor: not-allowed; }
   width: var(--icon-md);
   height: var(--icon-md);
   flex: none;
-  color: var(--text-primary);
+  color: currentColor;
 }
 
 .riser-icon--sm      { width: var(--icon-sm); height: var(--icon-sm); }

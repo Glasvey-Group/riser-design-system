@@ -9,10 +9,13 @@ import React from 'react';
  * corners anywhere except the app icon tile.
  *
  * Sizes are 16, 20 and 24 only — the same 4px rhythm as everything else.
- * Icons are ink, or slate when secondary. One icon per view may be orange:
- * it marks the action, it does not decorate. Icons are never filled, never
- * boxed in a circle or a tinted tile, and never used beside a heading for
- * ornament.
+ *
+ * An icon is the colour of whatever it sits in: ink on paper, paper inside an
+ * ink button, slate inside secondary text. `.riser-icon` inherits currentColor,
+ * so the common cases need no `tone` at all — reach for it only to override.
+ * One icon per view may be orange: it marks the action, it does not decorate.
+ * Icons are never filled, never boxed in a circle or a tinted tile, and never
+ * used beside a heading for ornament.
  *
  * Emoji are not icons. Unicode symbols are not icons. Where a glyph is genuinely
  * missing from Lucide, add a hand-built SVG on the same grid and stroke and
@@ -24,6 +27,9 @@ import React from 'react';
 
 export type IconSize = 16 | 20 | 24;
 export type IconTone = 'default' | 'secondary' | 'accent' | 'on-ink';
+/* `default` inherits. `on-ink` is only needed where an icon sits on an ink
+   surface that has not set a text colour of its own — inside a filled Button it
+   is redundant, because the button's own colour already carries. */
 
 export interface IconProps {
   /** A Lucide icon component. */

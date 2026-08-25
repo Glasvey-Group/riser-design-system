@@ -43,7 +43,8 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
 6. **Mono is load-bearing.** Labels and all numeric or technical data are JetBrains Mono,
    caps, 0.16em tracking, slate — never body copy, and never for strings longer than a few
    words (use sentence-case mono for those).
-7. **A button's only icon is a create's plus.** A leading Lucide `Plus` through `icon` when
+7. **An icon is the colour of what it sits in, and a button's only icon is a create's
+   plus.** A leading Lucide `Plus` through `icon` when
    the button creates a new record — never a literal "+" in the label, which is a unicode
    symbol doing an icon's job. Edit, Update, Cancel, Save, Promote, View and Duplicate go
    without: the verb is the affordance, and an icon restating its label is ornament.
