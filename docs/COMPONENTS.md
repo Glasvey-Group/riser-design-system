@@ -249,7 +249,8 @@ wide?: boolean; dismissible?: boolean     // Escape + overlay click, default tru
 isOpen, title, message, submessage?, onConfirm, onCancel
 confirmText?, cancelText?          // Events' names
 confirmLabel?, cancelLabel?        // Promo's names, accepted as aliases
-destructive?: boolean              // ink fill rather than the orange
+confirmVariant?: ButtonVariant     // default 'ink'
+destructive?: boolean              // deprecated: pass confirmVariant="danger"
 
 // LoadingModal
 isOpen, title, message?
@@ -258,6 +259,11 @@ isOpen, title, message?
 Promo's confirm dialog had a gradient background, a 20–24px radius, a coloured shadow, a
 150px logo and a springy `cubic-bezier(0.175, 0.885, 0.32, 1.275)` entrance. All four are
 out: square, flat paper, firm ease-out, no bounce.
+
+The confirm button defaults to `ink`, not the orange. A confirmation inherits the tone of
+the action it confirms (rule 2): `danger` to destroy, `primary` only where the thing being
+confirmed is itself the commercial action. One orange serving both "Yes, Publish" and
+"Yes, Delete" tells the reader nothing about which they are about to do.
 
 ## Loader / LoadingScreen / Skeleton — E+P
 

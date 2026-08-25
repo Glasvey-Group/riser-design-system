@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Button } from './Button';
+import type { ButtonVariant } from './Button';
 import { Loader } from './Loader';
 
 /**
@@ -85,7 +86,14 @@ export interface ConfirmModalProps {
   /** Promo's names, accepted as aliases. */
   confirmLabel?: string;
   cancelLabel?: string;
-  /** Destructive confirmations use the ink fill, not the orange. */
+  /**
+   * Tone of the confirm button. A confirmation inherits the tone of the action
+   * it confirms rather than defaulting to the loudest button available:
+   * `danger` to destroy, `primary` only where the thing being confirmed is
+   * itself the commercial action, `ink` otherwise. Default `ink`.
+   */
+  confirmVariant?: ButtonVariant;
+  /** @deprecated Pass `confirmVariant="danger"`. Kept so existing calls compile. */
   destructive?: boolean;
 }
 
@@ -100,6 +108,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   cancelText,
   confirmLabel,
   cancelLabel,
+  confirmVariant,
   destructive = false,
 }) => (
   <Modal
@@ -111,7 +120,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
         <Button variant="secondary" onClick={onCancel}>
           {cancelText ?? cancelLabel ?? 'Cancel'}
         </Button>
-        <Button variant={destructive ? 'ink' : 'primary'} onClick={onConfirm}>
+        <Button variant={confirmVariant ?? (destructive ? 'danger' : 'ink')} onClick={onConfirm}>
           {confirmText ?? confirmLabel ?? 'Confirm'}
         </Button>
       </>
