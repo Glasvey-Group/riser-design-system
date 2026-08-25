@@ -237,7 +237,12 @@
   white-space: nowrap;
 }
 
-.riser-badge--live    { border-bottom-color: var(--status-live); color: var(--accent); }
+/* live keeps the orange on the rule, not on the label. Orange text on paper is
+   2.4:1 and this label is 11px, so as a colour it failed the contrast the rest
+   of the system holds to — and orange carrying text is the one thing the brief
+   rules out. The rule underneath still marks it as the live status; the label
+   stays ink at 17.8:1. */
+.riser-badge--live    { border-bottom-color: var(--status-live); color: var(--text-primary); }
 .riser-badge--neutral { border-bottom-color: var(--status-neutral); color: var(--text-secondary); }
 .riser-badge--done    { border-bottom-color: var(--status-done); color: var(--text-primary); }
 .riser-badge--stopped { border-bottom-color: var(--status-stopped); color: var(--text-secondary); }
