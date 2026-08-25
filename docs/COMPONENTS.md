@@ -14,6 +14,7 @@ variant?: 'primary' | 'ink' | 'paper' | 'secondary' | 'ghost' | 'danger'   // de
 size?:    'sm' | 'md' | 'lg'                                              // default 'md'  (28 / 36 / 44px)
 block?:   boolean
 icon?:    ReactNode
+loading?: boolean
 // plus every ButtonHTMLAttributes
 ```
 
@@ -25,6 +26,16 @@ stop being one-off classNames.
 `primary` is the orange — at most one on screen. `paper` is the solid action on an ink
 surface where the orange is spent elsewhere. `danger` is an ink outline that fills on
 hover; there is no red in the palette, and the copy says what will happen.
+
+`loading` puts the mono `Loader` in the icon slot, disables the button and sets
+`aria-busy`; the loader itself is `aria-hidden`, since `aria-busy` already carries it and
+`Loader`'s `role="status"` would otherwise announce a second time. A loading button keeps
+its variant fill rather than taking the disabled grey — going flat mid-save reads as the
+button having broken. Keep the label, or move it to its progressive form ("Saving"); a
+button that empties its label mid-action leaves the user without the thing they clicked.
+
+A spinner is not the ornament rule 7 forbids. Rule 7 rules out an icon restating its own
+label; a loader reports state the label cannot.
 
 ## Card / CardHeader / CardFooter — E+P
 

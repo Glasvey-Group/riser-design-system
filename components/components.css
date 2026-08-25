@@ -120,11 +120,17 @@
   color: var(--text-on-ink);
 }
 
-.riser-button:disabled {
+.riser-button:disabled:not(.riser-button--loading) {
   background: var(--surface-disabled);
   color: var(--text-disabled);
   border-color: var(--border-disabled);
 }
+
+/* A working button keeps its own fill. The disabled grey is right for "you
+   cannot do this" and wrong for "this is happening" — going flat mid-save
+   reads as the button having broken rather than the save being underway. */
+.riser-button--loading { cursor: default; }
+.riser-button__loader { display: inline-flex; align-items: center; }
 
 /* On an ink surface the secondary and ghost rules invert. */
 .riser-surface-ink .riser-button--secondary { color: var(--paper); border-color: var(--line-on-ink-strong); }

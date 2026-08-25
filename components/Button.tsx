@@ -1,4 +1,5 @@
 import React from 'react';
+import { Loader } from './Loader';
 
 /**
  * Button.
@@ -30,6 +31,10 @@ import React from 'react';
  * a unicode symbol doing an icon's job. Everything else goes without: the verb
  * is the affordance, and an icon restating its own label is ornament.
  *
+ * A spinner is not what that rules out. `loading` puts the mono loader in the
+ * icon slot while a save is in flight, because a loader reports state the label
+ * cannot — it is not an icon restating its own label.
+ *
  * Nothing scales on hover and nothing rotates: hover darkens the fill or fills
  * the rule, over 140ms.
  */
@@ -45,6 +50,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   block?: boolean;
   /** Leading icon. Use the Icon component; 16px inside sm and md, 20px inside lg. */
   icon?: React.ReactNode;
+  /**
+   * Work is in flight. Replaces `icon` with the mono loader, disables the
+   * button and sets `aria-busy`. Keep the label steady or move it to its
+   * progressive form ("Saving"), but do not empty it — a button that loses its
+   * label mid-action leaves the user without the thing they just clicked.
+   */
+  loading?: boolean;
   className?: string;
 }
 
@@ -54,8 +66,10 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   block = false,
   icon,
+  loading = false,
   className = '',
   type = 'button',
+  disabled,
   ...rest
 }) => {
   const classes = [
@@ -63,12 +77,25 @@ export const Button: React.FC<ButtonProps> = ({
     `riser-button--${variant}`,
     `riser-button--${size}`,
     block && 'riser-button--block',
+    loading && 'riser-button--loading',
     className,
   ].filter(Boolean).join(' ');
 
   return (
-    <button type={type} className={classes} {...rest}>
-      {icon}
+    <button
+      type={type}
+      className={classes}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...rest}
+    >
+      {loading ? (
+        /* aria-hidden: the button's own aria-busy carries this to AT already,
+           and Loader's role="status" would otherwise announce a second time. */
+        <span aria-hidden="true" className="riser-button__loader">
+          <Loader variant="mono" size={size === 'lg' ? 20 : 16} />
+        </span>
+      ) : icon}
       {children}
     </button>
   );

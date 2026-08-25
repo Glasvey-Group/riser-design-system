@@ -27,7 +27,11 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    on the marketing site. Editing, updating, saving and cancelling never take it, however
    central they are to the screen. A form's submit is `ink`, its cancel is `secondary`, and
    a create is `ink` unless that create *is* the commercial action. Most working screens
-   have no orange at all, and should.
+   have no orange at all, and should. A confirmation dialog inherits the tone of the action
+   it confirms rather than defaulting to the loudest button available: `danger` to destroy,
+   `primary` only where the thing being confirmed is itself the commercial action, `ink`
+   otherwise. One orange for "Yes, Publish" and "Yes, Delete" alike tells the reader nothing
+   about which one they are about to do.
 3. **Square everywhere.** Radius 0. The only exception in the identity is the app icon
    tile, at 22% of its side.
 4. **Hairline rules rather than boxes.** 1px for separation, 2px ink for a grid header or
