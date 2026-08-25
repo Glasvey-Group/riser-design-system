@@ -17,21 +17,34 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The six rules
+## The eight rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
    most important live figure. Never both. Orange is ~10% of any surface.
-2. **Square everywhere.** Radius 0. The only exception in the identity is the app icon
+2. **The orange belongs to the commercial action.** Not to the most prominent button —
+   to the one that moves the business forward: Promote on the organiser dashboard, Sign up
+   on the marketing site. Editing, updating, saving and cancelling never take it, however
+   central they are to the screen. A form's submit is `ink`, its cancel is `secondary`, and
+   a create is `ink` unless that create *is* the commercial action. Most working screens
+   have no orange at all, and should.
+3. **Square everywhere.** Radius 0. The only exception in the identity is the app icon
    tile, at 22% of its side.
-3. **Hairline rules rather than boxes.** 1px for separation, 2px ink for a grid header or
+4. **Hairline rules rather than boxes.** 1px for separation, 2px ink for a grid header or
    section break, dashed only for measurement and specification.
-4. **Flat.** No shadows, no gradients, no tints of the orange. Depth is a rule, a change of
-   surface, or a 70% ink scrim over a photograph.
-5. **Mono is load-bearing.** Labels and all numeric or technical data are JetBrains Mono,
+5. **Flat, but not flat-toned.** No shadows, no gradients, no tints of the orange. Depth is
+   a rule, a change of surface, or a 70% ink scrim over a photograph — and the page sits a
+   step under the things on it (`--surface-page` vs `--surface-raised`), so a card reads as
+   raised rather than dissolving into its ground.
+6. **Mono is load-bearing.** Labels and all numeric or technical data are JetBrains Mono,
    caps, 0.16em tracking, slate — never body copy, and never for strings longer than a few
    words (use sentence-case mono for those).
-6. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
+7. **A button's only icon is a create's plus.** A leading Lucide `Plus` through `icon` when
+   the button creates a new record — never a literal "+" in the label, which is a unicode
+   symbol doing an icon's job. Edit, Update, Cancel, Save, Promote, View and Duplicate go
+   without: the verb is the affordance, and an icon restating its label is ornament.
+   Icon-only controls in a dense row are the exception and carry an `aria-label`.
+8. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
 
 ## Tokens
@@ -41,7 +54,11 @@ Never write a raw hex, px value or duration. Use the custom properties.
 ```
 --orange #F28600   --ink #121212   --paper #FAF9F7   --slate #708090
 --slate-text #5F6B7A (secondary copy)   --ink-soft #3A3A3A (body)
+--paper-dim #ECEBE8 (the page ground, one step under paper)
 --accent-hover #D97800   --line   --line-strong   --scrim-ink
+
+--surface-page   the ground: body, anything flush with it   (= --paper-dim)
+--surface-raised cards, panels, inputs, modals, navbar      (= --paper)
 
 --font-display / --font-ui  Archivo      --font-mono  JetBrains Mono
 --text-display 52  --text-h1 36  --text-h2 26  --text-h3 20

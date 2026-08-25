@@ -257,6 +257,7 @@ out: square, flat paper, firm ease-out, no bounce.
 // LoadingScreen text?: string        // mono caps under the bars
 //               onInk?: boolean      // maps to the loader's 'on-ink' variant
 //               size?: number
+//               overlay?: boolean    // cover the viewport; centred, no logo
 // Skeleton      variant?: 'text' | 'title' | 'media'; width?: string
 ```
 

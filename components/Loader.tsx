@@ -62,6 +62,13 @@ export interface LoadingScreenProps {
   onInk?: boolean;
   /** Height of the mark in px. */
   size?: number;
+  /**
+   * Cover the viewport instead of sitting inline. For a route that cannot render
+   * anything useful yet. The bars are the whole of it — no logo above them: the
+   * loader already is the mark, in motion, and stacking a lockup on top of it
+   * says the same thing twice.
+   */
+  overlay?: boolean;
   className?: string;
 }
 
@@ -69,9 +76,16 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   text = 'Loading',
   onInk = false,
   size = 64,
+  overlay = false,
   className = '',
 }) => (
-  <div className={`riser-loading-screen ${className}`.trim()}>
+  <div
+    className={[
+      'riser-loading-screen',
+      overlay && 'riser-loading-screen--overlay',
+      className,
+    ].filter(Boolean).join(' ')}
+  >
     <Loader variant={onInk ? 'on-ink' : 'full'} size={size} label={text} />
     <span className="riser-loading-screen__text">{text}</span>
   </div>

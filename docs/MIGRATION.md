@@ -27,8 +27,8 @@ The closest mapping, for a mechanical first pass:
 | --- | --- | --- |
 | `--color-primary` | `--accent` | The indigo becomes the orange, but see **orange discipline** below — a straight swap will put orange on far more than 10% of the surface. |
 | `--color-highlight` | — | No gradients. Delete the rule. |
-| `--color-bg` | `--surface-page` | `#F1F1F1` → `#FAF9F7`. |
-| `--color-content-bg` | `--surface-page` | Cards are the same ground as the page; the hairline separates them, not a white fill on grey. |
+| `--color-bg` | `--surface-page` | `#F1F1F1` → `#ECEBE8`. |
+| `--color-content-bg` | `--surface-raised` | `#FFFFFF` → `#FAF9F7`. Keep the step: the page stays one shade under the things sitting on it. An earlier build of this system mapped both of these onto `--surface-page`, on the principle that a hairline is enough to separate a card from its ground. It is not — on a dense dashboard everything reads washed out, with nothing to tell surface from surface. `riser.events` shipped it that way and it was reverted. |
 | `--color-text` | `--text-primary` | `#202020` → `#121212`. |
 | `--color-text-secondary` | `--text-secondary` | `#666666` → `#5F6B7A`. |
 | `--color-content-border` | `--border-hairline` | |

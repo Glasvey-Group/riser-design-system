@@ -6,15 +6,27 @@
   --slate: #708090;
 
   /* Derived. --slate-text is the slate darkened to clear 4.5:1 on paper (5.2:1).
-     --ink-soft is body copy at a lower weight than headlines. */
+     --ink-soft is body copy at a lower weight than headlines.
+     --paper-dim is the page ground, one step under paper. */
   --slate-text: #5F6B7A;
   --ink-soft: #3A3A3A;
+  --paper-dim: #ECEBE8;
   --line: rgba(18, 18, 18, 0.14);
   --line-strong: rgba(18, 18, 18, 0.3);
   --paper-on-ink: rgba(250, 249, 247, 0.6);
 
-  /* Semantic */
-  --surface-page: var(--paper);
+  /* Semantic.
+
+     The page is a step darker than the things sitting on it. An earlier build
+     had both on paper, on the principle that a hairline is enough to separate a
+     card from its ground — on a dense dashboard that reads as washed out, with
+     nothing to tell surface from surface. The step is the same one the pre-2026
+     site used between #F1F1F1 and #FFFFFF, about 5.5% of luminance.
+
+     --surface-page   the ground: body, and anything flush with it
+     --surface-raised cards, panels, inputs, modals, the navbar */
+  --surface-page: var(--paper-dim);
+  --surface-raised: var(--paper);
   --surface-inverse: var(--ink);
   --surface-accent: var(--orange);
   --text-primary: var(--ink);
