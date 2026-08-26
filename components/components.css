@@ -289,8 +289,13 @@
 .riser-select,
 .riser-textarea {
   width: 100%;
+  /* 8px, not 12px. These are border-box, so 12 + 21 line-height + 12 + 2 border came to
+     47px and min-height never got a say — the control was 3px taller than the 44px it
+     declares, and taller than a button that had just been set to match it. At 8px the
+     content box is 39px, min-height governs, and a field is exactly the height it says
+     it is. Horizontal padding is unchanged. */
   min-height: var(--control-height-lg);
-  padding: var(--space-3) var(--space-3);
+  padding: var(--space-2) var(--space-3);
   background: var(--surface-raised);
   border: var(--hairline) solid var(--border-dashed);
   border-radius: var(--radius-none);
