@@ -3,32 +3,6 @@
    paper or ink, no gradients, no tints of the orange. One orange thing per view.
    Nothing scales on hover; nothing rotates. */
 
-/* ================================================== The label
-   Mono caps at 11px, 0.16em tracking, slate. This is the one label treatment in the
-   system. A field's label, a stat's, a filter's, a detail row's, an empty state's and
-   a section's are all this rule and nothing else.
-
-   It used to be written out in full five times. Five identical copies are not one
-   treatment — they are five places a screen can drift from, and consuming apps did
-   drift, because there was no single selector to point at as "the label".
-
-   Use `.riser-label` directly for a caption that is not part of a component: the key
-   in a key/value pair on a card, a meta line, a table caption. */
-
-.riser-label,
-.riser-section-label,
-.riser-stat__label,
-.riser-field__label,
-.riser-filter__label,
-.riser-detail__label,
-.riser-empty__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 /* ================================================== SectionLabel
    The organising device: a small mono label above each section, "01 — CORE". */
 
@@ -499,12 +473,7 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-3) var(--space-3) 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
   font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
   min-width: 0;
 }
 
@@ -827,14 +796,6 @@
   background: var(--surface-page);
 }
 
-.riser-loading-screen__text {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 /* ================================================== Notification
    Enters by rising, like everything else. Status is a 2px leading rule, not a
    coloured card. */
@@ -944,14 +905,6 @@
 .riser-navbar__link:hover { border-bottom-color: var(--ink); }
 .riser-navbar__link--active { border-bottom-color: var(--orange); }
 
-.riser-navbar__context {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 @media (max-width: 768px) { .riser-navbar__context { display: none; } }
 
 /* ================================================== Sidebar / drawer */
@@ -1004,11 +957,6 @@
 .riser-drawer__section:last-child { border-bottom: 0; }
 
 .riser-drawer__section-title {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
   margin-bottom: var(--space-4);
 }
 
@@ -1069,11 +1017,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
 }
 
 .riser-event-card__price {
@@ -1120,11 +1063,6 @@
 .riser-ticket__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
 
 .riser-ticket__type {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
   margin-top: var(--space-1);
 }
 
@@ -1148,13 +1086,6 @@
 }
 
 .riser-ticket__spec-item { display: flex; flex-direction: column; gap: 2px; }
-.riser-ticket__spec-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
 .riser-ticket__spec-value { font-family: var(--font-mono); font-size: var(--text-small); font-variant-numeric: tabular-nums; color: var(--text-primary); }
 
 .riser-ticket__flags { display: flex; flex-wrap: wrap; gap: var(--space-3); }
@@ -1205,14 +1136,6 @@
 .riser-dropzone--disabled { opacity: 0.5; pointer-events: none; }
 
 .riser-dropzone__headline { font-size: var(--text-body-size); font-weight: var(--weight-bold); color: var(--text-primary); }
-.riser-dropzone__hint {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 /* The expected-columns line. Mono, because column names are technical data, but
    not uppercased and not tracked out — caps at 0.16em is a label device and
    stops working the moment the string runs to more than a few words. */

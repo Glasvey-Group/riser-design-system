@@ -84,8 +84,30 @@ button:disabled { cursor: not-allowed; }
 
 /* The load-bearing one. Small labels and all numeric or technical data are mono,
    uppercase, 0.16em tracking, slate. This is what keeps the identity reading as
-   infrastructure rather than a flyer. Never used for body copy. */
-.riser-label {
+   infrastructure rather than a flyer. Never used for body copy.
+
+   Every label in the system is this block. The component classes below are names for it,
+   not separate treatments — a field's label, a stat's, a filter's, a detail row's, an
+   empty state's, a section's and a figure's caption. They were each written out in full
+   once, which is how consuming apps ended up with no single selector to be consistent
+   with. Anything that needs a caption and is not one of those components uses
+   `.riser-label` directly. */
+.riser-label,
+.riser-section-label,
+.riser-stat__label,
+.riser-field__label,
+.riser-filter__label,
+.riser-detail__label,
+.riser-empty__label,
+.riser-grid__head-cell,
+.riser-loading-screen__text,
+.riser-navbar__context,
+.riser-drawer__section-title,
+.riser-event-card__meta-item,
+.riser-ticket__type,
+.riser-ticket__spec-label,
+.riser-dropzone__hint,
+.riser-figure__caption {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   font-weight: var(--weight-regular);
@@ -253,14 +275,7 @@ button:disabled { cursor: not-allowed; }
   pointer-events: none;
 }
 
-.riser-figure__caption {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-top: var(--space-2);
-}
+.riser-figure__caption { margin-top: var(--space-2); }
 
 .riser-visually-hidden {
   position: absolute;
