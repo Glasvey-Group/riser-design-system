@@ -44,8 +44,16 @@
 }
 
 /* Sizes, on the 4px rhythm. */
+/* Two heights, not three. A button is a control, and a control is 44px — the same height
+   as every Input, Select, Textarea and date picker. A button was 36px, so one sitting on a
+   field row floated 8px short of the control beside it, and a screen with both read as two
+   different systems.
+
+   sm survives for exactly one case: a control inside a table row or a chip, where 44px
+   breaks the row rhythm. md is kept as a name so existing call sites do not break, and
+   resolves to the same 44px as lg. There is no way to ask for 36px, deliberately. */
 .riser-button--sm { height: var(--control-height-sm); padding: 0 var(--space-3); font-size: var(--text-small); }
-.riser-button--md { height: var(--control-height-md); padding: 0 var(--space-4); font-size: var(--text-body-size); }
+.riser-button--md,
 .riser-button--lg { height: var(--control-height-lg); padding: 0 var(--space-5); font-size: var(--text-body-size); }
 
 .riser-button--block { width: 100%; }
@@ -103,16 +111,20 @@
 }
 .riser-button--ghost:hover:not(:disabled) { background: var(--surface-hover); }
 
-/* Danger — ink fill, not a red. There is no red in the palette; the weight of a
-   solid ink block carries the consequence, and the copy says what will happen. */
+/* Danger. This was an ink outline on the reasoning that the palette had no red and the
+   copy could carry the consequence. The palette has one now, and it is the same red the
+   form errors use — so a destructive confirm and a broken field speak with one voice
+   instead of the confirm borrowing the accent's. Outline at rest, fills on hover: the
+   consequence arrives as the pointer does. */
 .riser-button--danger {
   background: transparent;
-  color: var(--text-primary);
-  border-color: var(--ink);
+  color: var(--error);
+  border-color: var(--error);
 }
 .riser-button--danger:hover:not(:disabled) {
-  background: var(--surface-inverse);
-  color: var(--text-on-ink);
+  background: var(--error);
+  color: var(--paper);
+  border-color: var(--error);
 }
 
 .riser-button:disabled:not(.riser-button--loading) {
@@ -334,14 +346,17 @@
   font-size: var(--text-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--error);
 }
 
 .riser-field__hint { font-size: var(--text-small); color: var(--text-secondary); }
 
+/* An invalid field used --accent, which put the orange on the thing that is broken as
+   well as the thing to press. The reader could not tell them apart, and a form with three
+   empty required fields breached one-orange-per-view four times over. */
 .riser-field--invalid .riser-input,
 .riser-field--invalid .riser-select,
-.riser-field--invalid .riser-textarea { border-color: var(--accent); border-width: var(--rule-heavy); }
+.riser-field--invalid .riser-textarea { border-color: var(--error); border-width: var(--rule-heavy); }
 
 /* Search — same control, a mono placeholder. */
 .riser-search { position: relative; display: flex; align-items: center; }
@@ -377,13 +392,32 @@
   gap: var(--space-2);
   font-size: var(--text-body-size);
   color: var(--text-primary);
+  cursor: pointer;
 }
+.riser-check { cursor: pointer; }
+.riser-check-row:has(.riser-check:disabled) { cursor: not-allowed; color: var(--text-disabled); }
 
+/* A tick, not a filled square. The square said "this cell has something in it"; only a
+   tick says "yes". Two 2px paper strokes meeting at a mitre — the same weight as the rules
+   elsewhere and the same square corners, so it reads as drawn by the same hand.
+
+   The rotate puts the box's bottom-right corner where the tick's elbow belongs; the
+   translate corrects the optical centre, which rotation alone leaves low and left. */
 .riser-check:checked::after {
   content: "";
-  width: 8px; height: 8px;
-  background: var(--paper);
+  width: 5px;
+  height: 9px;
+  border: solid var(--paper);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
 }
+
+.riser-check:disabled {
+  background: var(--surface-disabled);
+  border-color: var(--border-hairline);
+  cursor: not-allowed;
+}
+.riser-check:disabled:checked { background: var(--text-disabled); border-color: var(--text-disabled); }
 
 /* ================================================== Filter dropdown */
 
@@ -647,13 +681,40 @@
 .riser-modal__title { font-size: var(--text-h2); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); margin-bottom: var(--space-3); }
 .riser-modal__message { color: var(--text-body); }
 .riser-modal__submessage { font-size: var(--text-small); color: var(--text-secondary); margin-top: var(--space-2); }
+/* ================================================== FormActions
+   Where a form's buttons live. The modal's own actions row shares the treatment.
+
+   Two things this exists to make unloseable. The primary action is last, so it sits on
+   the right where the eye finishes — Cancel then Save, never Save then Cancel. And the
+   row is right-aligned, so a standalone action under a section (Add Ticket, Add Social)
+   ends where the fields end rather than trailing off the left margin.
+
+   Both were left to call sites before, and both were got wrong. */
+
+.riser-form-actions,
 .riser-modal__actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: var(--space-3);
   margin-top: var(--space-7);
   padding-top: var(--space-5);
   border-top: var(--hairline) solid var(--border-hairline);
+}
+
+/* No rule and less air above: an actions row that adds a row to a table rather than
+   closing a form. */
+.riser-form-actions--bare {
+  margin-top: var(--space-4);
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (max-width: 640px) {
+  .riser-form-actions { flex-direction: column-reverse; }
+  .riser-form-actions .riser-button { width: 100%; }
+  .riser-form-actions--bare { flex-direction: row; }
+  .riser-form-actions--bare .riser-button { width: auto; }
 }
 
 @media (max-width: 500px) {
@@ -824,7 +885,7 @@
 
 .riser-notification--success { border-left-color: var(--paper); }
 .riser-notification--warning { border-left-color: var(--orange); }
-.riser-notification--error   { border-left-color: var(--orange); }
+.riser-notification--error   { border-left-color: var(--error); }
 .riser-notification--info    { border-left-color: var(--slate); }
 
 .riser-notification__header {

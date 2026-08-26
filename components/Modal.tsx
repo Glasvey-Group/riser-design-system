@@ -26,7 +26,15 @@ export interface ModalProps {
   title: React.ReactNode;
   children?: React.ReactNode;
   onClose?: () => void;
+  /**
+   * Freeform actions row. Prefer `primaryAction` / `secondaryAction`, which put the
+   * primary last and on the right for you — the order this took on trust and lost.
+   */
   actions?: React.ReactNode;
+  /** The action that completes the dialog. Rendered last, on the right. */
+  primaryAction?: React.ReactNode;
+  /** Cancel or Back. Rendered before the primary. */
+  secondaryAction?: React.ReactNode;
   wide?: boolean;
   /** Close on Escape and on overlay click. Off for blocking states. */
   dismissible?: boolean;
@@ -39,6 +47,8 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   onClose,
   actions,
+  primaryAction,
+  secondaryAction,
   wide = false,
   dismissible = true,
   className = '',
@@ -67,7 +77,9 @@ export const Modal: React.FC<ModalProps> = ({
       >
         <h2 className="riser-modal__title">{title}</h2>
         {children}
-        {actions ? <div className="riser-modal__actions">{actions}</div> : null}
+        {primaryAction
+          ? <div className="riser-modal__actions">{secondaryAction}{primaryAction}</div>
+          : actions ? <div className="riser-modal__actions">{actions}</div> : null}
       </div>
     </div>
   );

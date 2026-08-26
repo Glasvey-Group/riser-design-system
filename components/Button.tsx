@@ -45,6 +45,11 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** `primary` spends the view's orange. Default `secondary`. */
   variant?: ButtonVariant;
+  /**
+   * Height. Defaults to `lg` (44px), which is the height of every other control, so a
+   * button on a field row lines up with the field. Use `sm` (28px) only inside a table
+   * row or a chip. `md` is an alias of `lg` and is kept only so old call sites compile.
+   */
   size?: ButtonSize;
   /** Fill the container. Used for the stacked mobile actions in Promo. */
   block?: boolean;
@@ -63,7 +68,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'secondary',
-  size = 'md',
+  size = 'lg',
   block = false,
   icon,
   loading = false,

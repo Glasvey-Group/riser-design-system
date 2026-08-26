@@ -38,6 +38,30 @@
   --border-dashed: var(--line-strong);
   --accent: var(--orange);
 
+  /* ---- Error. The fifth colour, and the only one that is not in the brief ----
+
+     The brief is four colours and this system said outright that there is no red in
+     the palette. That held while nothing needed to say "this is wrong": a destructive
+     button could carry its consequence with a solid ink block and its copy.
+
+     It stopped holding for form validation. An invalid field was drawn in --accent, so
+     a form with a primary action and three empty required fields put four orange things
+     on one screen — a direct breach of rule 1, and worse, it made the orange ambiguous:
+     the reader cannot tell the thing to press from the thing that is broken.
+
+     So: a fifth colour, semantic only. It marks an error and nothing else. It is never
+     an accent, never decoration, never a fill for anything larger than a rule.
+
+     #A81420 was chosen over the #B3261E that consuming apps had inherited from Material.
+     That red sits 30 degrees from Signal Orange and reads as a dulled version of it when
+     the two appear together, which is exactly the confusion this is meant to end. This
+     one sits 38 degrees the other way and clears 7.16:1 on paper, which an 11px mono
+     caps label needs. */
+  --error: #A81420;
+  --error-on-ink: #EF5B6B;
+  --error-hover: #8C0F19;
+  --error-surface: rgba(168, 20, 32, 0.08);
+
   /* ---- Added by the design system, not new colour ---- */
 
   /* On ink surfaces the hairline has to invert or it disappears. */

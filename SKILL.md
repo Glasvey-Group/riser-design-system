@@ -17,7 +17,7 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The eight rules
+## The ten rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
@@ -31,7 +31,12 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    it confirms rather than defaulting to the loudest button available: `danger` to destroy,
    `primary` only where the thing being confirmed is itself the commercial action, `ink`
    otherwise. One orange for "Yes, Publish" and "Yes, Delete" alike tells the reader nothing
-   about which one they are about to do.
+   about which one they are about to do. **And the orange never marks an error.** There
+   is a fifth colour, `--error`, for that and only that. An invalid field drawn in the
+   accent puts the orange on the thing that is broken as well as the thing to press, and
+   the reader cannot tell them apart — a form with three empty required fields breaks
+   rule 1 four times over. Error text, invalid borders, the error notification and the
+   `danger` button all take `--error`; nothing else ever does.
 3. **Square everywhere.** Radius 0. The only exception in the identity is the app icon
    tile, at 22% of its side.
 4. **Hairline rules rather than boxes.** 1px for separation, 2px ink for a grid header or
@@ -54,7 +59,19 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    symbol doing an icon's job. Edit, Update, Cancel, Save, Promote, View and Duplicate go
    without: the verb is the affordance, and an icon restating its label is ornament.
    Icon-only controls in a dense row are the exception and carry an `aria-label`.
-8. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
+8. **A button is a control, and a control is 44px.** The same height as every Input,
+   Select, Textarea and date picker, so a button on a field row lines up with the field
+   beside it instead of floating short of it. `Button` defaults to this; there are only
+   two heights and the other is `sm` (28px), for a control inside a table row or a chip.
+   Never reach for `md` — it is an alias kept so old call sites compile.
+9. **A form's primary action is last, and the row is right-aligned.** Cancel then Save,
+   never Save then Cancel: the eye finishes on the right, and that is where the action
+   that commits belongs. Use `FormActions` (or `Modal`'s `primaryAction` /
+   `secondaryAction`) and pass the buttons rather than their order — every hand-rolled
+   actions row in this system's history has eventually got it backwards. A standalone
+   action under a section, like Add Ticket, is `<FormActions bare primary={…} />` so it
+   ends where the fields end.
+10. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
 
 ## Tokens

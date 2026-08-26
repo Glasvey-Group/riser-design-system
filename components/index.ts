@@ -7,6 +7,8 @@ export { SectionLabel } from './SectionLabel';
 export type { SectionLabelProps } from './SectionLabel';
 
 export { Button } from './Button';
+export { FormActions } from './FormActions';
+export type { FormActionsProps } from './FormActions';
 export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
 
 export { Card, CardHeader, CardFooter } from './Card';
