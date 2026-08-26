@@ -3,6 +3,32 @@
    paper or ink, no gradients, no tints of the orange. One orange thing per view.
    Nothing scales on hover; nothing rotates. */
 
+/* ================================================== The label
+   Mono caps at 11px, 0.16em tracking, slate. This is the one label treatment in the
+   system. A field's label, a stat's, a filter's, a detail row's, an empty state's and
+   a section's are all this rule and nothing else.
+
+   It used to be written out in full five times. Five identical copies are not one
+   treatment — they are five places a screen can drift from, and consuming apps did
+   drift, because there was no single selector to point at as "the label".
+
+   Use `.riser-label` directly for a caption that is not part of a component: the key
+   in a key/value pair on a card, a meta line, a table caption. */
+
+.riser-label,
+.riser-section-label,
+.riser-stat__label,
+.riser-field__label,
+.riser-filter__label,
+.riser-detail__label,
+.riser-empty__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
 /* ================================================== SectionLabel
    The organising device: a small mono label above each section, "01 — CORE". */
 
@@ -10,12 +36,7 @@
   display: flex;
   align-items: baseline;
   gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
   font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
   margin-bottom: var(--space-4);
 }
 
@@ -201,14 +222,6 @@
   background: var(--surface-raised);
 }
 
-.riser-stat__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 .riser-stat__value {
   font-family: var(--font-display);
   font-size: var(--text-h1);
@@ -283,14 +296,6 @@
 
 .riser-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
 .riser-field--full { grid-column: 1 / -1; }
-
-.riser-field__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
 
 .riser-field__required { color: var(--accent); margin-left: var(--space-1); }
 
@@ -409,14 +414,6 @@
   transition: border-color var(--duration-fast) var(--ease-out);
 }
 .riser-filter__trigger:hover { border-color: var(--ink); }
-
-.riser-filter__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
 
 .riser-filter__value { font-weight: var(--weight-medium); }
 
@@ -630,14 +627,6 @@
 @media (max-width: 768px) { .riser-detail__grid { grid-template-columns: 1fr; } }
 
 .riser-detail__field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
-
-.riser-detail__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
 
 .riser-detail__value { font-size: var(--text-body-size); color: var(--text-primary); overflow-wrap: anywhere; }
 .riser-detail__value--data { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
@@ -1231,14 +1220,6 @@
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-8) 0;
-}
-
-.riser-empty__label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--text-secondary);
 }
 
 .riser-empty__headline { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }

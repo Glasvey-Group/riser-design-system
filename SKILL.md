@@ -40,9 +40,14 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    a rule, a change of surface, or a 70% ink scrim over a photograph — and the page sits a
    step under the things on it (`--surface-page` vs `--surface-raised`), so a card reads as
    raised rather than dissolving into its ground.
-6. **Mono is load-bearing.** Labels and all numeric or technical data are JetBrains Mono,
-   caps, 0.16em tracking, slate — never body copy, and never for strings longer than a few
-   words (use sentence-case mono for those).
+6. **Mono is load-bearing, and there is exactly one label.** Labels and all numeric or
+   technical data are JetBrains Mono, caps, 0.16em tracking, slate — never body copy, and
+   never for strings longer than a few words (use sentence-case mono for those). Every
+   label in the system is the single `.riser-label` rule: a field's, a stat's, a filter's,
+   a detail row's, an empty state's, a section's. A label you style yourself is a label
+   that will drift, and a `.thing-group label` descendant rule outranks `.riser-field__label`
+   and silently keeps the old size after the markup has been migrated. Reach for `Field`
+   for anything in a form and `.riser-label` for a caption that is not part of a component.
 7. **An icon is the colour of what it sits in, and a button's only icon is a create's
    plus.** A leading Lucide `Plus` through `icon` when
    the button creates a new record — never a literal "+" in the label, which is a unicode
