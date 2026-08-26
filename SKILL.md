@@ -36,7 +36,10 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    accent puts the orange on the thing that is broken as well as the thing to press, and
    the reader cannot tell them apart — a form with three empty required fields breaks
    rule 1 four times over. Error text, invalid borders, the error notification and the
-   `danger` button all take `--error`; nothing else ever does.
+   `danger` button all take `--error`; nothing else ever does. The required asterisk is
+   the colour of the label it sits in, not the accent and not the error red — a form
+   where most fields are required is not a form with twenty warnings on it. It turns
+   red only once that field is actually invalid.
 3. **Square everywhere.** Radius 0. The only exception in the identity is the app icon
    tile, at 22% of its side.
 4. **Hairline rules rather than boxes.** 1px for separation, 2px ink for a grid header or

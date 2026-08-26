@@ -283,7 +283,15 @@
 .riser-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
 .riser-field--full { grid-column: 1 / -1; }
 
-.riser-field__required { color: var(--accent); margin-left: var(--space-1); }
+/* The asterisk is part of the label, so it is the colour of the label. It used to be
+   --accent, which meant a form with eight required fields had eight orange marks on it
+   and rule 1 had already lost. A required field is not an exceptional state — most
+   fields on most forms are required — so it does not earn a colour of its own.
+
+   It takes the error red only once the field is actually invalid, where it is no longer
+   an annotation but part of what is wrong. */
+.riser-field__required { color: inherit; margin-left: var(--space-1); }
+.riser-field--invalid .riser-field__required { color: var(--error); }
 
 .riser-input,
 .riser-select,
