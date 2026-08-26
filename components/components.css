@@ -391,6 +391,20 @@
   transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 .riser-check:checked { background: var(--ink); border-color: var(--ink); }
+/* A checkbox with its text beside it. The text is body copy, not a label: it is the
+   thing being agreed to, and reads as a sentence. The field's label — the mono caps one
+   above — is `Field`'s, and belongs to the group, not to the box.
+
+   Consuming apps had five of these, one per screen that needed a checkbox, and each had
+   picked its own font-size and colour for the text. */
+.riser-check-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-size);
+  color: var(--text-primary);
+}
+
 .riser-check:checked::after {
   content: "";
   width: 8px; height: 8px;
