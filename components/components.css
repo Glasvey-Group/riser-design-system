@@ -1241,6 +1241,10 @@
 }
 
 .riser-notice--attention { border-left-color: var(--orange); }
+/* The summary a form shows when submit fails. `attention` is the orange and would put the
+   accent on a failure; this is the same red the fields themselves are drawn in, so the
+   summary and the field it refers to are visibly the same statement. */
+.riser-notice--error { border-left-color: var(--error); }
 .riser-notice--ink { border-left-color: var(--ink); }
 .riser-notice__text { min-width: 0; }
 .riser-notice strong { font-weight: var(--weight-bold); color: var(--text-primary); }

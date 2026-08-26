@@ -11,7 +11,7 @@ import React from 'react';
  * Here it is one component with a `tone`, marked by a 2px leading rule.
  */
 
-export type NoticeTone = 'neutral' | 'attention' | 'ink';
+export type NoticeTone = 'neutral' | 'attention' | 'ink' | 'error';
 
 export interface NoticeProps {
   children: React.ReactNode;
