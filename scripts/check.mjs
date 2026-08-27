@@ -577,13 +577,50 @@ for (const file of css) {
 const HAND_GUTTER = /width\s*:\s*calc\(\s*100%\s*-\s*6rem\s*\)/;
 const PAGE_CAP = /max-width\s*:\s*(1440px|1200px|1280px|1550px|80rem)\b/;
 
+/* Classes that share an element with riser-measure in the markup. A width on one of them
+ * beats the measure at equal specificity and decides on import order, which is the same
+ * silent defeat as writing the measure out by hand — and it hides in a media query, where
+ * it only shows at the sizes that matter. */
+const measureCarriers = new Set();
+{
+  const ATTR = /className=(?:"([^"]*)"|\{`([^`]*)`\}|\{'([^']*)'\})/g;
+  for (const file of tsx) {
+    const src = readFileSync(file, 'utf8');
+    let m;
+    while ((m = ATTR.exec(src))) {
+      const val = m[1] ?? m[2] ?? m[3] ?? '';
+      if (!val.includes('riser-measure')) continue;
+      for (const name of val.split(/[\s${}?:'"()!&|=.]+/)) {
+        if (name && name !== 'riser-measure' && /^[a-z][\w-]*$/.test(name)) measureCarriers.add(name);
+      }
+    }
+  }
+}
+const CARRIER_WIDTH = /(?:^|[;{\s])(?:max-)?width\s*:/;
+
 for (const file of css) {
   const src = readFileSync(file, 'utf8');
   for (const { index, selector, body } of cssRules(src)) {
     const clean = body.replace(/\/\*[\s\S]*?\*\//g, '');
     const gutter = HAND_GUTTER.test(clean);
     const cap = PAGE_CAP.exec(clean);
-    if (!gutter && !cap) continue;
+    if (!gutter && !cap) {
+      if (!CARRIER_WIDTH.test(clean)) continue;
+      const hit = [...measureCarriers].find((c) => {
+        // Plain indexOf, not a built regex: the class name goes into the pattern and
+        // getting one backslash wrong turns the leading dot into "any character", which
+        // silently matches .organizer-dashboard-container for the carrier dashboard-container.
+        const at = selector.indexOf('.' + c);
+        if (at === -1) return false;
+        const after = selector[at + c.length + 1];
+        return after === undefined || !/[\w-]/.test(after);
+      });
+      if (!hit) continue;
+      report(10, file, lineOf(src, index),
+        `width on ".${hit}", which carries riser-measure`,
+        'the measure owns the width — remove it, or take riser-measure off that element');
+      continue;
+    }
     report(10, file, lineOf(src, index),
       gutter
         ? `page gutter written by hand in "${selector.trim().slice(0, 44)}"`
