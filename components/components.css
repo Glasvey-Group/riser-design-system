@@ -984,7 +984,6 @@
 .riser-navbar__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-4);
   height: var(--navbar-height);
   max-width: var(--container-max);
@@ -994,10 +993,27 @@
 
 @media (max-width: 960px) { .riser-navbar__inner { padding-inline: var(--container-gutter-sm); } }
 
-.riser-navbar__left  { display: flex; align-items: center; gap: var(--space-4); min-width: 0; }
-.riser-navbar__right { display: flex; align-items: center; gap: var(--space-4); }
+/* Three tracks, and the outer two are equal so the middle one is optically centred rather
+   than merely sitting between two unequal piles. flex-basis: 0 with grow makes them share
+   the leftover evenly whatever the menu button and the auth slot happen to contain, which
+   is what a `justify-content: space-between` row cannot do — there the logo drifts by half
+   the difference between the two ends. */
+.riser-navbar__left,
+.riser-navbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: 1 1 0;
+  min-width: 0;
+}
+.riser-navbar__right { justify-content: flex-end; }
 
-.riser-navbar__logo { display: flex; align-items: center; }
+.riser-navbar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
 .riser-navbar__logo img, .riser-navbar__logo svg { height: 28px; width: auto; display: block; }
 
 .riser-navbar__menu-btn {

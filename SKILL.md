@@ -84,7 +84,8 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    `.riser-measure` inside; it never carries horizontal padding of its own, because
    that padding is the gutter under another name and applies it a second time.
    The navbar takes the same measure, in either `variant` — that is what makes the
-   page line up with it.
+   page line up with it, and its lockup is centred between the menu button and the
+   auth slot on every surface.
 11. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
 

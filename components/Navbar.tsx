@@ -20,8 +20,14 @@ import React from 'react';
  * treatment Riser uses across its surfaces. Below --bp-lg it collapses to `bar`: a
  * detached pill on a phone spends horizontal room the content needs.
  *
- * The logo sits left. Left-aligned is the layout rule, and a centred lockup in a
- * left-aligned page reads as a different system.
+ * The lockup is centred, between the menu button and the auth slot. An earlier version of
+ * this component put it left, on the argument that left-aligned is the layout rule and a
+ * centred lockup reads as a different system. Riser's surfaces disagree in practice — the
+ * mark is the identity and it sits in the middle of the bar — so centred is the treatment,
+ * and it is the treatment everywhere rather than a per-app choice.
+ *
+ * The outer tracks are equal-width so the mark is optically centred in the bar rather than
+ * merely between two unequal ends.
  */
 
 export interface NavbarProps {
@@ -76,8 +82,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             {menuIcon ?? '≡'}
           </button>
         ) : null}
-        <span className="riser-navbar__logo">{logo}</span>
       </div>
+
+      <span className="riser-navbar__logo">{logo}</span>
 
       <div className="riser-navbar__right">
         {context ? <span className="riser-navbar__context">{context}</span> : null}
