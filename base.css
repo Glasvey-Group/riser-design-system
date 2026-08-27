@@ -152,6 +152,32 @@ button:disabled { cursor: not-allowed; }
 @media (max-width: 960px) { .riser-container { padding-inline: var(--container-gutter-sm); } }
 @media (max-width: 500px) { .riser-container { padding-inline: var(--container-gutter-xs); } }
 
+/* The same measure as a bounded box.
+
+   .riser-container holds the measure with padding, so the element spans the viewport and
+   its *children* land on the measure. That is right for a transparent wrapper and wrong
+   for anything you can see: a navbar pill, a form card, a panel with a border all need
+   their own edges on the measure, not their contents.
+
+   Consuming apps wrote this out per screen as `width: calc(100% - 6rem); max-width: 1440px`
+   — twenty-seven times in riser.events, at five different maximum widths, and in one case
+   nested inside another copy of itself so the gutter was subtracted twice and the card came
+   out 96px narrower than the navbar above it.
+
+   One expression instead. min() picks the gutter on a narrow viewport and the cap on a wide
+   one, which is what the two-property version was approximating. */
+.riser-measure {
+  width: min(100% - var(--container-gutter) * 2, var(--container-max));
+  margin-inline: auto;
+}
+
+@media (max-width: 960px) {
+  .riser-measure { width: min(100% - var(--container-gutter-sm) * 2, var(--container-max)); }
+}
+@media (max-width: 500px) {
+  .riser-measure { width: min(100% - var(--container-gutter-xs) * 2, var(--container-max)); }
+}
+
 .riser-stack   { display: flex; flex-direction: column; gap: var(--space-4); }
 .riser-row     { display: flex; align-items: center; gap: var(--space-3); }
 .riser-grid-2  { display: grid; grid-template-columns: var(--grid-columns-2); gap: var(--grid-gap-wide); }

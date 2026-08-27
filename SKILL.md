@@ -17,7 +17,7 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The ten rules
+## The eleven rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
@@ -74,7 +74,14 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    actions row in this system's history has eventually got it backwards. A standalone
    action under a section, like Add Ticket, is `<FormActions bare primary={…} />` so it
    ends where the fields end.
-10. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
+10. **One page measure, and it is a class not a formula.** Every page's content lines up
+   with the navbar, because both are `.riser-measure` — 1440px capped, gutter each side,
+   centred. Use `.riser-container` instead only for a transparent wrapper whose children
+   need the gutter; anything with a background, border or fill takes `.riser-measure` so
+   its own edges land on the measure. Never write `width: calc(100% - 6rem)` on a screen:
+   that is the measure spelled out by hand, it drifts, and nested inside another copy it
+   subtracts the gutter twice.
+11. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
 
 ## Tokens
