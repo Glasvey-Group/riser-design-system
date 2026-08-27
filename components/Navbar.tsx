@@ -9,14 +9,19 @@ import React from 'react';
  * slot on the right, with a drawer behind the menu button. Promo's Navbar is the
  * same bar plus an "as {organizer}" context string; that is the `context` prop.
  *
- * What changed: both codebases rendered a floating pill — `position: fixed`,
- * `calc(100% - 6rem)` wide, 4px radius, `backdrop-filter: blur(10px)` and
- * `box-shadow: 0 4px 30px rgba(0,0,0,0.1)`. Flat, square and hairline-ruled
- * means a bar that sits on the page: sticky, full width, one hairline
- * underneath, no blur and no shadow.
+ * Two treatments. `bar` is full-bleed on a hairline, sticky at the top of the scroll.
+ * `floating` is detached: fixed, held off the top edge, ruled on all four sides, and
+ * bounded to the page measure so its edges land where the content's do.
  *
- * The logo moves from centre to left. Left-aligned is the layout rule, and a
- * centred lockup in a left-aligned page reads as a different system.
+ * This component originally offered only `bar`, because both codebases rendered a pill
+ * with a 4px radius, a 10px backdrop blur and a 30px shadow — none of which this identity
+ * permits. That objection was to the ornament, not to the position. Square, opaque and
+ * unshadowed, a floating bar is just a bar that starts 16px down the page, and it is the
+ * treatment Riser uses across its surfaces. Below --bp-lg it collapses to `bar`: a
+ * detached pill on a phone spends horizontal room the content needs.
+ *
+ * The logo sits left. Left-aligned is the layout rule, and a centred lockup in a
+ * left-aligned page reads as a different system.
  */
 
 export interface NavbarProps {
@@ -30,6 +35,11 @@ export interface NavbarProps {
   /** Sign-in link, user menu, credit balance. */
   children?: React.ReactNode;
   tone?: 'paper' | 'ink';
+  /**
+   * Where the bar sits. `bar` is sticky and full-bleed; `floating` is fixed, inset from
+   * the top and bounded to the page measure. Both collapse to `bar` on small screens.
+   */
+  variant?: 'bar' | 'floating';
   className?: string;
 }
 
@@ -40,11 +50,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   context,
   children,
   tone = 'paper',
+  variant = 'bar',
   className = '',
 }) => (
   <nav
-    className={['riser-navbar', tone === 'ink' && 'riser-navbar--ink', className]
-      .filter(Boolean).join(' ')}
+    className={[
+      'riser-navbar',
+      // The measure lives on the nav itself when floating, because the nav is what the
+      // reader sees the edge of. In `bar` it belongs to __inner, which holds the content
+      // to the measure while the background runs full-bleed.
+      variant === 'floating' && 'riser-navbar--floating riser-measure',
+      tone === 'ink' && 'riser-navbar--ink',
+      className,
+    ].filter(Boolean).join(' ')}
   >
     <div className="riser-navbar__inner">
       <div className="riser-navbar__left">

@@ -178,6 +178,19 @@ button:disabled { cursor: not-allowed; }
   .riser-measure { width: min(100% - var(--container-gutter-xs) * 2, var(--container-max)); }
 }
 
+/* A band spans the viewport so its background can run edge to edge, and holds a
+   .riser-measure inside for the content. It has no horizontal padding, ever: that padding
+   is the gutter spelled differently, and with a measure inside it the gutter gets applied
+   twice. Vertical rhythm is the band's own business.
+
+   riser.events had two of these — the home hero and the marketing sections — each with
+   3rem of horizontal padding around a measured inner, which put the content 48px inside
+   where the navbar ended. */
+.riser-band {
+  width: 100%;
+  padding-inline: 0;
+}
+
 .riser-stack   { display: flex; flex-direction: column; gap: var(--space-4); }
 .riser-row     { display: flex; align-items: center; gap: var(--space-3); }
 .riser-grid-2  { display: grid; grid-template-columns: var(--grid-columns-2); gap: var(--grid-gap-wide); }

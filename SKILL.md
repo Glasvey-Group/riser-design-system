@@ -80,7 +80,11 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    need the gutter; anything with a background, border or fill takes `.riser-measure` so
    its own edges land on the measure. Never write `width: calc(100% - 6rem)` on a screen:
    that is the measure spelled out by hand, it drifts, and nested inside another copy it
-   subtracts the gutter twice.
+   subtracts the gutter twice. A full-bleed band takes `.riser-band` and holds a
+   `.riser-measure` inside; it never carries horizontal padding of its own, because
+   that padding is the gutter under another name and applies it a second time.
+   The navbar takes the same measure, in either `variant` — that is what makes the
+   page line up with it.
 11. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
 

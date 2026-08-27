@@ -723,7 +723,10 @@
   border-top: 0;
 }
 
-@media (max-width: 640px) {
+/* --bp-sm, matching .riser-modal__actions below — the two are the same row and stacked
+   at different widths, which showed as a modal's buttons going full-width while a form's
+   beside it did not. */
+@media (max-width: 500px) {
   .riser-form-actions { flex-direction: column-reverse; }
   .riser-form-actions .riser-button { width: 100%; }
   .riser-form-actions--bare { flex-direction: row; }
@@ -920,8 +923,20 @@
 }
 
 /* ================================================== Navbar
-   A full-bleed bar on a hairline, not a floating rounded pill. The lockup sits
-   left — the mark is the only thing that rises. */
+   Two treatments, and the difference is where the bar sits, not what it is made of.
+   Both are flat, square and hairline-ruled; neither blurs or casts a shadow.
+
+   `bar` is full-bleed on a hairline, sticky at the top of the scroll.
+
+   `floating` is detached: fixed, held off the top edge, ruled on all four sides, and
+   bounded to .riser-measure so its edges land exactly where the page content's do. An
+   earlier version of this system rejected a floating navbar, and was right to — the one
+   it rejected had a 4px radius, a 10px backdrop blur and a 30px shadow, none of which
+   this identity permits. Square, opaque and unshadowed, the objection does not apply:
+   what is left is a bar that happens to start 16px down the page.
+
+   Below --bp-lg the floating treatment collapses to the bar. A detached pill on a phone
+   spends horizontal room the content needs. */
 
 .riser-navbar {
   position: sticky;
@@ -929,6 +944,35 @@
   z-index: var(--z-navbar);
   background: var(--surface-raised);
   border-bottom: var(--hairline) solid var(--border-hairline);
+}
+
+/* The width comes from .riser-measure, which the component puts on the nav itself when
+   floating — the same rule every page container carries, so the navbar and the content
+   beneath it cannot drift apart. */
+.riser-navbar--floating {
+  position: fixed;
+  top: var(--space-4);
+  left: 0;
+  right: 0;
+  border: var(--hairline) solid var(--border-hairline);
+}
+
+.riser-navbar--floating .riser-navbar__inner {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: var(--space-4);
+}
+
+@media (max-width: 960px) {
+  /* Class-qualified so it beats .riser-measure on specificity rather than import order. */
+  .riser-navbar--floating.riser-measure {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border: 0;
+    border-bottom: var(--hairline) solid var(--border-hairline);
+  }
+  .riser-navbar--floating .riser-navbar__inner { padding-inline: var(--container-gutter-sm); }
 }
 
 .riser-navbar--ink {

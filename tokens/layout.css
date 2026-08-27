@@ -14,7 +14,13 @@
 
   /* Breakpoints. Declared as tokens for documentation; media queries cannot read
      custom properties, so the same numbers are written literally in component CSS
-     and passed to DataGrid's `responsive` prop. */
+     and passed to DataGrid's `responsive` prop.
+
+     The scale is exhaustive: a media query in this system, or in an app consuming it,
+     uses one of these five numbers and no others. It had drifted — a 640px and two
+     360px literals that were on no scale at all — which is how a consuming app ends up
+     with ten breakpoints and no two components agreeing where a layout changes. */
+  --bp-xs: 360px;
   --bp-sm: 500px;
   --bp-md: 768px;
   --bp-lg: 960px;
