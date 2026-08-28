@@ -86,6 +86,26 @@ an older rule outranks it, and the screen looks migrated while rendering the old
 | `.riser-app-checkbox input[type=checkbox]` | `.riser-check` | 0-1-1 > 0-1-0 |
 | two single-class rules | each other | import order — not deterministic |
 
+**A cascade layer outranks specificity entirely, and that catches the case above out.**
+`base.css` is imported unlayered, and Tailwind puts its utilities in `@layer utilities` —
+so `base.css`'s `a { color: inherit }` (0-0-1, unlayered) beats `.text-slate-text`
+(0-1-0, layered). Every text-colour utility on an `<a>` silently does nothing, and adding
+specificity in the app does not help, because the app's rule is layered too.
+
+Work around it by colouring something that is not the anchor. A `BrandMark` or `Icon`
+inside the link takes the utility cleanly, and `group` / `group-hover:` carries the hover
+across:
+
+```tsx
+<a href={href} className="group">
+  <BrandMark name="facebook" size={24}
+             className="text-slate-text group-hover:text-text-primary transition-colors" />
+</a>
+```
+
+Fixing it properly means wrapping `base.css` in `@layer base`, which changes cascade
+behaviour for every rule in it across both apps — worth doing, worth doing on its own.
+
 **When you put a design-system class on an element, strip the competing declarations from
 whatever else that element carries.** Adding the class is half the job. The other half is
 the reason the first attempt at each of these looked done and was not.
@@ -161,7 +181,42 @@ npm install "github:Glasvey-Group/riser-design-system#v1.14.0"
 
 Then verify `node_modules/@riser/design-system/package.json` really says the new version.
 
-### 3.7 Things that look like bugs and are not
+### 3.7 A vendor stylesheet redeclaring your palette at `:root`
+
+The worst version of 3.1, because it is invisible to every method used to find the others.
+
+`@clever-ui-kit/sign-in-form/dist/style.css` ships its own `:root` block restating a
+consuming app's entire legacy `--color-*` bridge at that app's *pre-rebrand* values —
+`--color-primary: #6666FF`, `--font-heading: Anton`, `--font-body: Inter`,
+`--color-success: #28a745`. On every route that loads the sign-in form it lands after
+`globals.css`. Equal specificity, later wins.
+
+RiserPromo finished its rebrand, measured clean, and its three auth screens were still
+rendering the old indigo and Anton headings. Nothing in the app source says so. Grep
+cannot find it — the declaration is in `node_modules`. The checker cannot see it either;
+it reads your files, not your dependencies' files.
+
+Beat it on specificity, in the app, because the names belong to the app:
+
+```css
+:root:root {          /* 0-2-0 against the vendor's 0-1-0 */
+  --color-primary: var(--accent);
+}
+```
+
+Verify by probing a throwaway element. This is the only method that catches it:
+
+```js
+const d = document.createElement('div');
+d.className = 'bg-primary';
+document.body.append(d);
+getComputedStyle(d).backgroundColor;   // rgb(102,102,255) means the vendor won
+```
+
+Do this once per app that pulls in any third-party stylesheet, and specifically on the
+routes that load it — the same probe on a route without the vendor bundle passes.
+
+### 3.8 Things that look like bugs and are not
 
 - **A 2px border computes to 1.6px.** Device-pixel snapping at 125% display scaling
   (2 ÷ 1.25). It renders 2px at 100%.
@@ -171,6 +226,15 @@ Then verify `node_modules/@riser/design-system/package.json` really says the new
   then 500s. Restart it, or do not build while it runs.
 - **Running `riser-check` inside the design system repo reports findings.** It is linting
   the components that *define* the primitives. Run it in a consuming app.
+- **A computed style does not follow a custom property you just changed.** Set
+  `--button-color` and the element's own `--button-color` reads back correctly while
+  `backgroundColor` still reports the old paint, so the variable looks live and the rule
+  looks broken. A forced reflow does not clear it. Clone the node (`el.cloneNode(false)`,
+  append, measure, remove) — the fresh element resolves correctly. Same cause as the
+  frozen transition clock in 9.
+- **A vendor control looks reskinned on one screen and not the next.** Not a specificity
+  problem: CSS order in the module graph. Route both through the app's one
+  `syncfusionTheme` module — see §4.
 
 ---
 
@@ -181,9 +245,17 @@ Then verify `node_modules/@riser/design-system/package.json` really says the new
 `Field` (label + control + error + hint) · `Input` `Select` `Textarea` `Checkbox` ·
 `Button` · `FormActions` · `Modal` · `Notice` · `StatusBadge` · `DataGrid` · `Pagination` ·
 `EmptyState` · `Loader` · `Navbar` · `Drawer` · `Card` · `StatCard` · `DetailView` ·
-`DetailForm` · `Filter` · `Dropzone` · `EventCard` · `TicketCard` · `SectionLabel` · `Icon`
+`DetailForm` · `Filter` · `Dropzone` · `EventCard` · `TicketCard` · `SectionLabel` · `Icon` ·
+`BrandMark`
 
-Two that get hand-rolled every time:
+Three that get hand-rolled every time:
+
+- **`BrandMark`** — Facebook, Instagram and TikTok logos. Lucide 1.x dropped its brand
+  glyphs, so both apps added Phosphor as a second icon library for two footer links, which
+  `docs/ICONS.md` forbids. A brand mark is not an icon and not a hand-built glyph: it is
+  filled, it keeps its owner's geometry, and it is exempt from the stroke rules — but it
+  still takes the 16/20/24 scale and `currentColor`, never the brand's own blue or pink.
+  The checker now reports any `@phosphor-icons` import.
 
 - **`FormActions`** — takes `primary` and `secondary` and renders secondary-then-primary,
   right-aligned. Order stops being something a call site can get wrong. `bare` drops the
@@ -197,6 +269,32 @@ Two that get hand-rolled every time:
 Shared classes when no component fits: `.riser-label` (any caption), `.riser-measure`,
 `.riser-band`, `.riser-container`, `.riser-check` / `.riser-check-row`,
 `.riser-input` / `.riser-select` / `.riser-textarea`.
+
+### Vendor reskins
+
+`vendor/syncfusion.css` reskins Syncfusion Material; `vendor/clever-ui-kit.css` reskins
+`@clever-ui-kit`'s own CSS modules around it. Both were written twice, once per app,
+before they were moved here.
+
+Do not import either from a layout, and do not import them per screen. Give the app one
+module — the name `vendorReskin` in `riser-design.config.json` points at — which imports
+whichever vendor stylesheets *this* app pulls in, then the reskin last:
+
+```ts
+// components/ui/syncfusionTheme.ts
+import '@clever-ui-kit/sign-in-form/dist/style.css';   // or @syncfusion/…/material.css
+import '@riser/design-system/vendor/syncfusion.css';
+import '@riser/design-system/vendor/clever-ui-kit.css';
+```
+
+The import list stays in the app because it names packages this one does not depend on;
+the treatment is the shared part. A layout-level import lands *before* component-level
+vendor CSS rather than after it, which is how the same control ends up reskinned on one
+screen and Material on the next.
+
+Scope a reskin by measuring the DOM, not by reading the vendor stylesheet. Most of what a
+bundle ships never mounts: `.e-float-text` alone carries 184 of the sign-in form's
+Material-magenta rules and the form does not render a float label at all.
 
 ---
 

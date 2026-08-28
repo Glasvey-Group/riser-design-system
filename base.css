@@ -254,6 +254,25 @@ button:disabled { cursor: not-allowed; }
 .riser-icon--accent  { color: var(--accent); }
 .riser-icon--on-ink  { color: var(--paper); }
 
+/* A brand mark carries none of the icon treatment above, and that is deliberate rather
+   than an omission. It is another company's logo: it is filled where our icons are
+   stroked, and it keeps its own geometry — Instagram's rounded square included — because
+   a squared-off Instagram mark is not a restyled Instagram mark, it is the wrong mark.
+   Note the absence of stroke-width, stroke-linecap and stroke-linejoin here.
+
+   What it does share is the 16/20/24 scale, so a row of social links lines up with a row
+   of interface icons, and currentColor, so it takes ink or slate from its context and
+   never its owner's blue or pink. */
+.riser-brand-mark {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  flex: none;
+  fill: currentColor;
+}
+
+.riser-brand-mark--sm { width: var(--icon-sm); height: var(--icon-sm); }
+.riser-brand-mark--lg { width: var(--icon-lg); height: var(--icon-lg); }
+
 /* -------------------------------------------------------------- motion */
 
 /* Things enter by rising, and stagger in sequence like the bars of the mark.

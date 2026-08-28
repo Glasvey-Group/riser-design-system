@@ -3,6 +3,12 @@
 export { Icon } from './Icon';
 export type { IconProps, IconSize, IconTone } from './Icon';
 
+/* A brand mark is not an icon — see the note at the top of BrandMark.tsx. It is filled,
+   it keeps its owner's geometry, and it is exempt from the stroke rules that make the
+   Lucide set coherent. Size and colour it still obeys. */
+export { BrandMark } from './BrandMark';
+export type { BrandMarkProps, BrandName, BrandMarkSize } from './BrandMark';
+
 export { SectionLabel } from './SectionLabel';
 export type { SectionLabelProps } from './SectionLabel';
 

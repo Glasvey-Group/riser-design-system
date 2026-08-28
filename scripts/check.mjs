@@ -24,6 +24,10 @@
  *     "vendorReskin": { "module": "syncfusionTheme",
  *                       "hint": "import '@/components/ui/syncfusionTheme'" }
  *   }
+ *
+ * vendorReskin names the app's own one-import-point module. That module imports whichever
+ * vendor stylesheets this app actually pulls in, then vendor/syncfusion.css from this
+ * package last: the treatment is shared, the import list is not.
  */
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -362,6 +366,19 @@ for (const file of tsx) {
       'hand-rolled field label',
       'use <Field label="..."> — a bare <label> renders sentence case beside Field’s mono caps');
   }
+}
+
+/* A second icon library. docs/ICONS.md has forbidden this from the start, but both apps
+ * added one anyway and for the same reason: Lucide 1.x carries no brand glyphs, so a
+ * footer with a Facebook link had nowhere to go. BrandMark covers that case now, which is
+ * what makes this checkable rather than merely stated. */
+for (const file of tsx) {
+  const src = readFileSync(file, 'utf8');
+  const m = /from\s+['"]@phosphor-icons\/[^'"]*['"]/.exec(src);
+  if (!m) continue;
+  report('icons', file, lineOf(src, m.index),
+    'second icon library',
+    'use Icon with a Lucide glyph, or BrandMark for a third-party logo — see docs/ICONS.md');
 }
 
 /* Syncfusion Material has to arrive with the Riser reskin, or Material wins by load

@@ -1,0 +1,302 @@
+/* ============================================================
+   Riser theme for Syncfusion Material.
+
+   Syncfusion ships Material stylesheets and there is no Riser theme for it, so the
+   controls arrive rounded, shadowed and accented in Material's magenta (#e3165b, used
+   67 times in ej2-calendars alone). This file reskins them onto the identity: square
+   corners, flat surfaces, Archivo, 44px controls, and the orange used as a fill rather
+   than as text.
+
+   Both apps wrote this independently and neither could have been the other's caller, so
+   it belongs here — section 11's test. RiserEvents reached Syncfusion through direct
+   @syncfusion/.../material.css imports; RiserPromo through the copy that
+   @clever-ui-kit/sign-in-form bundles inside its own stylesheet.
+
+   ---- Load order is the whole problem ----
+
+   Syncfusion's own rules are long, specific, and in some bundles emitted *after* this
+   file. That is why the declarations below carry !important: this is the sanctioned
+   vendor case, not a shortcut around specificity in our own CSS.
+
+   For the same reason this file must be imported *last*, immediately after the vendor
+   stylesheet that brings Material in. A layout-level import lands before the
+   component-level Syncfusion CSS rather than after it, which is how the same control
+   ends up Riser-styled on one screen and Material-styled on the next. Give each app a
+   single module that imports its own vendor sources and then this file:
+
+     // components/ui/syncfusionTheme.ts
+     import '@syncfusion/ej2-base/styles/material.css';       // whichever this app needs
+     import '@riser/design-system/vendor/syncfusion.css';     // always last
+
+   The import list stays in the app because it names packages this one does not depend
+   on. The treatment is the part that is shared.
+
+   ---- One thing this file cannot reach ----
+
+   @clever-ui-kit/sign-in-form also re-declares an app's legacy --color-* palette at
+   :root, at pre-rebrand values, and wins on load order. That has to be beaten on
+   specificity in the app's own stylesheet, because the names are the app's, not ours.
+   See vendor/clever-ui-kit.css.
+   ============================================================ */
+
+/* ---- Corners. The identity is square everywhere. ---- */
+.e-control,
+.e-control-wrapper,
+.e-input-group,
+.e-datetime-wrapper,
+.e-popup,
+.e-calendar,
+.e-calendar .e-header .e-title,
+.e-btn,
+.e-ddl,
+.e-input-group-icon {
+  border-radius: 0 !important;
+}
+
+/* Material draws date cells as circles. */
+.e-calendar .e-cell span.e-day,
+.e-calendar .e-cell.e-selected span.e-day,
+.e-calendar .e-cell.e-today span.e-day,
+.e-calendar .e-cell.e-focused-date span.e-day {
+  border-radius: 0 !important;
+}
+
+/* ---- Type. Material ships Roboto at 13px. ---- */
+.e-control,
+.e-control-wrapper,
+.e-popup,
+.e-calendar,
+.e-list-item,
+.e-input-group input.e-input,
+.e-datetime-wrapper input.e-input {
+  font-family: var(--font-ui) !important;
+  font-size: var(--text-body) !important;
+}
+
+/* Dates and times are data. */
+.e-input-group input.e-input,
+.e-datetime-wrapper input.e-input,
+.e-calendar .e-cell span.e-day {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Surfaces: flat, raised paper, hairline-ruled ----
+
+   These were --surface-page, which is the ground the page sits on, not the surface a
+   control sits on. After the v1.2.0 surface split that token became the dim paper, so
+   every date field rendered as a grey box against the white ones beside it. A control
+   and a popup are both raised. ---- */
+.e-popup,
+.e-calendar {
+  background: var(--surface-raised) !important;
+  border: var(--hairline) solid var(--border-hairline) !important;
+  box-shadow: none !important;
+}
+
+.e-input-group,
+.e-datetime-wrapper,
+.e-control-wrapper.e-input-group {
+  background: var(--surface-raised) !important;
+  border: var(--hairline) solid var(--border-hairline) !important;
+  box-shadow: none !important;
+  /* Syncfusion's own height is 32px, and the clever-ui-kit build renders 52px. Every
+     other control on a Riser form is 44px, and a row of fields where one is a different
+     height reads as broken. */
+  min-height: var(--control-height-lg) !important;
+}
+
+/* Material sits its text hard against the control's left edge, because a Material
+   control has an underline rather than a border to sit against. Once the control is a
+   bordered square the text needs the same inset every other field gives it. The wrapper
+   carries the border, so the padding goes on the input inside it. */
+.e-input-group input.e-input,
+.e-datetime-wrapper input.e-input,
+.e-input-group .e-input,
+.e-datetime-wrapper .e-input {
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  /* Matches .riser-input, which is 8px vertical so min-height governs the 44px. */
+  padding: var(--space-2) var(--space-3) !important;
+  margin: 0 !important;
+}
+
+.e-input-group input.e-input::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* Material underlines the control and animates a coloured bar in on focus.
+   The identity uses a rule that goes to 2px ink instead. */
+.e-input-group::before,
+.e-input-group::after,
+.e-datetime-wrapper::before,
+.e-datetime-wrapper::after,
+.e-control-wrapper::before,
+.e-control-wrapper::after {
+  content: none !important;
+}
+
+.e-input-group.e-input-focus,
+.e-datetime-wrapper.e-input-focus,
+.e-input-group:focus-within {
+  border-color: var(--ink) !important;
+  border-width: var(--rule-heavy) !important;
+  box-shadow: none !important;
+}
+
+/* ---- Colour ----
+   Orange is a fill. Anywhere Material used its accent for text or a thin rule, that
+   becomes ink or slate. */
+.e-control,
+.e-control-wrapper,
+.e-popup,
+.e-calendar,
+.e-input-group input.e-input,
+.e-datetime-wrapper input.e-input {
+  color: var(--text-primary) !important;
+}
+
+.e-calendar .e-header .e-title,
+.e-calendar .e-header .e-date-icon-prev,
+.e-calendar .e-header .e-date-icon-next {
+  color: var(--text-primary) !important;
+  background: transparent !important;
+}
+
+.e-calendar .e-content .e-week-header th,
+.e-calendar .e-content th {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-label) !important;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary) !important;
+}
+
+/* Other-month and disabled dates */
+.e-calendar .e-cell.e-other-month span.e-day,
+.e-calendar .e-cell.e-disabled span.e-day {
+  color: var(--text-disabled) !important;
+}
+
+/* Selected date: the one fill. Ink on orange, never white on orange. */
+.e-calendar .e-cell.e-selected span.e-day,
+.e-calendar .e-cell.e-selected:hover span.e-day {
+  background: var(--accent) !important;
+  color: var(--text-on-accent) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Today is marked by a rule, not a coloured ring or coloured text. */
+.e-calendar .e-cell.e-today span.e-day,
+.e-calendar .e-cell.e-today.e-focused-date span.e-day {
+  border: var(--hairline) solid var(--ink) !important;
+  color: var(--text-primary) !important;
+  background: transparent !important;
+}
+
+.e-calendar .e-cell.e-today.e-selected span.e-day {
+  background: var(--accent) !important;
+  color: var(--text-on-accent) !important;
+}
+
+/* Hover is a surface change, never a lift or a tint of the orange. */
+.e-calendar .e-cell:hover span.e-day {
+  background: var(--surface-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ---- Dropdowns (DropDownList, AutoComplete, ComboBox) ---- */
+.e-input-group-icon,
+.e-input-group .e-input-group-icon,
+.e-ddl-icon {
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.e-input-group-icon:hover,
+.e-ddl-icon:hover {
+  color: var(--text-primary) !important;
+  background: transparent !important;
+}
+
+/* The open list. Material gives it a 4px radius over a three-layer drop shadow; a popup
+   is raised paper on a hairline, and nothing in the system casts a shadow. */
+.e-ddl.e-popup,
+.e-popup.e-ddl {
+  background: var(--surface-raised) !important;
+  border: var(--hairline) solid var(--border-hairline) !important;
+  box-shadow: none !important;
+}
+
+.e-list-item {
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  height: var(--control-height-lg) !important;
+  line-height: var(--control-height-lg) !important;
+  padding: 0 var(--space-3) !important;
+}
+
+/* Material tints the focused row grey and the selected row with its magenta. Hover and
+   keyboard focus are a surface change; the selected row is the one fill. */
+.e-list-item.e-item-focus,
+.e-list-item.e-hover,
+.e-list-item:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.e-list-item.e-active,
+.e-list-item.e-active.e-item-focus {
+  background: var(--accent) !important;
+  color: var(--text-on-accent) !important;
+}
+
+/* The empty state a remote-bound dropdown shows before its options arrive. */
+.e-ddl.e-popup .e-nodata {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  padding: var(--space-3) !important;
+}
+
+/* ---- Focus ring: square, ink, offset — matching the rest of the app. ---- */
+.e-calendar .e-cell:focus-visible span.e-day,
+.e-input-group input.e-input:focus-visible,
+.e-btn:focus-visible {
+  outline: var(--rule-heavy) solid var(--focus-ring) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* ---- Footer buttons (Today / Cancel) ---- */
+.e-footer-container .e-btn,
+.e-calendar .e-footer-container .e-btn {
+  font-family: var(--font-ui) !important;
+  font-weight: var(--weight-bold) !important;
+  text-transform: none !important;
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  border: var(--hairline) solid var(--border-hairline) !important;
+  box-shadow: none !important;
+}
+
+.e-footer-container .e-btn:hover {
+  border-color: var(--ink) !important;
+  background: var(--surface-hover) !important;
+}
+
+/* ---- Motion. Nothing scales, nothing ripples. ---- */
+.e-control .e-ripple,
+.e-ripple-element,
+.e-calendar .e-cell span.e-day::after {
+  display: none !important;
+  animation: none !important;
+}
+
+.e-control,
+.e-control-wrapper,
+.e-list-item,
+.e-calendar .e-cell span.e-day {
+  transition-duration: var(--duration-fast) !important;
+  transition-timing-function: var(--ease-out) !important;
+}

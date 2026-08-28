@@ -1,0 +1,95 @@
+/* ============================================================
+   Riser theme for @clever-ui-kit's own chrome.
+
+   Separate from vendor/syncfusion.css on purpose: these are two different vendors that
+   happen to arrive together. @clever-ui-kit/sign-in-form bundles the entire Syncfusion
+   Material stylesheet inside its dist/style.css — 1,108 distinct .e-* selectors — and
+   then adds its own CSS modules around them for the panel, the submit, the OAuth
+   buttons, the phone-number field and the type-ahead.
+
+   The Syncfusion half is handled by vendor/syncfusion.css. This file is only the
+   kit's own layer, which between the sign-in form and the type-ahead brings five
+   different corner radii (3, 4, 6, 7 and 8px), two drop shadows and a press-down
+   transform.
+
+   An app importing the sign-in form needs both files. An app using Syncfusion directly
+   needs only the other one.
+
+   ---- Why the selectors look like that ----
+
+   These are CSS modules. The rendered class is `_signInFormButton_wms8d_133`, where the
+   middle segment is a build hash that changes whenever the package is rebuilt — so the
+   stable part is the prefix, and matching on a substring is what survives a version
+   bump. It is deliberately not a guess: run the class list off a rendered screen before
+   adding to it.
+
+   ---- What is NOT here ----
+
+   Colour. SignInForm takes a `colors` prop and emits it as custom properties
+   (`--button-color: ${...}`), so a `var(--accent)` chain resolves and the form can be
+   pinned to package tokens from the call site. Pass tokens there rather than fighting
+   the paint from here. Setting it in CSS would mean this file holding a copy of the
+   brand, which is the thing the package exists to prevent.
+   ============================================================ */
+
+/* ---- Corners. Radius 0, everywhere. ---- */
+[class*="signInFormContainer"],
+[class*="signInFormButton"],
+[class*="signInFormBottomButton"],
+[class*="signInFormInput"],
+[class*="signInFormDropDown"],
+[class*="signInFormRequiredFieldsError"],
+[class*="oauthButton"],
+[class*="phoneCountryDropdown"],
+[class*="phoneCountrySearch"],
+[class*="typeaheadSelectBoxDropdown"],
+[class*="typeaheadSelectBoxOptions"],
+[class*="typeaheadSelectBoxSearchInput"],
+[class*="typeaheadSelectBoxTag"],
+[class*="typeaheadSelectBoxCtaButton"] {
+  border-radius: 0 !important;
+}
+
+/* ---- Flat. ---- */
+[class*="phoneCountryDropdown"],
+[class*="typeaheadSelectBoxDropdown"],
+[class*="typeaheadSelectBoxCtaButton"] {
+  box-shadow: none !important;
+}
+
+/* The OAuth button drops 1px on press. Nothing in the system moves under the pointer —
+   things enter by rising, and that is the only travel there is. */
+[class*="oauthButton"]:active {
+  transform: none !important;
+}
+
+/* ============================================================
+   The part this file cannot fix, and the app must.
+
+   dist/style.css also declares its own `:root` block, restating a consuming app's whole
+   legacy --color-* palette at whatever values that app shipped before its rebrand —
+   `--color-primary: #6666FF`, `--font-heading: Anton`, `--font-body: Inter`,
+   `--color-success: #28a745`. On any route that loads the sign-in form it lands after
+   the app's globals.css, and at equal specificity the later rule wins.
+
+   The effect is that every legacy-palette utility on the auth screens keeps rendering
+   the pre-rebrand brand long after the migration looks finished, and nothing in the
+   app's own source says so. It was measured on RiserPromo as `bg-primary` computing to
+   rgb(102,102,255) with the rebrand otherwise complete.
+
+   The fix cannot live here, because those variable names belong to the app, not to this
+   package. In the app's stylesheet, qualify the bridge so it wins on specificity rather
+   than on order:
+
+       :root:root {           / * 0-2-0 against the vendor's 0-1-0 * /
+         --color-primary: var(--accent);
+         ...
+       }
+
+   Verify it by probing a throwaway element, not by grepping the source:
+
+       const d = document.createElement('div');
+       d.className = 'bg-primary';
+       document.body.append(d);
+       getComputedStyle(d).backgroundColor;
+   ============================================================ */
