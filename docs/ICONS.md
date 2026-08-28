@@ -63,16 +63,27 @@ Colour is the rule most likely to be argued with. A footer that renders Facebook
 beside Instagram pink beside TikTok cyan has four accents on a page allowed one, and the
 marks stop reading as a set. They take ink, or slate when secondary, like everything else.
 
-Currently shipped: `facebook`, `instagram`, `tiktok` - the three any Riser surface links
+Currently shipped: `facebook`, `instagram`, `tiktok`, `x`, `whatsapp` - the marks Riser surfaces link
 to. To add another, put the owner's own path in `BRAND_PATHS`, its proper name in
 `BRAND_LABELS`, and a row in the table below. Do not add a mark speculatively, and do not
 reach for a second icon library to get one.
+
+The checker reports any `@phosphor-icons` import. One case cannot be fixed in the markup:
+an icon name read from the database, where changing the set needs a data migration first.
+Waive that at the site, with the reason, rather than in a config list:
+
+```tsx
+/* riser-check-allow icons - iconName is socialMediaType.icon, a DB value */
+import * as PhosphorIcons from '@phosphor-icons/react';
+```
 
 | Mark | Added | For |
 | --- | --- | --- |
 | Facebook | v1.15.0 | riser.events and promo footers |
 | Instagram | v1.15.0 | riser.events and promo footers |
 | TikTok | v1.15.0 | riser.events footer |
+| X | v1.15.1 | riser.events performer + event share rows |
+| WhatsApp | v1.15.1 | riser.events performer share row |
 
 ## The mark is not an icon
 

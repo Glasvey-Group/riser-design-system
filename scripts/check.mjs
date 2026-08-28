@@ -376,6 +376,14 @@ for (const file of tsx) {
   const src = readFileSync(file, 'utf8');
   const m = /from\s+['"]@phosphor-icons\/[^'"]*['"]/.exec(src);
   if (!m) continue;
+  /* One case is genuinely not fixable in the markup: an icon name held in the database,
+   * where swapping the set needs a data migration first. Waive it at the site with a
+   * reason rather than in a config list — the note above CHROME_BASE is right that a
+   * per-file allowlist is one nobody updates, and here the reason is the whole point.
+   *
+   *   /* riser-check-allow icons — iconName is socialMediaType.icon, a DB value * /
+   */
+  if (/riser-check-allow\s+icons\b/.test(src)) continue;
   report('icons', file, lineOf(src, m.index),
     'second icon library',
     'use Icon with a Lucide glyph, or BrandMark for a third-party logo — see docs/ICONS.md');
