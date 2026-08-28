@@ -98,6 +98,7 @@ assets/fonts/    Archivo variable, self-hosted (186 KB woff2)
 docs/            COMPONENTS.md · MIGRATION.md · ICONS.md
 SKILL.md         so the whole thing can be used from Claude Code
 DesignSystemRebrand.md  how to migrate an existing app onto this, and what went wrong last time
+CLAUDE.template.md      base CLAUDE.md to copy into an app before its rebrand session
 ```
 
 ---
