@@ -98,15 +98,30 @@ never what happens to sit inside it today.
 
 ## This app specifically
 
-<!-- Fill this in during step 2 of the rebrand, once the checker's first run has shown you
-     what you are dealing with. Delete the prompts as you answer them. Everything above is
-     true of every Riser app; everything here is not. -->
+**Claude: filling this in is your first task, before any migration work.** Everything above
+is true of every Riser app. Nothing below it is known yet, and the answers change how the
+rest of this file applies — so establish them from the codebase, replace each angle-bracket
+prompt with the answer, and delete this instruction block when you are done. Do not ask me
+for any of it; all of it is discoverable, and the last two lines are the only ones needing
+anything to have been run.
 
-- **Stack:** <Next version · React version · router · Tailwind version>
-- **Global stylesheet:** <path — e.g. src/app/globals.css, or pages/_app.tsx for Pages Router>
-- **Stylesheet convention:** <one per route? per component? something else?>
-- **Page file size:** <are these 200-line files or 2,000-line files? it changes how to read them>
-- **Known duplication:** <surfaces that exist twice — extract before converting, not after>
-- **Legacy palette bridge:** <where the old --color-* vars live>
-- **Vendor UI to reskin:** <Syncfusion, Clerk, editors — or none>
-- **Checker starting count:** <number of findings on the first run, so progress is visible>
+Answer from evidence, not assumption. `Unknown` is a valid answer where a short look does
+not settle it — a wrong entry here is worse than a missing one, because the next twenty
+passes will trust it.
+
+- **Stack:** <Next version · React version · router · Tailwind version — from package.json,
+  and whether the router is `app/`, `src/app/` or `pages/`>
+- **Global stylesheet:** <the file that imports the design system — usually src/app/globals.css,
+  or wherever _app.tsx imports CSS on the Pages Router>
+- **Stylesheet convention:** <one per route? per component? one big file? count the .css files
+  and where they sit>
+- **Page file size:** <the line count of the three largest page files — it decides whether to
+  read them whole or grep and read a range>
+- **Known duplication:** <surfaces existing twice, e.g. the same form under two routes. Find
+  these before converting anything: extracting after converting means converting twice>
+- **Legacy palette bridge:** <where the old --color-* vars are declared, so they can be
+  re-pointed at design-system tokens and retired surface by surface>
+- **Vendor UI to reskin:** <Syncfusion, Clerk, rich-text or image editors — grep the
+  dependencies. These need a single import point, not a reskin per screen>
+- **Checker starting count:** <findings on the first `npm run check:design`, recorded so
+  progress is visible. Re-run and update it at the end of each pass>

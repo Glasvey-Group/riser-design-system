@@ -1,6 +1,6 @@
 {
   "name": "@riser/design-system",
-  "version": "1.14.2",
+  "version": "1.14.3",
   "description": "Riser design system — tokens, primitives and UI kits for riser.events and promo.riser.events.",
   "private": true,
   "main": "components/index.ts",
