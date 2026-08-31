@@ -64,6 +64,13 @@ export { NotificationStack } from './Notification';
 export type { NotificationStackProps, NotificationItem, NotificationType } from './Notification';
 
 export { Navbar } from './Navbar';
+
+/* The ink band at the foot of every Riser site. Owns the skeleton and the treatment;
+   every link arrives as a node the app built with its own router, the same seam Navbar
+   uses for its logo. See the note at the top of Footer.tsx for what deliberately stays
+   in the app. */
+export { Footer, RISER_NETWORK } from './Footer';
+export type { FooterProps, FooterColumn, FooterSocial } from './Footer';
 export type { NavbarProps } from './Navbar';
 
 export { Drawer, DrawerSection, DrawerLink } from './Drawer';
