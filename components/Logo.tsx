@@ -76,10 +76,23 @@ export const LogoLockup: React.FC<LogoProps> = ({
   >
     <title>{title}</title>
     <Bars variant={variant} />
+    {/* The width axis has to be set twice, and both are load-bearing.
+
+        `font-stretch: 88%` is the correct spelling and the one a static renderer
+        understands, but in a browser it does not drive the `wdth` axis of the Archivo
+        that next/font serves — measured identical at 62%, 88% and 100%. The wordmark
+        then renders at full width, 271 units against a 244-unit budget, and the final R
+        is clipped by the viewBox. It looked like a wrong logo file; it was the width
+        axis silently doing nothing.
+
+        `font-variation-settings` addresses the axis directly and does work: 243.6 units,
+        which is the width the lockup was drawn at. Keep both — the attribute for
+        renderers that honour it, the variation setting for the browser. */}
     <text
       x="111" y="90"
       fontFamily="Archivo" fontWeight={800} fontSize={80}
       fontStretch="88%" letterSpacing="2.6"
+      style={{ fontVariationSettings: "'wdth' 88" }}
       fill={FILLS[variant].bar}
     >
       RISER
