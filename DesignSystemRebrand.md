@@ -235,6 +235,13 @@ routes that load it — the same probe on a route without the vendor bundle pass
 - **A vendor control looks reskinned on one screen and not the next.** Not a specificity
   problem: CSS order in the module graph. Route both through the app's one
   `syncfusionTheme` module — see §4.
+- **`font-stretch` does not drive the `wdth` axis** of the Archivo `next/font` serves.
+  Measured identical at 62%, 88% and 100%. `font-variation-settings: 'wdth' 88` does.
+  This clipped the final R off the lockup in both apps and read as a bad logo file: the
+  font *was* loading, `document.fonts.check('800 80px Archivo')` passed, and the family
+  resolved to `Archivo` — the axis was simply doing nothing. Fixed in `Logo.tsx` at
+  v1.16.0; if you set a width axis anywhere else, set both properties and measure the
+  text's `getBBox().width` against the space it has, on a freshly built node.
 
 ---
 
