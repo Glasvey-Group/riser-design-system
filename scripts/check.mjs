@@ -170,7 +170,14 @@ function* rawButtons(src) {
     const end = close + '</button>'.length;
     const block = src.slice(m.index, end);
     const inner = block.slice(tagEnd(block), block.lastIndexOf('</button>'));
-    yield { index: m.index, block, inner, chrome: CHROME.test(classOf(block)) };
+    /* classOf reads the opening tag, not the whole block. Given the whole block it
+       returns the first *quoted* className anywhere inside — so a button whose own
+       className is a template literal, wrapping a child with a plain className, was
+       classified by its child. That mis-flagged a menu row carrying `user-menu-item`
+       around a <span className="flex-1">, and would equally wave through a real action
+       button whose child happened to say "toggle". */
+    const openTag = block.slice(0, tagEnd(block));
+    yield { index: m.index, block, inner, chrome: CHROME.test(classOf(openTag)) };
   }
 }
 
