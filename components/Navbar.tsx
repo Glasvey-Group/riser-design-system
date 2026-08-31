@@ -30,11 +30,39 @@ import React from 'react';
  * merely between two unequal ends.
  */
 
+/* Lucide's `Menu`, inlined. Same three paths, and the same stroke treatment `.riser-icon`
+   applies to the Lucide set — 1.5, square caps, mitred joins. Inlined rather than imported
+   because this package has no icon dependency and adding one for a single glyph is the
+   second icon library docs/ICONS.md forbids. */
+const HamburgerIcon = (
+  <svg
+    width="24" height="24" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="1.5"
+    strokeLinecap="square" strokeLinejoin="miter"
+    aria-hidden="true"
+  >
+    <path d="M4 5h16" />
+    <path d="M4 12h16" />
+    <path d="M4 19h16" />
+  </svg>
+);
+
 export interface NavbarProps {
   /** LogoLockup, wrapped in whatever your router uses for links. */
   logo: React.ReactNode;
   /** Drawer toggle. Omit to hide the menu button. */
   onMenuClick?: () => void;
+  /**
+   * Defaults to the hamburger, which is almost always what you want — pass this only
+   * for a genuinely different affordance.
+   *
+   * It has a default because leaving it to the call site is how the two apps drifted:
+   * promo passed Lucide's `Menu`, riser.events passed Lucide's `List` — a bulleted-list
+   * glyph, whose bullets are drawn by a round line cap the identity does not use — and
+   * the same control meant "open the navigation" on one site and "a list of items" on
+   * the other. The previous fallback here was the character `≡`, which docs/ICONS.md
+   * rules out: unicode symbols are not icons.
+   */
   menuIcon?: React.ReactNode;
   /** Promo's "as {organizer}" string. Mono caps, hidden below 768px. */
   context?: React.ReactNode;
@@ -79,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={onMenuClick}
             aria-label="Open menu"
           >
-            {menuIcon ?? '≡'}
+            {menuIcon ?? HamburgerIcon}
           </button>
         ) : null}
       </div>

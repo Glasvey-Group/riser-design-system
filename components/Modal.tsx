@@ -147,11 +147,28 @@ export interface LoadingModalProps {
   isOpen: boolean;
   title: string;
   message?: string;
+  /**
+   * The second line — "This may take a few moments. Please don't close this window."
+   *
+   * ConfirmModal has had this from the start and LoadingModal did not, so promo kept a
+   * local copy of this component to get the line back, and rendered it with
+   * `riser-modal__message` because that was the only class it knew about. Two lines at
+   * the same size, where the second should step down to small and secondary.
+   * `.riser-modal__submessage` already existed in components.css; only the prop was
+   * missing.
+   */
+  submessage?: string;
 }
 
-export const LoadingModal: React.FC<LoadingModalProps> = ({ isOpen, title, message }) => (
+export const LoadingModal: React.FC<LoadingModalProps> = ({
+  isOpen,
+  title,
+  message,
+  submessage,
+}) => (
   <Modal isOpen={isOpen} title={title} dismissible={false}>
     {message ? <p className="riser-modal__message">{message}</p> : null}
+    {submessage ? <p className="riser-modal__submessage">{submessage}</p> : null}
     <div style={{ marginTop: 'var(--space-5)' }}><Loader /></div>
   </Modal>
 );
