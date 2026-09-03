@@ -137,8 +137,10 @@ Button variants: `primary` (the orange — one per view) · `ink` · `paper` (so
 an ink surface) · `secondary` · `ghost` · `danger`. Sizes `sm` `md` `lg` = 28 36 44px.
 
 Status is `StatusBadge` with tone `live` · `neutral` · `done` · `stopped`, plus
-`campaignStatus(n)` and `deliveryStatus(n)` for Promo's numeric enums. Never a coloured
-pill.
+`campaignStatus(n)` and `deliveryStatus(n)` for RiserAdmin's numeric enums, and
+`campaignStatusFromName(name)` for the campaign-progress endpoint, which sends the name
+instead. Never a coloured pill, and never a local copy of the enum — the labels are the
+backend's words, and a screen that restates them drifts.
 
 ## Screen composition, as the Promo Dashboard does it
 

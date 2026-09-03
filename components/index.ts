@@ -27,8 +27,11 @@ export {
   StatusBadge,
   CAMPAIGN_STATUS,
   CAMPAIGN_STATUS_TONE,
+  CAMPAIGN_STATUS_BY_NAME,
+  TERMINAL_CAMPAIGN_STATUS_NAMES,
   DELIVERY_STATUS_TONE,
   campaignStatus,
+  campaignStatusFromName,
   deliveryStatus,
 } from './StatusBadge';
 export type { StatusBadgeProps, StatusTone } from './StatusBadge';

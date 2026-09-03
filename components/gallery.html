@@ -60,12 +60,13 @@
     <p class="spec-lede">Mono caps over a 2px rule. Both codebases had drifted — Events used <span class="riser-data">rounded-full</span> pills, Promo had a commented-out six-shade grey ramp. Six greys cannot be told apart at 11px, and the brand has one signal colour, so only <span class="riser-data">live</span> spends the orange.</p>
     <div class="spec-demo">
       <span class="riser-badge riser-badge--neutral">Draft</span>
+      <span class="riser-badge riser-badge--neutral">Saved</span>
       <span class="riser-badge riser-badge--neutral">Scheduled</span>
       <span class="riser-badge riser-badge--live">Running</span>
-      <span class="riser-badge riser-badge--done">Complete</span>
+      <span class="riser-badge riser-badge--done">Completed</span>
       <span class="riser-badge riser-badge--stopped">Cancelled</span>
     </div>
-    <span class="spec-caption">CampaignStatus 1–5, mapped in <span class="riser-data">CAMPAIGN_STATUS_TONE</span></span>
+    <span class="spec-caption">CampaignStatus 0–6, mapped in <span class="riser-data">CAMPAIGN_STATUS_TONE</span>. <span class="riser-data">Saved</span> and <span class="riser-data">Scheduled</span> are the only two a campaign can be run from</span>
     <div class="spec-demo" style="margin-top:var(--space-4)">
       <span class="riser-badge riser-badge--neutral riser-badge--boxed">Queued</span>
       <span class="riser-badge riser-badge--done riser-badge--boxed">Delivered</span>
@@ -197,7 +198,7 @@
             <div class="riser-grid__row riser-grid__row--clickable">
               <div class="riser-grid__cell riser-grid__cell--data" style="width:15%" data-label="Date">2026-08-12 20:00</div>
               <div class="riser-grid__cell" style="width:12%" data-label="Type">SMS</div>
-              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--done">Complete</span></div>
+              <div class="riser-grid__cell" style="width:12%" data-label="Status"><span class="riser-badge riser-badge--done">Completed</span></div>
               <div class="riser-grid__cell" style="width:30%" data-label="Name">Re-engage · 90-day lapsed</div>
               <div class="riser-grid__cell" style="width:20%" data-label="Brand">Limelight</div>
               <div class="riser-grid__cell" style="width:11%" data-label="Actions"><span class="riser-grid__cell-actions"><button class="riser-button riser-button--ghost riser-button--sm">View</button></span></div>

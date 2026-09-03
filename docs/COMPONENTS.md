@@ -72,8 +72,16 @@ onImage?: boolean      // ink block behind, for badges over photography
 ```
 
 Exports `CAMPAIGN_STATUS`, `CAMPAIGN_STATUS_TONE`, `DELIVERY_STATUS_TONE`,
-`campaignStatus(n)`, `deliveryStatus(n)` — Promo's numeric enums mapped once, so screens
+`campaignStatus(n)`, `deliveryStatus(n)` — RiserAdmin's numeric enums mapped once, so screens
 stop re-deriving them.
+
+The campaign-progress endpoint is the exception: it reports `campaignStatus` as the enum
+**name** ("Running", "Completed") where every other payload sends the integer. Use
+`campaignStatusFromName(name)` to map it back, and `TERMINAL_CAMPAIGN_STATUS_NAMES` to decide
+when a campaign will never change again and polling can stop.
+
+`CAMPAIGN_STATUS.SAVED` (6) is the status a campaign must reach before it can run — with
+`SCHEDULED`, the only two the server accepts. Gate a Run action on those two and nothing else.
 
 Events used `rounded-full` pills; Promo had a commented-out six-shade grey ramp in
 `globals.css`. Six greys are indistinguishable at 11px, and the brand has one signal

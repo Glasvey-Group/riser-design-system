@@ -232,6 +232,13 @@
 .riser-badge {
   display: inline-flex;
   align-items: center;
+  /* The rule belongs to the word, not to whatever column the badge is sitting in.
+     `inline-flex` hugs the label on its own, but a badge placed in a flex or grid
+     parent becomes an item and inherits `stretch` — which blockifies it to `flex`
+     and draws the 2px rule across the full cell. That happened the moment a caller
+     stacked a figure under the badge in a grid cell. `start` costs nothing when the
+     badge is not an item, so it is set here rather than left to every call site. */
+  align-self: start;
   gap: var(--space-2);
   padding: var(--space-1) 0;
   border-bottom: var(--rule-heavy) solid var(--status-neutral);
