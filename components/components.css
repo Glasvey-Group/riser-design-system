@@ -533,6 +533,7 @@
   display: flex;
   align-items: stretch;
   border-bottom: var(--rule-heavy) solid var(--ink);
+  padding-left: var(--space-3);
 }
 
 .riser-grid__head-cell {
@@ -567,6 +568,12 @@
   align-items: center;
   border-bottom: var(--hairline) solid var(--border-hairline);
   transition: background-color var(--duration-fast) var(--ease-out);
+  /* A leading gutter so the active row's orange rule has somewhere to live. Cells
+     carry no left padding — the first column used to sit flush against that rule,
+     which read as a defect rather than a marker. Every row is inset, not just the
+     active one, so selecting a row still shifts nothing. `.riser-grid__head-row`
+     matches it, or the header would no longer line up with its column. */
+  padding-left: var(--space-3);
 }
 
 .riser-grid__row--clickable { cursor: pointer; }
@@ -605,7 +612,7 @@
    labelled by its column. This is what the `responsive` widths of 0 are for. */
 @media (max-width: 500px) {
   .riser-grid__head-row { display: none; }
-  .riser-grid__row { flex-direction: column; align-items: stretch; padding: var(--space-3) 0; }
+  .riser-grid__row { flex-direction: column; align-items: stretch; padding-block: var(--space-3); padding-right: 0; }
   .riser-grid__cell { width: 100% !important; display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) 0; }
   .riser-grid__cell::before {
     content: attr(data-label);

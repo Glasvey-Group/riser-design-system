@@ -23,6 +23,8 @@ import { SearchInput } from './Field';
  * Layout notes:
  *   - Rows are separated by hairlines. No zebra fill, no cell borders.
  *   - The header row is mono caps over a 2px ink rule.
+ *   - Rows carry a leading gutter so that rule has somewhere to sit; without it the
+ *     first column reads as flush against the orange and looks like a defect.
  *   - The active row is marked by a 2px orange rule on its leading edge. That is
  *     the view's one orange thing when a grid row is selected.
  *   - Below 500px the grid becomes stacked records, each cell labelled by its
