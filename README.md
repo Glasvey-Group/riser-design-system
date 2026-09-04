@@ -45,9 +45,8 @@ import { Button, DataGrid, StatusBadge } from '@riser/design-system';
 ```
 
 **Next.js apps use the fonts-free entry point instead.** `styles.css` pulls in
-`tokens/fonts.css`, which `@font-face`s a self-hosted Archivo and fetches JetBrains Mono
-from Google. An app using `next/font` already has both, so that import downloads Archivo
-twice and adds a blocking Google Fonts request:
+`tokens/fonts.css`, which `@font-face`s a self-hosted Archivo and a self-hosted JetBrains
+Mono. An app using `next/font` already has both, so that import ships every face twice:
 
 ```css
 @import "@riser/design-system/styles-no-fonts.css";
@@ -171,12 +170,17 @@ the largest display; 400–500 for body and labels. The wordmark is 88% width; U
 at 100%. Body copy is 15px at 1.6 in `#3A3A3A`. Headlines are tight — negative tracking,
 line-height under 1.2.
 
-Archivo is **self-hosted** here: `assets/fonts/Archivo-Variable.woff2`, 186 KB, carrying
-weight 100–900 and width 62–125 in one file, converted from the TTF in the
-`RiserDesignBrief` folder. JetBrains Mono is still loaded from Google Fonts — no binaries
-were supplied for it. To finish the job, drop its woff2 files into `assets/fonts/` and
-replace the `@import` in `tokens/fonts.css` with `@font-face` rules in the same shape as
-Archivo's.
+Both faces are **self-hosted**. Archivo is `assets/fonts/Archivo-Variable.woff2`, 186 KB,
+carrying weight 100–900 and width 62–125 in one file, converted from the TTF in the
+`RiserDesignBrief` folder. JetBrains Mono is `JetBrainsMono-Regular.woff2` and
+`JetBrainsMono-Medium.woff2` — latin subset, 21 KB each, the two weights the system uses
+(400 for labels, 500 for `.riser-data`), taken from `@fontsource/jetbrains-mono` 5.3.0.
+
+Nothing here reaches the network. That is a hard requirement rather than an optimisation:
+RiserApp packages the build into a Capacitor shell, where a Google Fonts request fails
+offline and takes the identity with it — including `LogoLockup`, which sets the wordmark
+as live Archivo text rather than a path. Both faces are SIL Open Font License 1.1;
+`assets/fonts/OFL.txt` ships alongside them.
 
 | Class | Size / leading | Weight |
 | --- | --- | --- |
@@ -298,7 +302,6 @@ pricing and close, with the site's own copy.
 
 ## Not in this build
 
-- **JetBrains Mono binaries.** Still on Google Fonts.
 - **Photography.** See above; the only genuinely open item.
 - **Micro-SaaS surfaces.** Copy-Genie, Influencer-Track, Fan-Insight AI and white-label
   ticketing have no code yet, so they have no kit. The primitives cover them when they do.

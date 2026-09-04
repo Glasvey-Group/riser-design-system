@@ -3,10 +3,15 @@
    Self-hosted from Archivo-VariableFont_wdth,wght.ttf, converted to woff2 (186 KB,
    wght 100–900 and wdth 62–125 in one file).
 
-   JetBrains Mono is the label and data face and is still pulled from Google Fonts —
-   no binaries were supplied for it. To self-host it, drop the woff2 files into
-   assets/fonts/ and replace the @import with @font-face rules in the same shape as
-   Archivo's below. */
+   JetBrains Mono is the label and data face, self-hosted since v1.20.0 in the two
+   weights the system actually uses — 400 for labels, 500 for .riser-data. It was an
+   @import from Google Fonts until then, which is fine on the web and wrong in a
+   Capacitor shell: the build is packaged into the APK and the fetch fails with no
+   network, so every label fell back to the platform monospace. Worse, LogoLockup sets
+   the wordmark as live Archivo text, so a font fetch that fails takes the logo with it.
+   Both faces are latin-subset woff2 (21 KB each); nothing here reaches the network.
+
+   Both faces are SIL Open Font License 1.1 — see assets/fonts/OFL.txt. */
 
 @font-face {
   font-family: "Archivo";
@@ -17,4 +22,18 @@
   font-display: swap;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/JetBrainsMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

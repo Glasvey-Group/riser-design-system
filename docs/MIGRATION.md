@@ -48,8 +48,8 @@ Inter and Anton are both retired. Archivo replaces both — 800 where Inter 800 
 where Anton was doing display work. Anton is a condensed face and Archivo at width 88–100%
 is not, so headline line breaks will move; re-check any two-line headline.
 
-`next/font/google` blocks in both `layout.tsx` files can be deleted. Archivo is self-hosted
-in `assets/fonts/`; JetBrains Mono still comes from Google Fonts via `tokens/fonts.css`.
+`next/font/google` blocks in both `layout.tsx` files can be deleted. Archivo and JetBrains
+Mono are both self-hosted in `assets/fonts/` and loaded by `tokens/fonts.css`.
 
 The `--font-body` and `--font-heading` variables become `--font-ui` and `--font-display`,
 which are the same family.

@@ -382,8 +382,9 @@ on its first run; the checkbox rule found eight.
 - No `transpilePackages` — that is a Next setting. Vite compiles TS in dependencies, but
   may need `optimizeDeps.exclude: ['@riser/design-system']` if pre-bundling complains.
 - Capacitor packages the web build into a native shell, so **fonts must be bundled, not
-  fetched**. The self-hosted Archivo is already right; JetBrains Mono needs the same
-  treatment rather than a Google Fonts request.
+  fetched**. Both faces are self-hosted as of v1.20.0 — JetBrains Mono was an `@import`
+  from Google until then, which fails offline in the shell and takes `LogoLockup` with it,
+  because the wordmark is live Archivo text and not a path.
 - Do this one last, once the package has been proven against three web apps.
 
 ---
