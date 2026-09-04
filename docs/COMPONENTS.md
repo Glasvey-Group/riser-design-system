@@ -373,9 +373,19 @@ features?: string[]
 variant?: 'event' | 'organizer' | 'brand'
 status?: { label: string; tone: StatusTone }
 detail?: boolean             // was showDetails
-action?: ReactNode
-onClick?: (id: string) => void
+action?: ReactNode           // footer; no interactive element when onClick is set
+onClick?: (id: string) => void   // makes the card a control: focusable, Enter/Space
+label?: string               // accessible name for that control; defaults to title
 ```
+
+**A card with `onClick` is a control.** It carries `role="button"`, `tabIndex={0}` and
+an Enter/Space handler as of v1.21.0, and takes the base layer's focus ring. Before
+that it was an `<article>` with a click handler and no keyboard path at all — mouse
+and touch only — which RiserApp hit when this replaced a local card that had been a
+real `<button>`. `action` and `onClick` stay mutually exclusive: `action` is the footer
+for a card that is *not* itself the link, and an interactive element there would nest a
+control inside a control. Non-interactive footer content — a row of figures, say — is
+fine.
 
 The prop surface had grown to 24, five of which were whole unfiltered collections
 (`allTickets`, `allCities`, `allCountries`, `allLocations`, `allEventFeatures`) that the

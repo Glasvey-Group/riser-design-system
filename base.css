@@ -49,7 +49,13 @@ a {
   transition: color var(--duration-fast) var(--ease-out);
 }
 
-button { cursor: pointer; font: inherit; }
+/* `font: inherit` without `color: inherit` is half a reset: the button takes the
+   page's typography and then paints it in the UA's buttontext, which is pure
+   black on a palette whose darkest value is #121212. RiserApp measured it on two
+   raw buttons, where every descendant that did not set a colour of its own
+   inherited black from the button rather than ink from the page. Components are
+   unaffected either way — .riser-button sets its own colour. */
+button { cursor: pointer; font: inherit; color: inherit; }
 button:disabled { cursor: not-allowed; }
 
 /* One focus treatment everywhere: a square 2px offset ring in ink, or paper on

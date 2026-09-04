@@ -303,6 +303,15 @@ Scope a reskin by measuring the DOM, not by reading the vendor stylesheet. Most 
 bundle ships never mounts: `.e-float-text` alone carries 184 of the sign-in form's
 Material-magenta rules and the form does not render a float label at all.
 
+**`min-height` does not make a vendor control 44px.** It raises a short one and is
+powerless against a tall one, so a reskin that sets it and stops looks correct and is
+not. `vendor/syncfusion.css` carried `min-height: 44px` from the start and RiserApp
+still measured 56px on the sign-in inputs, because `@clever-ui-kit`'s own CSS module
+puts 8px of padding on the wrapper: 38 + 16 + 2. Zero the wrapper's padding — the
+inset belongs to the control inside it — and set `align-items: center`, or a
+dropdown's icon pins to the top of the taller box. Fixed at v1.21.0. **Measure the
+control's height; do not read the rule and assume it landed.**
+
 ---
 
 ## 5. Layout conditions

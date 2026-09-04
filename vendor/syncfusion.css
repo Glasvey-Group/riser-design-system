@@ -101,8 +101,20 @@
   box-shadow: none !important;
   /* Syncfusion's own height is 32px, and the clever-ui-kit build renders 52px. Every
      other control on a Riser form is 44px, and a row of fields where one is a different
-     height reads as broken. */
+     height reads as broken.
+
+     min-height alone did not deliver 44 and could not: it raises a short control and
+     is powerless against a tall one. @clever-ui-kit's own CSS module puts 8px of
+     padding on this wrapper, so a 38px input came out at 38 + 16 + 2 = 56px in
+     RiserApp — measured, on the sign-in form, against 44px everywhere else on the
+     screen. The padding belongs to the input inside, as the note below says; it is
+     zeroed here so min-height governs.
+
+     align-items matters once the box is taller than its content: Syncfusion leaves
+     this at stretch, which pins a dropdown's icon to the top of the control. */
+  padding: 0 !important;
   min-height: var(--control-height-lg) !important;
+  align-items: center !important;
 }
 
 /* Material sits its text hard against the control's left edge, because a Material

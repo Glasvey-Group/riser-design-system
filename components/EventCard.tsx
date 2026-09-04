@@ -17,6 +17,18 @@ import { StatusBadge, StatusTone } from './StatusBadge';
  * The image runs full-bleed to the card edge, square, no radius and no inset.
  * The status badge sits on the image over an ink block — the one place a badge
  * gets a fill, because an underline will not read over a photograph.
+ *
+ * A card given `onClick` is a control, and is focusable and operable from the
+ * keyboard. It did not used to be: this rendered an <article> with a click
+ * handler, so a list whose whole interaction is tapping a card was reachable by
+ * mouse and touch only. RiserApp found it replacing a local card that had been a
+ * real <button>, and had to wrap this one to avoid regressing. A <button> cannot
+ * legally contain an <article>, so the semantics go on the article itself.
+ *
+ * `action` and `onClick` are mutually exclusive, and always were — `action` is
+ * documented as the footer for a card that is *not* itself the link. Do not put
+ * an interactive element in `action` on a card that also takes `onClick`: that
+ * nests a control inside a control. Non-interactive footer content is fine.
  */
 
 export type EventCardVariant = 'event' | 'organizer' | 'brand';
@@ -39,9 +51,15 @@ export interface EventCardProps {
   status?: { label: string; tone: StatusTone };
   /** Show price, description and features. The old `showDetails`. */
   detail?: boolean;
-  /** Footer action. Omit for a card that is itself the link. */
+  /**
+   * Footer content. Omit for a card that is itself the link. Must not contain an
+   * interactive element when `onClick` is also set — see the note above.
+   */
   action?: React.ReactNode;
+  /** Makes the whole card a control: clickable, focusable and keyboard-operable. */
   onClick?: (id: string) => void;
+  /** Accessible name for the card as a control. Defaults to `title`. */
+  label?: string;
   className?: string;
 }
 
@@ -59,14 +77,31 @@ export const EventCard: React.FC<EventCardProps> = ({
   detail = false,
   action,
   onClick,
+  label,
   className = '',
 }) => {
   const hasImage = Boolean(image && image !== 'null');
+
+  /* Space scrolls the page by default and Enter does nothing on a non-button, so
+     both are handled explicitly — that is the whole of what `role="button"`
+     promises a screen-reader user, and the browser supplies none of it here. */
+  const activate = onClick
+    ? (event: React.KeyboardEvent<HTMLElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onClick(id);
+        }
+      }
+    : undefined;
 
   return (
     <article
       className={`riser-event-card ${className}`.trim()}
       onClick={onClick ? () => onClick(id) : undefined}
+      onKeyDown={activate}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={onClick ? label || title : undefined}
     >
       <div className="riser-event-card__media">
         {hasImage ? (
