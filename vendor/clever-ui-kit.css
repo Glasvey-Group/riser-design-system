@@ -93,3 +93,15 @@
        document.body.append(d);
        getComputedStyle(d).backgroundColor;
    ============================================================ */
+
+/* ---- The required asterisk is the colour of its label ----
+   Rule 2: it is not the accent and not the error red. A form where most fields are
+   required is not a form with twenty warnings on it; the mark turns red only once
+   that field is actually invalid, which is Field's job and not this vendor's.
+
+   @clever-ui-kit paints it Material's #B00020 unconditionally — measured
+   rgb(176, 0, 32) on RiserApp's sign-in, on two valid empty fields. `inherit`
+   hands it back to the label it sits in. */
+[class*="signInFormAsterisk"] {
+  color: inherit !important;
+}

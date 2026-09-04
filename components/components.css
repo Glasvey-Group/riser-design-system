@@ -721,6 +721,14 @@
 .riser-modal__title { font-size: var(--text-h2); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); margin-bottom: var(--space-3); }
 .riser-modal__message { color: var(--text-body); }
 .riser-modal__submessage { font-size: var(--text-small); color: var(--text-secondary); margin-top: var(--space-2); }
+
+/* A loading dialog is centred; every other modal is a form and stays left.
+   .riser-modal is display:block with text-align:start, which is right for a form
+   and wrong for a status dialog: Loader is an inline-flex span, so it sat hard
+   against the left edge under a left-aligned title while the box it lived in was
+   perfectly centred on screen. Reported from RiserApp's sign-in. */
+.riser-modal--loading { text-align: center; }
+.riser-modal__loader { margin-top: var(--space-5); display: flex; justify-content: center; }
 /* ================================================== FormActions
    Where a form's buttons live. The modal's own actions row shares the treatment.
 

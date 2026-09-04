@@ -166,9 +166,9 @@ export const LoadingModal: React.FC<LoadingModalProps> = ({
   message,
   submessage,
 }) => (
-  <Modal isOpen={isOpen} title={title} dismissible={false}>
+  <Modal isOpen={isOpen} title={title} dismissible={false} className="riser-modal--loading">
     {message ? <p className="riser-modal__message">{message}</p> : null}
     {submessage ? <p className="riser-modal__submessage">{submessage}</p> : null}
-    <div style={{ marginTop: 'var(--space-5)' }}><Loader /></div>
+    <div className="riser-modal__loader"><Loader /></div>
   </Modal>
 );
