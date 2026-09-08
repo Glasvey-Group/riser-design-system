@@ -45,10 +45,11 @@ export interface FooterSocial {
   href: string;
 }
 
-/* The Riser properties. Public sites only — promo.riser.events is an organizer tool and
-   is not listed anywhere public. */
+/* The Riser properties. Public sites only. Promo was held back from this list while it was
+   an organizer tool with no public face; it has a landing page now, so it is listed. */
 export const RISER_NETWORK: { label: string; href: string }[] = [
   { label: 'Riser Events', href: 'https://www.riser.events' },
+  { label: 'Riser Promo', href: 'https://promo.riser.events' },
   { label: 'Riser Solutions', href: 'https://solutions.riser.events' },
   { label: 'Riser Academy', href: 'https://academy.riser.events' },
 ];
