@@ -272,8 +272,28 @@
 
   <!-- MODAL / NOTIFICATION / LOADER -->
   <section class="spec-section">
-    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">08 —</span><span>Modal, Notification, Loader</span></div>
-    <p class="spec-lede">Promo's confirm dialog had a gradient background, a 20–24px radius, a coloured shadow, a 150px logo and a springy <span class="riser-data">cubic-bezier(0.175, 0.885, 0.32, 1.275)</span> entrance. All of it is out: square, flat paper, firm ease-out with no bounce.</p>
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">08 —</span><span>Expander, Modal, Notification, Loader</span></div>
+    <p class="spec-lede">Rule 12: nothing opens over the page. A form opens in place under its control as an Expander and the page grows to hold it; a dialog is a ConfirmModal or a LoadingModal, nothing else. Promo's confirm dialog had a gradient background, a 20–24px radius, a coloured shadow, a 150px logo and a springy <span class="riser-data">cubic-bezier(0.175, 0.885, 0.32, 1.275)</span> entrance. All of it is out: square, flat paper, firm ease-out with no bounce.</p>
+    <div class="spec-demo" style="margin-bottom:var(--space-6)">
+      <div class="riser-row" style="justify-content:space-between">
+        <span class="riser-h3">Karim Ainsworth</span>
+        <button class="riser-button riser-button--ink riser-button--lg" aria-expanded="true" aria-controls="spec-expander">Edit profile</button>
+      </div>
+      <div class="riser-expander riser-expander--open riser-expander--settled" id="spec-expander">
+        <div class="riser-expander__panel">
+          <div class="riser-expander__content">
+            <div class="riser-card" style="margin-top:var(--space-5)">
+              <div class="riser-grid-2">
+                <div class="riser-field"><label class="riser-field__label" for="spec-first">First name<span class="riser-field__required">*</span></label><input class="riser-input" id="spec-first" value="Karim"></div>
+                <div class="riser-field"><label class="riser-field__label" for="spec-last">Last name<span class="riser-field__required">*</span></label><input class="riser-input" id="spec-last" value="Ainsworth"></div>
+              </div>
+              <div class="riser-form-actions"><button class="riser-button riser-button--secondary riser-button--lg">Cancel</button><button class="riser-button riser-button--ink riser-button--lg">Save</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="spec-caption">Expander · the form grows out from under its button, 200ms, content rising 8px; closed it is inert and takes no room</span>
+    </div>
     <div class="riser-grid-2" style="align-items:start">
       <div>
         <div class="riser-modal" style="position:static;animation:none">

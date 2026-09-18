@@ -245,7 +245,42 @@ which key (`audienceId → __ADD_AUDIENCE__`) and called `router.push` itself; t
 `audienceType` changed away from `DERIVED` — audience-model logic inside a form renderer;
 use `onChangeField`.
 
+## Expander — E user dashboard (profile form, change password, a row's tickets)
+
+```ts
+open: boolean; id?: string; children: ReactNode
+scrollIntoView?: boolean         // default true: once open, scroll the panel into view if it is not
+onClosed?: () => void            // after the close transition, for a caller that resets on close
+className?: string
+```
+
+The region rule 12 puts a form in instead of a dialog. It grows from nothing to its
+content's height (`grid-template-rows: 0fr → 1fr`, 200ms, the firm ease-out), the content
+rises 8px as it opens, and closed it is inert and hidden from assistive technology but
+still mounted. The control is the caller's: a `Button` with `aria-expanded={open}` and
+`aria-controls={id}`, wherever the layout wants it.
+
+```tsx
+<Button variant="ink" aria-expanded={open} aria-controls="profile-form" onClick={() => setOpen(!open)}>
+  Edit profile
+</Button>
+<Expander id="profile-form" open={open}>
+  <Card>…fields, then <FormActions primary={…} secondary={…} />…</Card>
+</Expander>
+```
+
+Nest one for a second step — Change password under the profile form — rather than
+reaching for a dialog. A dropdown inside the panel is clipped while the panel is moving
+and free once it has settled. The content carries its own spacing above (a margin-top
+on the Card, say); the region adds none, so a closed one takes no room.
+
 ## Modal / ConfirmModal / LoadingModal — E `ConfirmationModal` + P `ConfirmModal`
+
+Rule 12: a Modal is a `ConfirmModal`, for an action that destroys or cannot be undone, or
+a `LoadingModal`, for a wait the page must not be touched during. Anything else that was
+a dialog is an `Expander`. The checker reports `<Modal>` in app code, and any hand-rolled
+class named modal; a genuine critical interruption that is neither is waived at the site
+with `riser-check-allow modal — <reason>`.
 
 ```ts
 // Modal

@@ -54,6 +54,11 @@ export type { DetailViewProps, DetailField } from './DetailView';
 export { DetailForm } from './DetailForm';
 export type { DetailFormProps, FormField, FormFieldType } from './DetailForm';
 
+/* Rule 12: a form or a detail opens in place, under its control. This is the region
+   that grows. Modal below is for ConfirmModal and LoadingModal, nothing else. */
+export { Expander } from './Expander';
+export type { ExpanderProps } from './Expander';
+
 export { Modal, ConfirmModal, LoadingModal } from './Modal';
 export type { ModalProps, ConfirmModalProps, LoadingModalProps } from './Modal';
 

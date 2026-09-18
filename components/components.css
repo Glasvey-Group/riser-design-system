@@ -729,6 +729,37 @@
    perfectly centred on screen. Reported from RiserApp's sign-in. */
 .riser-modal--loading { text-align: center; }
 .riser-modal__loader { margin-top: var(--space-5); display: flex; justify-content: center; }
+
+/* ================================================== Expander
+   Rule 12: nothing opens over the page. The region under a control that grows to hold
+   a form, a detail or a list, and shrinks back. grid-template-rows 0fr → 1fr is the
+   height transition that needs no measurement; the content rises the identity's 8px
+   as the region opens. Closed, the panel is hidden from assistive technology (the
+   component also makes it inert) but stays mounted, so a form keeps its state across a
+   "not now". While moving, overflow is hidden; once settled it is released, so a
+   dropdown inside the panel can open past its edge. */
+
+.riser-expander {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-base) var(--ease-out);
+}
+
+.riser-expander--open { grid-template-rows: 1fr; }
+
+.riser-expander__panel {
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0s var(--duration-base);
+}
+
+.riser-expander--open .riser-expander__panel { visibility: visible; transition: none; }
+.riser-expander--open.riser-expander--settled .riser-expander__panel { overflow: visible; }
+
+.riser-expander--open .riser-expander__content {
+  animation: riser-rise var(--duration-base) var(--ease-out) both;
+}
 /* ================================================== FormActions
    Where a form's buttons live. The modal's own actions row shares the treatment.
 

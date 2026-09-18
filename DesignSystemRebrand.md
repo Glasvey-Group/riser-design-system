@@ -7,7 +7,7 @@ went wrong — the failures here cost hours to find and every one of them will r
 This ships inside the package, so from any consuming app it is at
 `node_modules/@riser/design-system/DesignSystemRebrand.md`.
 
-**Read `SKILL.md` first** for the eleven rules. This document does not repeat them; it
+**Read `SKILL.md` first** for the twelve rules. This document does not repeat them; it
 covers how to apply them to an existing codebase without repeating our mistakes.
 
 ---

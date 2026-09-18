@@ -6,7 +6,7 @@ of CSS than it started with.
 
 ## Read these once, then stop re-deriving
 
-- `node_modules/@riser/design-system/SKILL.md` — the eleven rules, and the brand law
+- `node_modules/@riser/design-system/SKILL.md` — the twelve rules, and the brand law
 - `node_modules/@riser/design-system/DesignSystemRebrand.md` — how to run this migration,
   and the traps that cost the last one hours
 - `node_modules/@riser/design-system/docs/COMPONENTS.md` — prop contracts

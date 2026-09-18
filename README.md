@@ -266,10 +266,10 @@ is not. The previous violet R monogram is retired, along with its indigo `#554CF
 
 ## Components
 
-22 primitives. Full prop contracts are in `docs/COMPONENTS.md`, and every one carries a
+23 primitives. Full prop contracts are in `docs/COMPONENTS.md`, and every one carries a
 header comment saying which file it came from and what changed.
 
-Layout and identity — `Logo` · `SectionLabel` · `Card` · `Navbar` · `Drawer`
+Layout and identity — `Logo` · `SectionLabel` · `Card` · `Expander` · `Navbar` · `Drawer`
 Action and status — `Button` · `StatusBadge` · `Notice` · `NotificationStack`
 Data — `DataGrid` · `Pagination` · `Filter` · `StatCard` · `DetailView` · `DetailForm`
 Input — `Field` · `Input` · `Select` · `Textarea` · `SearchInput` · `Checkbox` · `Dropzone`

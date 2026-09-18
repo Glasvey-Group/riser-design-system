@@ -661,6 +661,56 @@ for (const file of css) {
   }
 }
 
+/* --------------------------------------------- rule 12: nothing opens over the page
+ * A dialog is a ConfirmModal or a LoadingModal, nothing else. <Modal> in app code is a
+ * form or a detail that belongs in an Expander under its control. A hand-rolled dialog
+ * is the same thing wearing a class name: anything called modal, dialog or lightbox that
+ * is not the design system's own riser-modal. A genuine critical interruption that is
+ * neither a confirmation nor a wait is waived at the site, with the reason:
+ *
+ *   /* riser-check-allow modal — account deletion needs a typed confirmation * /
+ */
+const DIALOG_CLASS = /[\w-]*(?:modal|dialog|lightbox)[\w-]*/gi;
+for (const file of tsx) {
+  const src = readFileSync(file, 'utf8');
+  if (/riser-check-allow\s+modal\b/.test(src)) continue;
+  const comments = commentRanges(src);
+  const reported = new Set();
+  const modal = /<Modal(?=[\s/>])/g;
+  let m;
+  while ((m = modal.exec(src))) {
+    if (inRanges(comments, m.index)) continue;
+    const line = lineOf(src, m.index);
+    reported.add(line);
+    report(12, file, line,
+      'a dialog that is not a confirmation or a wait',
+      'open it in place with Expander — Modal is for ConfirmModal and LoadingModal only');
+  }
+  // A className, literal or expression, that names a dialog. Brace-aware for the same
+  // reason the control scan is: a template literal with a ternary has nested braces.
+  // One finding per file: a hand-rolled dialog is seven class names on seven lines, and
+  // it is one dialog. A file already reported for <Modal> is not reported again for the
+  // class it hung on that Modal.
+  if (reported.size > 0) continue;
+  const attr = /className=(?:"[^"]*"|'[^']*'|\{)/g;
+  while ((m = attr.exec(src))) {
+    if (inRanges(comments, m.index)) continue;
+    let value = m[0];
+    if (value.endsWith('{')) {
+      const rest = src.slice(m.index + m[0].length - 1);
+      value = rest.slice(0, tagEnd('<' + rest) - 1);
+    }
+    const hit = [...value.matchAll(DIALOG_CLASS)].map((h) => h[0]).find((token) => !token.startsWith('riser-'));
+    if (!hit) continue;
+    const line = lineOf(src, m.index);
+    if (reported.has(line)) continue;
+    report(12, file, line,
+      `hand-rolled dialog "${hit}"`,
+      'a form or a detail opens in place with Expander; a confirmation is ConfirmModal, a wait is LoadingModal');
+    break;
+  }
+}
+
 /* ------------------------------------------------------------------- output */
 
 findings.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line);

@@ -17,7 +17,7 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The eleven rules
+## The twelve rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
@@ -88,6 +88,14 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    auth slot on every surface.
 11. **Things enter by rising.** 8px up, 200ms, `cubic-bezier(0.16, 0.84, 0.44, 1)`, 45ms
    stagger. Nothing scales on hover. Nothing rotates.
+12. **Nothing opens over the page.** A form, a detail, a picker, a list of tickets opens in
+   place, as an `Expander` under the control that asked for it, and the page grows to
+   hold it. It is reachable on a phone because it is on the page, not floating above one
+   the reader can no longer scroll. A dialog is for two things only: a `ConfirmModal` for
+   an action that destroys or cannot be undone, and a `LoadingModal` for a wait the page
+   must not be touched during. Prompts a third party draws — Clerk's re-verification,
+   Google's sign-in — are theirs. Everything else that was a modal is an Expander, and
+   the checker reports `<Modal>` in app code.
 
 ## Tokens
 
@@ -125,7 +133,7 @@ Never: slate as body text (3.9:1) · white on orange (2.6:1) · orange as text o
 import {
   Button, Card, CardHeader, CardFooter, SectionLabel, StatCard, StatusBadge,
   Field, Input, Textarea, Select, SearchInput, Checkbox, Dropzone,
-  DataGrid, Pagination, Filter, DetailView, DetailForm,
+  DataGrid, Pagination, Filter, DetailView, DetailForm, Expander,
   Modal, ConfirmModal, LoadingModal, Loader, LoadingScreen, Skeleton,
   Notice, NotificationStack, Navbar, Drawer, DrawerSection, DrawerLink,
   EventCard, EventCardSkeleton, TicketCard, EmptyState, Icon,
@@ -187,3 +195,5 @@ were audited and every one fails the rules above.
 - An icon in a tinted circle beside a stat. Use `StatCard`; the label carries the meaning.
 - Emoji as row labels. Use mono caps labels.
 - Red for errors, green for success. There is no red and no green.
+- A form in a dialog. Use `Expander`: it opens under the button, on the page, and the
+  page grows. A dialog is a `ConfirmModal` or a `LoadingModal`, nothing else.

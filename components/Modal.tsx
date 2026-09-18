@@ -19,6 +19,12 @@ import { Loader } from './Loader';
  * springy `cubic-bezier(0.175, 0.885, 0.32, 1.275)` entrance. All four are out:
  * square corners, flat paper, a firm ease-out with no bounce, and the mark only
  * where it earns its place.
+ *
+ * Rule 12 (v1.23.0): a dialog is a ConfirmModal, for an action that destroys or cannot
+ * be undone, or a LoadingModal, for a wait the page must not be touched during. A form,
+ * a detail or a list that used to sit in a Modal opens in place as an Expander under
+ * its control. The bare Modal stays exported so ConfirmModal and LoadingModal have a
+ * frame, and the checker reports it in app code.
  */
 
 export interface ModalProps {
