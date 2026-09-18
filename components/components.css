@@ -754,10 +754,12 @@
   transition: visibility 0s var(--duration-base);
 }
 
-.riser-expander--open .riser-expander__panel { visibility: visible; transition: none; }
-.riser-expander--open.riser-expander--settled .riser-expander__panel { overflow: visible; }
+/* Child combinators, not descendants: an Expander nests (Change password sits inside
+   the profile form), and an open outer one must not show or animate a closed inner one. */
+.riser-expander--open > .riser-expander__panel { visibility: visible; transition: none; }
+.riser-expander--open.riser-expander--settled > .riser-expander__panel { overflow: visible; }
 
-.riser-expander--open .riser-expander__content {
+.riser-expander--open > .riser-expander__panel > .riser-expander__content {
   animation: riser-rise var(--duration-base) var(--ease-out) both;
 }
 /* ================================================== FormActions
