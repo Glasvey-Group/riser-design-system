@@ -3,6 +3,11 @@
 export { Icon } from './Icon';
 export type { IconProps, IconSize, IconTone } from './Icon';
 
+/* An event's when, where and tickets always carry the same three glyphs, so the
+   screen states which fact it is and Fact picks the glyph — see rule 13. */
+export { Fact } from './Fact';
+export type { FactProps, FactKind, FactSize } from './Fact';
+
 /* A brand mark is not an icon — see the note at the top of BrandMark.tsx. It is filled,
    it keeps its owner's geometry, and it is exempt from the stroke rules that make the
    Lucide set coherent. Size and colour it still obeys. */

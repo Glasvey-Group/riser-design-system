@@ -1177,6 +1177,42 @@
 .riser-drawer__link:hover { background: var(--surface-hover); border-left-color: var(--ink); }
 .riser-drawer__link--active { border-left-color: var(--orange); font-weight: var(--weight-bold); }
 
+/* ================================================== Fact
+   An event's when, where and tickets, each with its glyph. Two columns and
+   `align-items: baseline`, so the icon sits on the baseline of the first line of
+   text and a second line hangs under the text, never under the icon.
+
+   `--fact-drop` is the space Lucide leaves under each drawing inside its 24-unit
+   box, measured to the outside of a 1.5 stroke: calendar 2.25, pin 1.45, ticket
+   4.25. A replaced element takes its baseline from the bottom of its *box*, so
+   without this the ticket — a wide capsule centred in its box — floats 3.5px
+   above a line the calendar sits on. The drop scales to whichever icon size is
+   in use, and it is a transform, so the row box itself does not move. */
+
+.riser-fact {
+  --fact-icon: var(--icon-md);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.riser-fact--sm { --fact-icon: var(--icon-sm); }
+
+.riser-fact--when    { --fact-drop: 2.25; }
+.riser-fact--where   { --fact-drop: 1.45; }
+.riser-fact--tickets { --fact-drop: 4.25; }
+
+/* So a long venue name can wrap or ellipse inside the track rather than pushing
+   the row wider than its container. */
+.riser-fact__text { min-width: 0; }
+
+.riser-fact__icon { transform: translateY(calc(var(--fact-drop) * var(--fact-icon) / 24)); }
+
+/* A fact that is a link underlines on hover and nowhere else: the glyph and the
+   place it sits already say what it is. */
+a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
+
 /* ================================================== EventCard
    Full-bleed image to the card edge, square, no inset and no radius. Title,
    then mono meta lines. The status badge sits on the image over an ink block. */
@@ -1215,12 +1251,8 @@
 
 .riser-event-card__meta { display: flex; flex-direction: column; gap: var(--space-2); }
 
-.riser-event-card__meta-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
+/* The row layout is Fact's; what stays here is the type, which base.css sets with
+   the other mono caps labels. */
 .riser-event-card__price {
   font-family: var(--font-mono);
   font-size: var(--text-small);

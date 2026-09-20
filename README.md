@@ -89,7 +89,7 @@ tokens/          colors · typography · spacing · motion · fonts · layout ·
 styles.css       entry point: fonts + tokens + components + base
 styles-no-fonts.css  same, minus fonts — for apps loading Archivo themselves
 base.css         element defaults, type/layout utilities, icon, motion, imagery
-components/      22 React primitives (.tsx), one stylesheet, a static gallery
+components/      28 React primitives (.tsx), one stylesheet, a static gallery
 foundations/     colour, type, spacing, motion, icons, logo, imagery, voice
 kits/            promo-dashboard · ticket-buyer · marketing-site
 assets/logo/     10 SVGs and 4 PNGs, as supplied
@@ -266,7 +266,7 @@ is not. The previous violet R monogram is retired, along with its indigo `#554CF
 
 ## Components
 
-23 primitives. Full prop contracts are in `docs/COMPONENTS.md`, and every one carries a
+24 primitives. Full prop contracts are in `docs/COMPONENTS.md`, and every one carries a
 header comment saying which file it came from and what changed.
 
 Layout and identity — `Logo` · `SectionLabel` · `Card` · `Expander` · `Navbar` · `Drawer`

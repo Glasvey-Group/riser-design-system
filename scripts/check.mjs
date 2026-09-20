@@ -711,6 +711,43 @@ for (const file of tsx) {
   }
 }
 
+/* ------------------------------- rule 13: an event's facts carry fixed glyphs
+ * Calendar is a date, MapPin is a venue, Ticket is a price — on every screen, at one
+ * size, on the baseline. `Fact` holds the mapping and the baseline, so a screen that
+ * imports one of the three from Lucide is picking a glyph it does not get to pick, and
+ * will sooner or later pick a different size or a different glyph from the screen next
+ * to it. That is how the event page came to draw all three at 22px while the cards on
+ * the dashboard drew none.
+ *
+ * Where one of the three genuinely means something else — a date-picker's own trigger,
+ * a control on a map — waive it at the site, with the reason:
+ *
+ *   /* riser-check-allow fact — Calendar is the picker's trigger, not an event date * /
+ */
+const FACT_GLYPHS = new Set(['Calendar', 'MapPin', 'Ticket']);
+for (const file of tsx) {
+  const src = readFileSync(file, 'utf8');
+  if (/riser-check-allow\s+fact\b/.test(src)) continue;
+  const comments = commentRanges(src);
+  // The braces of an import list hold no nested braces, and the list may wrap over
+  // several lines, so [^}]* is both sufficient and multiline-safe here.
+  const imports = /import\s*\{([^}]*)\}\s*from\s*['"]lucide-react['"]/g;
+  let m;
+  while ((m = imports.exec(src))) {
+    if (inRanges(comments, m.index)) continue;
+    // `Calendar as CalendarIcon` is still Calendar; it is the imported name that counts.
+    const hit = m[1]
+      .split(',')
+      .map((name) => name.trim().split(/\s+as\s+/)[0].trim())
+      .find((name) => FACT_GLYPHS.has(name));
+    if (!hit) continue;
+    report(13, file, lineOf(src, m.index),
+      `"${hit}" chosen by the screen`,
+      'an event\'s date, venue and price are <Fact kind="when|where|tickets"> — see docs/ICONS.md');
+    break; // One finding per file: it is one decision, however many rows it draws.
+  }
+}
+
 /* ------------------------------------------------------------------- output */
 
 findings.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line);

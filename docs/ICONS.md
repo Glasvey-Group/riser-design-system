@@ -22,6 +22,29 @@ line with an identity that has no round corners anywhere except the app icon til
 - Sizes 16, 20, 24 only, on the same 4px rhythm as everything else.
 - Emoji are not used. Unicode symbols are not used as icons.
 
+## Fixed meanings
+
+A glyph that carries a recurring meaning is not chosen per screen. Before this table the
+event page drew Calendar, MapPin and Ticket at 22px, the event card drew two of them at
+20, and the cards on the dashboard drew none — the same three facts with four answers.
+
+| Meaning | Glyph | Draw it with |
+| --- | --- | --- |
+| An event's date, or a date range | `Calendar` | `<Fact kind="when">` |
+| A ticket's on-sale window | `Calendar` | `<Fact kind="when" label="On sale">` |
+| Venue, city, address | `MapPin` | `<Fact kind="where">` |
+| Ticket price, price range, ticket count | `Ticket` | `<Fact kind="tickets">` |
+| A time of day inside a schedule | `Clock` | `Icon` — a stage time is not one of the three |
+
+`Fact` owns the mapping, the two sizes and the baseline, so a screen states which fact it
+is rather than which glyph to draw. Rule 13 is enforced: the checker reports `Calendar`,
+`MapPin` and `Ticket` imported from Lucide into app code. Where one of them genuinely
+means something else — a date-picker trigger, a map control — waive it at the site:
+
+```tsx
+/* riser-check-allow fact — Calendar is the picker's own trigger, not an event date */
+```
+
 ## Custom glyphs
 
 Where a glyph is genuinely unavailable in Lucide, add a hand-built SVG on the same grid

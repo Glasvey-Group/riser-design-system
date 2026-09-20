@@ -496,3 +496,32 @@ size?: 16 | 20 | 24
 tone?: 'default' | 'secondary' | 'accent' | 'on-ink'
 label?: string          // omit for decorative; those are hidden from assistive tech
 ```
+
+## Fact
+
+```ts
+kind: 'when' | 'where' | 'tickets'
+size?: 16 | 20         // 20 with body text, 16 beside small or mono text
+href?: string          // renders the row as a link; the venue usually is one
+label?: string | false  // renames it, e.g. "On sale"; false where the text already does
+```
+
+An event's date, venue and price, each with its fixed glyph — rule 13. The screen says
+which fact it is; `Fact` picks the glyph, so the three never drift apart across screens.
+
+```tsx
+<Fact kind="when">Fri 12 Sep, 9:00 PM</Fact>
+<Fact kind="where" href="/venues/limelight">Limelight, Belfast</Fact>
+<Fact kind="tickets">£12 – £28</Fact>
+<Fact kind="when" label="On sale" size={16}>{salesWindow}</Fact>
+```
+
+The icon sits on the baseline of the **first** line of text, and a second line hangs under
+the text rather than under the icon. That is a two-column grid with `align-items:
+baseline` plus a per-glyph optical drop: Lucide leaves a different amount of room under
+each drawing inside its 24-unit box, and a replaced element's baseline is the bottom of
+its box, so aligning the boxes leaves the ticket floating above a line the calendar sits
+on. `EventCard` renders its date, location and price as Facts, so a card needs nothing.
+
+A fact whose meaning is not one of the three keeps `Icon`: a stage time inside a schedule
+is `Clock`, not a `when`. See `docs/ICONS.md`.

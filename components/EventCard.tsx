@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBadge, StatusTone } from './StatusBadge';
+import { Fact } from './Fact';
 
 /**
  * EventCard.
@@ -121,12 +122,18 @@ export const EventCard: React.FC<EventCardProps> = ({
 
         {(location || date) && (
           <div className="riser-event-card__meta">
-            {location ? <span className="riser-event-card__meta-item">{location}</span> : null}
-            {date ? <span className="riser-event-card__meta-item">{date}</span> : null}
+            {location ? (
+              <Fact kind="where" size={16} className="riser-event-card__meta-item">{location}</Fact>
+            ) : null}
+            {date ? (
+              <Fact kind="when" size={16} className="riser-event-card__meta-item">{date}</Fact>
+            ) : null}
           </div>
         )}
 
-        {detail && price ? <span className="riser-event-card__price">{price}</span> : null}
+        {detail && price ? (
+          <Fact kind="tickets" size={16} className="riser-event-card__price">{price}</Fact>
+        ) : null}
 
         {detail && description ? (
           <p className="riser-event-card__description">{description}</p>

@@ -338,8 +338,22 @@
 
   <!-- EVENT / TICKET CARD -->
   <section class="spec-section">
-    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">09 —</span><span>EventCard &amp; TicketCard</span></div>
-    <p class="spec-lede">EventCard's prop surface had grown to 24 props, five of which were whole unfiltered collections the card filtered itself in three useEffects. It now takes resolved strings. TicketCard's emoji row — 💰 📦 🛒 📅 — is replaced by a mono spec block under a dashed rule.</p>
+    <div class="riser-section-label riser-section-label--ruled"><span class="riser-section-label__index">09 —</span><span>Fact, EventCard &amp; TicketCard</span></div>
+    <p class="spec-lede">An event's date, venue and price carry the same three glyphs everywhere — rule 13. The icon sits on the baseline of the <em>first</em> line, and a venue long enough to wrap hangs under the text rather than under the pin. Note the ticket: Lucide centres that capsule in its box, so aligning boxes would leave it floating above the line the calendar sits on, and Fact drops each glyph by its own measured amount.</p>
+    <div class="riser-grid-2" style="align-items:start;margin-bottom:var(--space-7)">
+      <div class="riser-stack" style="gap:var(--space-3)">
+        <span class="riser-label">20 — with body text</span>
+        <span class="riser-fact riser-fact--when"><svg class="riser-icon riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><span class="riser-fact__text">Mon 24 Aug 2026, 11:30 PM – Thu 24 Sep, 11:30 PM Yangon time</span></span>
+        <span class="riser-fact riser-fact--where"><svg class="riser-icon riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="riser-fact__text">The Fall of the Berlin Wall Bar, Yangon</span></span>
+        <span class="riser-fact riser-fact--tickets"><svg class="riser-icon riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg><span class="riser-fact__text">$0 + fees</span></span>
+      </div>
+      <div class="riser-stack" style="gap:var(--space-3)">
+        <span class="riser-label">16 — beside mono caps, as on a card</span>
+        <span class="riser-fact riser-fact--sm riser-fact--when riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><span class="riser-fact__text">Fri 12 Sep · 9:00 PM</span></span>
+        <span class="riser-fact riser-fact--sm riser-fact--where riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="riser-fact__text">The Deer's Head, Belfast</span></span>
+        <span class="riser-fact riser-fact--sm riser-fact--tickets riser-event-card__price"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg><span class="riser-fact__text">£12 – £28</span></span>
+      </div>
+    </div>
     <div class="riser-grid-4" style="align-items:start">
       <article class="riser-event-card">
         <div class="riser-event-card__media" style="background:linear-gradient(160deg,#3a2410,#121212 70%)">
@@ -348,8 +362,8 @@
         <div class="riser-event-card__body">
           <h3 class="riser-event-card__title">Warehouse Series 04</h3>
           <div class="riser-event-card__meta">
-            <span class="riser-event-card__meta-item">Limelight, Belfast</span>
-            <span class="riser-event-card__meta-item">Fri 12 Sep · 9:00 PM</span>
+            <span class="riser-fact riser-fact--sm riser-fact--where riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="riser-fact__text">Limelight, Belfast</span></span>
+            <span class="riser-fact riser-fact--sm riser-fact--when riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><span class="riser-fact__text">Fri 12 Sep · 9:00 PM</span></span>
           </div>
           <span class="riser-event-card__price">£12 – £28</span>
         </div>
@@ -361,8 +375,8 @@
         <div class="riser-event-card__body">
           <h3 class="riser-event-card__title">Yangon Rooftop</h3>
           <div class="riser-event-card__meta">
-            <span class="riser-event-card__meta-item">Pansodan, Yangon</span>
-            <span class="riser-event-card__meta-item">Sat 20 Sep · 8:00 PM</span>
+            <span class="riser-fact riser-fact--sm riser-fact--where riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="riser-fact__text">Pansodan, Yangon</span></span>
+            <span class="riser-fact riser-fact--sm riser-fact--when riser-event-card__meta-item"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><span class="riser-fact__text">Sat 20 Sep · 8:00 PM</span></span>
           </div>
         </div>
       </article>

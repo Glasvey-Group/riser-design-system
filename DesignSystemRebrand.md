@@ -7,7 +7,7 @@ went wrong — the failures here cost hours to find and every one of them will r
 This ships inside the package, so from any consuming app it is at
 `node_modules/@riser/design-system/DesignSystemRebrand.md`.
 
-**Read `SKILL.md` first** for the twelve rules. This document does not repeat them; it
+**Read `SKILL.md` first** for the thirteen rules. This document does not repeat them; it
 covers how to apply them to an existing codebase without repeating our mistakes.
 
 ---
@@ -18,7 +18,7 @@ covers how to apply them to an existing codebase without repeating our mistakes.
 implementation and is fully migrated on `main`, `staging` and `development`, all pinned to
 v1.14.0.
 
-The package ships tokens, 23 React primitives, the logo and font assets, `SKILL.md`, and
+The package ships tokens, 24 React primitives, the logo and font assets, `SKILL.md`, and
 **the checker** (`npx riser-check`). Nothing about the identity should be re-derived in an
 app: if it is not in the package, it does not exist.
 

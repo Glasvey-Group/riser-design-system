@@ -17,7 +17,7 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The twelve rules
+## The thirteen rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
@@ -96,6 +96,14 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    must not be touched during. Prompts a third party draws — Clerk's re-verification,
    Google's sign-in — are theirs. Everything else that was a modal is an Expander, and
    the checker reports `<Modal>` in app code.
+13. **An event's when, where and tickets always carry the same three glyphs.** Calendar,
+   MapPin, Ticket — every screen, every card, every list, wherever the fact appears. The
+   screen says which fact it is and `Fact` draws it: `<Fact kind="when">`, `kind="where"`,
+   `kind="tickets"`. The icon sits on the baseline of the first line of text, and text
+   that wraps hangs under the text, never under the icon. A date beside a venue beside a
+   price with no glyphs is three strings the reader has to parse; with them it is
+   scannable at a glance, and the same at a glance on the next screen. The checker
+   reports those three Lucide glyphs imported into app code.
 
 ## Tokens
 
@@ -136,7 +144,7 @@ import {
   DataGrid, Pagination, Filter, DetailView, DetailForm, Expander,
   Modal, ConfirmModal, LoadingModal, Loader, LoadingScreen, Skeleton,
   Notice, NotificationStack, Navbar, Drawer, DrawerSection, DrawerLink,
-  EventCard, EventCardSkeleton, TicketCard, EmptyState, Icon,
+  EventCard, EventCardSkeleton, TicketCard, EmptyState, Icon, Fact,
   LogoLockup, LogoMark, LogoAppIcon,
 } from 'riser-design-system';
 ```
@@ -162,6 +170,11 @@ grids → the main DataGrid with the selected row marked. Page container is
 Lucide only, wrapped in `Icon`, at 16/20/24. Never filled, never in a tinted tile, never
 decorative beside a heading. No emoji, ever, in UI or in copy. If a glyph is missing from
 Lucide, hand-build it on the same grid and record it in `docs/ICONS.md`.
+
+Where a glyph carries a recurring meaning it is fixed, not chosen per screen: an event's
+date is `Calendar`, its venue is `MapPin`, its tickets and price are `Ticket`, and a time
+of day inside a schedule is `Clock`. Reach for `Fact` rather than those three glyphs — it
+holds the mapping and the baseline. The table is in `docs/ICONS.md`.
 
 ## Copy
 
