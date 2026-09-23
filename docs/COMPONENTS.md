@@ -111,7 +111,9 @@ error?: string; hint?: string; full?: boolean
 // Input     extends InputHTMLAttributes  + data?: boolean   (mono, tabular figures)
 // Textarea  extends TextareaHTMLAttributes
 // Select    extends SelectHTMLAttributes
-//   options: {value, label}[]; placeholder?: string
+//   options: {value, label, group?}[]; placeholder?: string
+//   group: consecutive options sharing one sit under a native <optgroup> heading,
+//          e.g. "Common" then "All countries" (v1.25.0)
 //   addOptionLabel?: string; onAddOption?: () => void      // Promo's "+ Add Audience"
 // SearchInput extends InputHTMLAttributes + icon?: ReactNode
 // Checkbox  extends InputHTMLAttributes                     // square, ink fill when checked

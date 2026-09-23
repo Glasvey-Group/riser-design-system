@@ -86,7 +86,31 @@ export const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement
 export interface SelectOption {
   value: string;
   label: string;
+  /** Consecutive options that share a group sit under one heading, a native
+   *  <optgroup>: "Common" above "All countries", say. Options without one render as
+   *  they always have. */
+  group?: string;
 }
+
+/** The options in runs of the same group, in their order. */
+const groupRuns = (options: SelectOption[]) => {
+  const runs: { group?: string; options: SelectOption[] }[] = [];
+  for (const option of options) {
+    const last = runs[runs.length - 1];
+    if (last && last.group === option.group) {
+      last.options.push(option);
+    } else {
+      runs.push({ group: option.group, options: [option] });
+    }
+  }
+  return runs;
+};
+
+const renderOption = (option: SelectOption) => (
+  <option key={option.value} value={option.value}>
+    {option.label}
+  </option>
+);
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectOption[];
@@ -121,11 +145,15 @@ export const Select: React.FC<SelectProps> = ({
   >
     {placeholder ? <option value="">{placeholder}</option> : null}
     {addOptionLabel ? <option value={ADD_SENTINEL}>{addOptionLabel}</option> : null}
-    {options.map((option) => (
-      <option key={option.value} value={option.value}>
-        {option.label}
-      </option>
-    ))}
+    {groupRuns(options).map((run, index) =>
+      run.group ? (
+        <optgroup key={`${index}-${run.group}`} label={run.group}>
+          {run.options.map(renderOption)}
+        </optgroup>
+      ) : (
+        run.options.map(renderOption)
+      )
+    )}
   </select>
 );
 
