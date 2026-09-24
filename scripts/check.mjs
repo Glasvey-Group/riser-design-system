@@ -613,22 +613,41 @@ const PAGE_CAP = /max-width\s*:\s*(1440px|1200px|1280px|1550px|80rem)\b/;
  * beats the measure at equal specificity and decides on import order, which is the same
  * silent defeat as writing the measure out by hand — and it hides in a media query, where
  * it only shows at the sizes that matter. */
-const measureCarriers = new Set();
-{
+const measureCarriers = carriersOf('riser-measure');
+const CARRIER_WIDTH = /(?:^|[;{\s])(?:max-)?width\s*:/;
+
+/** Classes that share an element with `base` in a className, literal or template. */
+function carriersOf(base) {
+  const found = new Set();
   const ATTR = /className=(?:"([^"]*)"|\{`([^`]*)`\}|\{'([^']*)'\})/g;
   for (const file of tsx) {
     const src = readFileSync(file, 'utf8');
     let m;
     while ((m = ATTR.exec(src))) {
       const val = m[1] ?? m[2] ?? m[3] ?? '';
-      if (!val.includes('riser-measure')) continue;
+      if (!new RegExp(`(?:^|[\\s{])${base}(?:$|[\\s}])`).test(val)) continue;
       for (const name of val.split(/[\s${}?:'"()!&|=.]+/)) {
-        if (name && name !== 'riser-measure' && /^[a-z][\w-]*$/.test(name)) measureCarriers.add(name);
+        if (name && name !== base && /^[a-z][\w-]*$/.test(name)) found.add(name);
       }
     }
   }
+  return found;
 }
-const CARRIER_WIDTH = /(?:^|[;{\s])(?:max-)?width\s*:/;
+
+/** The carrier a rule styles directly, if any. Only the subject of each selector counts:
+ *  `.card > *` styles the card's children, and a width there is not a width on the card. */
+function carrierStyled(selector, carriers) {
+  const subjects = selector.split(',').map((s) => s.trim().split(/\s*[>+~]\s*|\s+/).pop() ?? '');
+  return [...carriers].find((c) => subjects.some((subject) => {
+    // Plain indexOf, not a built regex: the class name goes into the pattern and
+    // getting one backslash wrong turns the leading dot into "any character", which
+    // silently matches .organizer-dashboard-container for the carrier dashboard-container.
+    const at = subject.indexOf('.' + c);
+    if (at === -1) return false;
+    const after = subject[at + c.length + 1];
+    return after === undefined || !/[\w-]/.test(after);
+  }));
+}
 
 for (const file of css) {
   const src = readFileSync(file, 'utf8');
@@ -638,15 +657,7 @@ for (const file of css) {
     const cap = PAGE_CAP.exec(clean);
     if (!gutter && !cap) {
       if (!CARRIER_WIDTH.test(clean)) continue;
-      const hit = [...measureCarriers].find((c) => {
-        // Plain indexOf, not a built regex: the class name goes into the pattern and
-        // getting one backslash wrong turns the leading dot into "any character", which
-        // silently matches .organizer-dashboard-container for the carrier dashboard-container.
-        const at = selector.indexOf('.' + c);
-        if (at === -1) return false;
-        const after = selector[at + c.length + 1];
-        return after === undefined || !/[\w-]/.test(after);
-      });
+      const hit = carrierStyled(selector, measureCarriers);
       if (!hit) continue;
       report(10, file, lineOf(src, index),
         `width on ".${hit}", which carries riser-measure`,
@@ -745,6 +756,67 @@ for (const file of tsx) {
       `"${hit}" chosen by the screen`,
       'an event\'s date, venue and price are <Fact kind="when|where|tickets"> — see docs/ICONS.md');
     break; // One finding per file: it is one decision, however many rows it draws.
+  }
+}
+
+/* ------------------------------------------------ rule 14: a page starts at the top
+ * The first block carries .riser-page, which puts it one gap below the navbar at every
+ * width. Three ways a screen drifts off that, each found in riser.events on the day the
+ * rule was written:
+ *
+ *   - A box a screen tall that centres what is inside it. The sign-in card sat 200px below
+ *     the navbar on a desktop, and five static pages floated their text in half the
+ *     screen. An overlay is exempt, because it covers the page rather than sits in it; it
+ *     is fixed or absolute. Anything else that has a reason is waived in its stylesheet:
+ *
+ *       /* riser-check-allow centred — the reason * /
+ *
+ *   - The navbar's clearance written by hand. var(--navbar-height) outside this package
+ *     is somebody working out, again, where the page starts.
+ *
+ *   - A top margin on an element that carries riser-page. `margin: 0 auto` beats the class
+ *     at equal specificity once the app's stylesheet loads, and quietly puts the page back
+ *     under the navbar. */
+const pageCarriers = carriersOf('riser-page');
+const SCREEN_TALL = /(?:^|[;{\s])(?:min-)?height\s*:\s*(\d+(?:\.\d+)?)[dsl]?vh\b/;
+const OVERLAY = /position\s*:\s*(?:fixed|absolute)/;
+const HAND_CLEARANCE = /var\(\s*--navbar-height\s*\)/;
+const TOP_MARGIN = /(?:^|[;{\s])margin(?:-top|-block|-block-start)?\s*:/;
+
+for (const file of css) {
+  const src = readFileSync(file, 'utf8');
+  const waived = /riser-check-allow\s+centred\b/.test(src);
+  for (const { index, selector, body } of cssRules(src)) {
+    const clean = body.replace(/\/\*[\s\S]*?\*\//g, '');
+    const name = selector.trim().replace(/\s+/g, ' ').slice(0, 44);
+
+    const tall = SCREEN_TALL.exec(clean);
+    if (!waived && tall && Number(tall[1]) >= 50 && !OVERLAY.test(clean)) {
+      const column = /flex-direction\s*:\s*column/.test(clean);
+      const centred = (!column && /align-items\s*:\s*center/.test(clean))
+        || (column && /justify-content\s*:\s*center/.test(clean))
+        || /(?:place-items|place-content|align-content)\s*:\s*center/.test(clean);
+      if (centred) {
+        report(14, file, lineOf(src, index),
+          `"${name}" centres its content in the height of the screen`,
+          'start it at the top: drop the vertical centring, and put riser-page on the first block');
+      }
+    }
+
+    if (HAND_CLEARANCE.test(clean)) {
+      report(14, file, lineOf(src, index),
+        `navbar clearance written by hand in "${name}"`,
+        'put riser-page on the first block on the page and drop this');
+    }
+
+    if (TOP_MARGIN.test(clean)) {
+      const hit = carrierStyled(selector, pageCarriers);
+      if (hit) {
+        report(14, file, lineOf(src, index),
+          `top margin on ".${hit}", which carries riser-page`,
+          'riser-page owns the top margin — use margin-bottom or margin-inline, not a shorthand');
+      }
+    }
   }
 }
 

@@ -107,6 +107,16 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    price with no glyphs is three strings the reader has to parse; with them it is
    scannable at a glance, and the same at a glance on the next screen. The checker
    reports those three Lucide glyphs imported into app code.
+14. **A page starts at the top.** Its first block carries `.riser-page` and starts one
+   gap, `--space-5`, below the navbar: on a desktop that means clearing the floating bar,
+   and on a phone it's the gap alone. A panel that bleeds sits flush under the bar
+   instead. Nothing on a page is centred in the height of the screen. A form, a card or a
+   paragraph that floats in the middle of the screen reads as a loading state, and on a
+   large monitor it leaves a band of nothing between the navbar and the thing the reader
+   came for. Never pick a margin by hand to clear the navbar. The checker reports a
+   screen-tall box that centres its content, a hand-written navbar clearance, and a top
+   margin on anything that carries `.riser-page`. Loaders and overlays are exempt: they
+   cover the page rather than sit in it.
 
 ## Tokens
 

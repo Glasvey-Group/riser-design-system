@@ -207,6 +207,36 @@ button:disabled { cursor: not-allowed; }
   }
 }
 
+/* Where a page starts. Content sits at the top of the page, never centred in the height of
+   the screen, and the first block on a page starts --space-5 below the navbar.
+
+   The floating navbar is fixed --space-4 down the page and --navbar-height tall inside a
+   hairline on each side, so on a desktop the first block has to clear it. Below --bp-lg
+   the navbar is a bar in the page flow, so nothing needs clearing and only the gap is
+   left. A panel that runs edge to edge there (riser-measure--bleed) sits flush under the
+   bar instead, and drops the top rule that would double the bar's.
+
+   It is a margin, so it works on a panel as well as on a transparent wrapper. Nothing else
+   on that element may set a top margin: `margin: 0 auto` would quietly cancel it.
+
+   riser.events' pages each chose their own margin to clear the navbar: 100px, 120px, 200px
+   on one. None of them allowed for the navbar stopping floating below 960px, so on a phone
+   every page started under 100px of nothing. Six more centred their content in the height
+   of the screen, which on a desktop put a two-field form 200px below the navbar. */
+.riser-page {
+  margin-top: calc(var(--space-4) + var(--navbar-height) + var(--hairline) * 2 + var(--space-5));
+}
+
+@media (max-width: 960px) {
+  .riser-page {
+    margin-top: var(--space-5);
+  }
+  .riser-page.riser-measure--bleed {
+    margin-top: 0;
+    border-top-width: 0;
+  }
+}
+
 /* A band spans the viewport so its background can run edge to edge, and holds a
    .riser-measure inside for the content. It has no horizontal padding, ever: that padding
    is the gutter spelled differently, and with a measure inside it the gutter gets applied
