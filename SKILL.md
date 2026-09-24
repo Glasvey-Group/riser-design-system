@@ -83,6 +83,9 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    subtracts the gutter twice. A full-bleed band takes `.riser-band` and holds a
    `.riser-measure` inside; it never carries horizontal padding of its own, because
    that padding is the gutter under another name and applies it a second time.
+   A panel that pads itself, such as a form card, adds `.riser-measure--bleed`. Below
+   --bp-lg it runs edge to edge, as the navbar does there, and its own padding keeps
+   the content off the edge. Never add a page padding around it to get the same look.
    The navbar takes the same measure, in either `variant` — that is what makes the
    page line up with it, and its lockup is centred between the menu button and the
    auth slot on every surface.

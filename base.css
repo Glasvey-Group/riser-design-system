@@ -184,6 +184,29 @@ button:disabled { cursor: not-allowed; }
   .riser-measure { width: min(100% - var(--container-gutter-xs) * 2, var(--container-max)); }
 }
 
+/* A panel that pads itself, such as a form card or a page's sheet, can follow the navbar
+   all the way down.
+
+   Below --bp-lg the floating navbar collapses to a full-width bar in the page flow. A
+   panel that kept the measure's gutter there sat in a frame the bar above it did not
+   have, and on a phone that frame is width the form needs. That is why the navbar
+   collapses in the first place. With this modifier the panel runs edge to edge with the
+   bar and gives up the side rules that would now sit on the viewport's edge. Its own
+   padding keeps its content off the edge: --container-gutter-sm there puts the content
+   on the bar's.
+
+   riser.events' organiser sign-up sat in two frames on a phone, the measure's gutter
+   and a page padding the navbar above it did not have.
+
+   Class-qualified, as the navbar's collapse is, so it beats .riser-measure on specificity
+   rather than import order. */
+@media (max-width: 960px) {
+  .riser-measure.riser-measure--bleed {
+    width: 100%;
+    border-inline-width: 0;
+  }
+}
+
 /* A band spans the viewport so its background can run edge to edge, and holds a
    .riser-measure inside for the content. It has no horizontal padding, ever: that padding
    is the gutter spelled differently, and with a measure inside it the gutter gets applied
