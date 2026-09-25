@@ -1517,6 +1517,9 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 
 .riser-footer__nav a:hover { color: var(--text-on-ink); }
 
+/* An action in a column is a Button, which the flex column would otherwise stretch. */
+.riser-footer__nav .riser-button { align-self: flex-start; }
+
 .riser-footer__social {
   display: flex;
   gap: var(--space-3);
@@ -1581,5 +1584,6 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
   .riser-footer__inner { padding: var(--space-7) var(--space-5) var(--space-5); }
   .riser-footer__top { grid-template-columns: 1fr; gap: var(--space-6); }
   .riser-footer__brand { gap: var(--space-3); }
-  .riser-footer__columns { display: flex; flex-direction: column; gap: var(--space-5); }
+  /* Two by two: Explore and Riser, then Contact and Follow. */
+  .riser-footer__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
 }

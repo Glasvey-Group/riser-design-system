@@ -31,12 +31,16 @@ import { BrandMark, type BrandName } from './BrandMark';
  * The Riser column, the contact address and the social accounts are the same on every
  * site, so they are defaults here rather than three copies. Adding a fourth property is
  * then one edit and a version bump, not an edit in each app.
+ *
+ * The band is an ink surface, so a `Button` in a column takes the inverted treatment and
+ * sits at its own width: Events puts Sign out there for a signed-in visitor. On a phone
+ * the columns go two by two, Explore and Riser above Contact and Follow.
  */
 
 export interface FooterColumn {
   /** Mono caps heading. */
   title: string;
-  /** The app's own links, in the app's own Link component. */
+  /** The app's own links, in the app's own Link component, or an action as a `Button`. */
   children: React.ReactNode;
 }
 
@@ -103,7 +107,7 @@ export const Footer: React.FC<FooterProps> = ({
         };
 
   return (
-    <footer className={`riser-footer ${className}`.trim()}>
+    <footer className={`riser-footer riser-surface-ink ${className}`.trim()}>
       <div className="riser-measure riser-footer__inner">
         <div className="riser-footer__top">
           <div className="riser-footer__brand">
