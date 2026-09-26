@@ -820,6 +820,65 @@ for (const file of css) {
   }
 }
 
+/* ------------------------------ rule 15: a page is one stack, one gap, one edge
+ * The page's blocks sit in .riser-stack--page, which owns the gap between them and the gap
+ * before the footer; a panel is a Card with riser-measure--bleed, and the package gives it
+ * its phone padding. Two ways a screen drifts off that, both found in riser.events on the
+ * day the rule was written:
+ *
+ *   - A vertical margin on the block itself. `margin: 10px auto` on every panel,
+ *     `margin: 0` on two of them below 800px — which also cancels the measure's
+ *     `margin-inline: auto`, so the box hugged the left edge and stopped 32px short of
+ *     the right — and `margin-bottom: 40px` on a third. One page measured gaps of 0, 9,
+ *     10, 12, 50 and 60px between its blocks on a phone. The stack owns the gap; the
+ *     block carries none. A stylesheet with a reason waives it:
+ *
+ *       /* riser-check-allow rhythm — the reason * /
+ *
+ *   - A breakpoint of the stylesheet's own. Fourteen different widths in one app: 350,
+ *     400, 480, 600, 640, 700, 780, 800, 1024, 1300 and more. The navbar collapses at 960
+ *     and the form grid stacks at 768, so a page that switched at 800 was half a phone
+ *     page between 800 and 960. Layout changes at the package's widths and nowhere else:
+ *     360, 500, 768, 960, 1200, 1440. Waived per file with
+ *     `riser-check-allow breakpoint — the reason`. */
+const BREAKPOINTS = new Set([360, 500, 768, 960, 1200, 1440]);
+const MEDIA_WIDTH = /\(\s*(?:min|max)-width\s*:\s*(\d+(?:\.\d+)?)\s*(px|em|rem)\s*\)/g;
+const VERTICAL_MARGIN = /(?:^|[;{\s])margin(?:-top|-bottom|-block|-block-start|-block-end)?\s*:/;
+
+for (const file of css) {
+  const src = readFileSync(file, 'utf8');
+  /* Comments become spaces of the same length, so offsets and line numbers survive. */
+  const bare = src.replace(/\/\*[\s\S]*?\*\//g, (c) => c.replace(/[^\n]/g, ' '));
+
+  if (!/riser-check-allow\s+breakpoint\b/.test(src)) {
+    const media = /@media[^{]*/g;
+    let m;
+    while ((m = media.exec(bare))) {
+      MEDIA_WIDTH.lastIndex = 0;
+      let w;
+      while ((w = MEDIA_WIDTH.exec(m[0]))) {
+        const px = w[2] === 'px' ? Number(w[1]) : Number(w[1]) * 16;
+        if (BREAKPOINTS.has(px)) continue;
+        report(15, file, lineOf(bare, m.index + w.index),
+          `breakpoint ${w[1]}${w[2]} in "${m[0].trim().slice(0, 44)}"`,
+          'layout changes only at 360, 500, 768, 960, 1200 or 1440px — move the rule to the next of those up, or delete it');
+      }
+    }
+  }
+
+  if (!/riser-check-allow\s+rhythm\b/.test(src)) {
+    for (const { index, selector, body } of cssRules(src)) {
+      const clean = body.replace(/\/\*[\s\S]*?\*\//g, '');
+      if (!VERTICAL_MARGIN.test(clean)) continue;
+      const hit = carrierStyled(selector, measureCarriers);
+      if (!hit) continue;
+      report(15, file, lineOf(src, index),
+        `vertical margin on ".${hit}", which carries riser-measure`,
+        'the page stack (riser-stack--page) owns the gap between blocks — delete the margin; the measure already centres itself');
+    }
+  }
+}
+
 /* ------------------------------------------------------------------- output */
 
 findings.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line);

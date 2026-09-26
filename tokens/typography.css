@@ -31,3 +31,10 @@
   --tracking-body: 0;
   --tracking-label: 0.16em;
 }
+
+/* On a phone the floor is 12px, mono caps included: 11px with 0.16em tracking is less
+   legible small, not more. Desktop keeps 11. Every label in the system reads this one
+   token, so the floor is one line (rule 15). */
+@media (max-width: 960px) {
+  :root { --text-label: 12px; }
+}

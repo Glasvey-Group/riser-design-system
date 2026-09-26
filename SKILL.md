@@ -17,7 +17,7 @@ Read `README.md` for the rules and `docs/COMPONENTS.md` for prop contracts. If y
 changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old indigo
 `#6666FF` palette is not a drop-in swap for the orange.
 
-## The thirteen rules
+## The fifteen rules
 
 1. **One orange thing per view.** If the view has a primary action, the orange is on that
    action and nothing else. If it has no primary action, the orange may mark the single
@@ -117,6 +117,22 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    screen-tall box that centres its content, a hand-written navbar clearance, and a top
    margin on anything that carries `.riser-page`. Loaders and overlays are exempt: they
    cover the page rather than sit in it.
+15. **A page is one stack, with one gap and one edge.** Its blocks sit in
+   `.riser-stack .riser-stack--page`: a column with `--space-5` between blocks and
+   `--space-8` before the footer, at every width, and no block carries a vertical margin
+   of its own. Below `--bp-lg` a panel — anything with a background or a border that pads
+   itself — is a `Card` with `.riser-measure--bleed` and runs edge to edge as the navbar
+   bar does; its content sits on the bar's gutter, `--container-gutter-sm`, which is where
+   bare content and a grid of cards sit too, at every phone width. Layout changes only at
+   the package's widths, 360, 500, 768, 960, 1200 and 1440: stacking happens at 768, where
+   the form grid stacks, and bleeding and the navbar's collapse happen at 960 with no local
+   rule. No stylesheet shrinks text for a phone (the label token takes its 12px floor there
+   on its own), and no control is under 44px except inside a grid row or a chip. riser.events
+   had every panel choosing its own margin (10px auto, 0, 2rem), its own edge (bled, on the
+   gutter, or `margin: 0` at 800px, which cancels the measure's centring and leaves the box
+   short of the right edge) and its own breakpoint, fourteen of them, so one page showed
+   gaps of 0, 9, 10, 12, 50 and 60px on a phone. The checker reports a media query at any
+   other width and a vertical margin on an element that carries `.riser-measure`.
 
 ## Tokens
 

@@ -51,6 +51,14 @@ Events' `.pru-stat-card` and `.dru-description-section` and Promo's
 `bg-content-bg border border-content-border rounded-lg p-6` were the same card at three
 radii. Radius is now 0 in all of them.
 
+A panel on a page is `<Card className="riser-measure riser-measure--bleed">` (rule 15):
+below 960px it runs edge to edge and its inline padding becomes the navbar bar's gutter
+from one rule in the package, so no app writes a phone padding for a panel.
+`padding="none"` keeps its zero. A page's short form is the same card with
+`riser-auth-card` and `riser-page`: the form keeps a half-width column on a desktop and
+takes the whole card on a phone. The blocks of a page sit in
+`<div className="riser-stack riser-stack--page">`, which owns the gap between them.
+
 ## SectionLabel
 
 ```ts

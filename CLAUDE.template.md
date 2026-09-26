@@ -6,7 +6,7 @@ of CSS than it started with.
 
 ## Read these once, then stop re-deriving
 
-- `node_modules/@riser/design-system/SKILL.md` — the thirteen rules, and the brand law
+- `node_modules/@riser/design-system/SKILL.md` — the fifteen rules, and the brand law
 - `node_modules/@riser/design-system/DesignSystemRebrand.md` — how to run this migration,
   and the traps that cost the last one hours
 - `node_modules/@riser/design-system/docs/COMPONENTS.md` — prop contracts
@@ -65,7 +65,11 @@ never what happens to sit inside it today.
 - No inline style objects, no arbitrary Tailwind values for anything a token covers.
 - `!important` is allowed where it is beating a stylesheet we do not control — a vendor
   reskin. Don't spend a pass hunting them down.
-- Breakpoints are 360, 500, 768, 960, 1200, 1440 and nothing else.
+- Breakpoints are 360, 500, 768, 960, 1200, 1440 and nothing else. The checker reports any other.
+- A page is `riser-stack riser-stack--page`; a panel on it is a `Card` with `riser-measure
+  riser-measure--bleed`; no block carries a vertical margin of its own, and no stylesheet
+  writes a phone padding for a panel or shrinks text for a phone (rule 15). The checker
+  reports a vertical margin on anything that carries `riser-measure`.
 - Don't restyle a raw `<button>`; use `Button`. Don't hand-roll a `<label htmlFor>`; use
   `Field`. Don't write `width: calc(100% - 6rem)`; use `.riser-measure`. The checker fails
   on all three.

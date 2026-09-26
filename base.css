@@ -156,7 +156,6 @@ button:disabled { cursor: not-allowed; }
 }
 
 @media (max-width: 960px) { .riser-container { padding-inline: var(--container-gutter-sm); } }
-@media (max-width: 500px) { .riser-container { padding-inline: var(--container-gutter-xs); } }
 
 /* The same measure as a bounded box.
 
@@ -177,11 +176,13 @@ button:disabled { cursor: not-allowed; }
   margin-inline: auto;
 }
 
+/* One gutter below --bp-lg, and it is the navbar bar's own, --container-gutter-sm. There
+   was a second step down to --container-gutter-xs at 500px, but the bar's inner padding
+   never takes that step, so on a small phone the content sat 8px inside the logo's edge.
+   Everything on a phone now shares one vertical line: the logo, a bled card's text, a
+   bare block, a grid of cards (rule 15). */
 @media (max-width: 960px) {
   .riser-measure { width: min(100% - var(--container-gutter-sm) * 2, var(--container-max)); }
-}
-@media (max-width: 500px) {
-  .riser-measure { width: min(100% - var(--container-gutter-xs) * 2, var(--container-max)); }
 }
 
 /* A panel that pads itself, such as a form card or a page's sheet, can follow the navbar
@@ -260,6 +261,26 @@ button:disabled { cursor: not-allowed; }
 /* Four-up stays two-up on a phone rather than collapsing to one. A column of
    four stat cards is a scroll, not a comparison, and comparison is the point. */
 @media (max-width: 360px) { .riser-grid-4 { grid-template-columns: 1fr; } }
+
+/* The page's own stack — rule 15. A page is a column of blocks with one gap between
+   them, --space-5, the same gap rule 14 leaves under the navbar, and one larger gap
+   before the footer. The blocks carry no vertical margin of their own: the stack owns
+   the rhythm, at every width, so a phone and a desktop differ in what bleeds and what
+   stacks, never in the space between things.
+
+   Flex rather than margins because nothing competes with a gap. A measured block keeps
+   its own width and its auto inline margins, and a flex column honours both, so the
+   block stays centred; a bled panel keeps its riser-page margin-top, which a flex item
+   does not collapse away.
+
+   riser.events had every panel choosing its own margin: 10px auto on most, 0 on two
+   below 800px (which also cancelled the measure's centring and left the box short of
+   the right edge), 40px on a third, and 50px of padding on the page for the footer.
+   One page measured gaps of 0, 9, 10, 12, 50 and 60px on a phone. */
+.riser-stack--page {
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+}
 
 /* Hairline rules rather than boxes. Dashed marks measurement and specification,
    never decoration. */
