@@ -648,12 +648,30 @@
 }
 
 /* Below 500px the grid stops being a grid and becomes stacked records, each cell
-   labelled by its column. This is what the `responsive` widths of 0 are for. */
+   labelled by its column. This is what the `responsive` widths of 0 are for. A grid
+   whose rows hold controls stacks below 768px instead (`stack="md"`): riser.events'
+   performers grid is a checkbox, a number, two times and a select per row, about 620px
+   of controls, which a 568px tablet row clipped. */
 @media (max-width: 500px) {
   .riser-grid__head-row { display: none; }
   .riser-grid__row { flex-direction: column; align-items: stretch; padding-block: var(--space-3); padding-right: 0; }
   .riser-grid__cell { width: 100% !important; display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) 0; }
   .riser-grid__cell::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    flex: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .riser-grid--stack-md .riser-grid__head-row { display: none; }
+  .riser-grid--stack-md .riser-grid__row { flex-direction: column; align-items: stretch; padding-block: var(--space-3); padding-right: 0; }
+  .riser-grid--stack-md .riser-grid__cell { width: 100% !important; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) 0; overflow: visible; }
+  .riser-grid--stack-md .riser-grid__cell::before {
     content: attr(data-label);
     font-family: var(--font-mono);
     font-size: var(--text-label);

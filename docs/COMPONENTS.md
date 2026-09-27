@@ -168,6 +168,7 @@ filterLabel?: string
 activeId?: string
 onRowClick?: (row: any) => void      // falls back to row.baseUrl
 notice?: ReactNode                   // ← the Promo difference
+stack?: 'sm' | 'md'                  // stacked records below 500px (default) or 768px (rows of controls)
 ```
 
 ```ts

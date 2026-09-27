@@ -84,6 +84,10 @@ export interface DataGridProps {
    * banner, passed in rather than fetched here.
    */
   notice?: React.ReactNode;
+  /** Where the grid becomes stacked records: below 500px ('sm', the default), or below
+   *  768px ('md') for a grid whose rows hold controls — a time, a select, an order — that
+   *  cannot share a tablet's row at a usable width. */
+  stack?: 'sm' | 'md';
   className?: string;
 }
 
@@ -130,6 +134,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
   activeId,
   onRowClick,
   notice,
+  stack = 'sm',
   className = '',
 }) => {
   const [query, setQuery] = useState('');
@@ -248,7 +253,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
   };
 
   return (
-    <div className={`riser-grid ${className}`.trim()}>
+    <div className={['riser-grid', stack === 'md' && 'riser-grid--stack-md', className].filter(Boolean).join(' ')}>
       {hasHeader ? (
       <div className="riser-grid__header">
         <div className="riser-grid__heading">
