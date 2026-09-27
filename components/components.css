@@ -155,6 +155,12 @@
   box-shadow: var(--shadow-none);
 }
 
+/* The phone step comes before the modifiers so that they win at every width. It sat
+   after them, at the same specificity, so below 500px a `padding="none"` card took
+   16px: riser.events' page headers, flush cards with their own banner, put their text
+   32px in on a phone. */
+@media (max-width: 500px) { .riser-card { padding: var(--space-4); } }
+
 .riser-card--flush   { padding: 0; }
 .riser-card--tight   { padding: var(--space-4); }
 .riser-card--ink     { background: var(--surface-inverse); color: var(--text-on-ink); border-color: transparent; }
@@ -192,8 +198,6 @@
   justify-content: flex-end;
   gap: var(--space-3);
 }
-
-@media (max-width: 500px) { .riser-card { padding: var(--space-4); } }
 
 /* A card that bleeds (riser-measure--bleed, rule 10) runs edge to edge below --bp-lg, and
    its own padding is what keeps its content off the viewport's edge. That padding is the
