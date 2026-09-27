@@ -63,6 +63,28 @@
   transform: none !important;
 }
 
+/* ---- In the auth card, the card is the frame (rule 15). ----
+   The kit pads its own container, 20px above 600px and 2vw below it, and holds it at
+   least 300px wide above 600px. Inside riser-auth-card that put the form inside the
+   card's padding a second time: its fields 23px from the edge of a 320px phone and 36px
+   on a tablet, where the navbar's content and every other page's fields sit on the 16px
+   gutter, and 20px inside the card's half-width column on a desktop. The card's padding
+   is now the form's only inset. The container keeps its bottom padding. Measured on
+   riser.events' sign-in at 320, 375, 768 and 1240px. */
+.riser-auth-card [class*="signInFormContainer"] {
+  min-width: 0 !important;
+  padding-inline: 0 !important;
+}
+
+/* ---- The kit's buttons are 44px targets (rule 8). ----
+   The kit sets its type in vw on a phone and sizes its buttons by their padding, so on
+   a 320px phone Sign In came out 40px tall and Register 38px. The fields were already
+   44px (vendor/syncfusion.css sizes the input group). */
+[class*="signInFormButton"],
+[class*="signInFormBottomButton"] {
+  min-height: var(--control-height-lg) !important;
+}
+
 /* ============================================================
    The part this file cannot fix, and the app must.
 
