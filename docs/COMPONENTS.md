@@ -176,7 +176,7 @@ interface ColumnConfig {
   label: string
   key: string
   render?: (value: any, row: any) => ReactNode
-  sortable?: boolean
+  sortable?: boolean                   // the header is one button: ascending, descending, off
   data?: boolean                       // mono, tabular figures
   responsive?: { breakpoint: number; width: number }[]
 }

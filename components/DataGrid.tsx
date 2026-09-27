@@ -210,13 +210,18 @@ export const DataGrid: React.FC<DataGridProps> = ({
     return { width: `${width}%` };
   };
 
-  const toggleSort = (key: string, direction: 'asc' | 'desc') => {
-    if (sortColumn === key && sortDirection === direction) {
-      setSortColumn(null);
+  // One press per step: ascending, then descending, then unsorted.
+  const cycleSort = (key: string) => {
+    if (sortColumn !== key) {
+      setSortColumn(key);
+      setSortDirection('asc');
       return;
     }
-    setSortColumn(key);
-    setSortDirection(direction);
+    if (sortDirection === 'asc') {
+      setSortDirection('desc');
+      return;
+    }
+    setSortColumn(null);
   };
 
   const handleRowClick = (row: any, event: React.MouseEvent) => {
@@ -313,33 +318,30 @@ export const DataGrid: React.FC<DataGridProps> = ({
                       : undefined
                   }
                 >
-                  <span>{column.label}</span>
                   {column.sortable ? (
-                    <span className="riser-grid__sort">
-                      <button
-                        type="button"
-                        className={[
-                          'riser-grid__sort-btn',
-                          sortColumn === column.key && sortDirection === 'asc' && 'riser-grid__sort-btn--active',
-                        ].filter(Boolean).join(' ')}
-                        onClick={() => toggleSort(column.key, 'asc')}
-                        aria-label={`Sort ${column.label} ascending`}
-                      >
-                        <svg width="9" height="5" viewBox="0 0 9 5" aria-hidden><path d="M0 5 4.5 0 9 5Z" fill="currentColor" /></svg>
-                      </button>
-                      <button
-                        type="button"
-                        className={[
-                          'riser-grid__sort-btn',
-                          sortColumn === column.key && sortDirection === 'desc' && 'riser-grid__sort-btn--active',
-                        ].filter(Boolean).join(' ')}
-                        onClick={() => toggleSort(column.key, 'desc')}
-                        aria-label={`Sort ${column.label} descending`}
-                      >
-                        <svg width="9" height="5" viewBox="0 0 9 5" aria-hidden><path d="M0 0 4.5 5 9 0Z" fill="currentColor" /></svg>
-                      </button>
-                    </span>
-                  ) : null}
+                    /* The whole cell is one button (rule 8). It was two arrow buttons 9px by
+                       5px, the only way to sort, and on a tablet no finger could land one. The
+                       arrows stay as the state; aria-sort on the header says it aloud. */
+                    <button
+                      type="button"
+                      className="riser-grid__sort-btn"
+                      onClick={() => cycleSort(column.key)}
+                    >
+                      <span>{column.label}</span>
+                      <span className="riser-grid__sort" aria-hidden>
+                        <svg
+                          className={sortColumn === column.key && sortDirection === 'asc' ? 'riser-grid__sort-arrow--active' : undefined}
+                          width="9" height="5" viewBox="0 0 9 5"
+                        ><path d="M0 5 4.5 0 9 5Z" fill="currentColor" /></svg>
+                        <svg
+                          className={sortColumn === column.key && sortDirection === 'desc' ? 'riser-grid__sort-arrow--active' : undefined}
+                          width="9" height="5" viewBox="0 0 9 5"
+                        ><path d="M0 0 4.5 5 9 0Z" fill="currentColor" /></svg>
+                      </span>
+                    </button>
+                  ) : (
+                    <span>{column.label}</span>
+                  )}
                 </div>
               ))}
             </div>
