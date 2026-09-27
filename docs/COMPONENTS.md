@@ -45,6 +45,8 @@ padding?:     'default' | 'tight' | 'none'    // 26 / 16 / 0
 dashed?:      boolean                          // specification and measurement only
 interactive?: boolean                          // hover takes the rule to ink; no lift
 onClick?:     () => void
+as?:          'div' | 'section' | 'article' | 'aside' | 'header'   // default 'div'
+// plus every HTMLAttributes: id, aria-*, role, …
 ```
 
 Events' `.pru-stat-card` and `.dru-description-section` and Promo's

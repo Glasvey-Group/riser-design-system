@@ -1118,6 +1118,13 @@
   flex: 0 0 auto;
 }
 .riser-navbar__logo img, .riser-navbar__logo svg { height: 28px; width: auto; display: block; }
+/* The app passes its own Link around the lockup, so the target is set on the element:
+   the lockup stays 28px and the link around it is 44px tall (rule 8). It was 28. */
+.riser-navbar__logo > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height-lg);
+}
 
 /* 44px, as every control is (rule 8), and on a phone this is the control: it was 36. */
 .riser-navbar__menu-btn {
@@ -1525,6 +1532,14 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
   gap: var(--space-4);
 }
 
+/* A brand's lockup arrives wrapped in the app's Link; the target is 44px however short
+   the logo file is. */
+.riser-footer__brand > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height-lg);
+}
+
 .riser-footer__columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -1548,10 +1563,11 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
   line-height: 1.2;
 }
 
+/* Each link is a 44px row (rule 8), so the column carries no gap of its own: the rows
+   are the rhythm. They were 22px rows 8px apart. */
 .riser-footer__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
 }
 
 /* Element selectors, because every link inside arrives from the app in the app's own
@@ -1559,6 +1575,7 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 .riser-footer__nav a {
   display: inline-flex;
   align-items: center;
+  min-height: var(--control-height-lg);
   gap: var(--space-2);
   color: var(--paper-on-ink);
   text-decoration: none;
@@ -1581,8 +1598,8 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: var(--control-height-lg);
+  height: var(--control-height-lg);
   color: var(--paper-on-ink);
   background: var(--surface-hover-on-ink);
   border: var(--hairline) solid var(--line-on-ink);
@@ -1619,10 +1636,13 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 .riser-footer__legal {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-5);
+  column-gap: var(--space-5);
 }
 
 .riser-footer__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height-lg);
   color: var(--paper-on-ink);
   text-decoration: none;
   font-size: var(--text-small);
@@ -1631,8 +1651,11 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 
 .riser-footer__legal a:hover { color: var(--text-on-ink); }
 
+/* The inner is the measure, so it takes no inline padding of its own (rule 10): on a phone
+   it was 20px inside the measure's 16px gutter, and the footer's text sat 36px in while
+   everything above it sat at 16. */
 @media (max-width: 768px) {
-  .riser-footer__inner { padding: var(--space-7) var(--space-5) var(--space-5); }
+  .riser-footer__inner { padding: var(--space-7) 0 var(--space-5); }
   .riser-footer__top { grid-template-columns: 1fr; gap: var(--space-6); }
   .riser-footer__brand { gap: var(--space-3); }
   /* Two by two: Explore and Riser, then Contact and Follow. */

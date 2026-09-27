@@ -15,8 +15,14 @@ import React from 'react';
 export type CardTone = 'paper' | 'ink' | 'accent';
 export type CardPadding = 'default' | 'tight' | 'none';
 
-export interface CardProps {
+/** The elements a card is. A page section that is a card is a `section`. */
+export type CardElement = 'div' | 'section' | 'article' | 'aside' | 'header';
+
+export interface CardProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'className' | 'children' | 'onClick'> {
   children: React.ReactNode;
+  /** The element to render; `div` unless the card is a section of the page. */
+  as?: CardElement;
   tone?: CardTone;
   padding?: CardPadding;
   /** Dashed hairline. For specification and measurement only. */
@@ -41,12 +47,14 @@ const PADDING_CLASS: Record<CardPadding, string> = {
 
 export const Card: React.FC<CardProps> = ({
   children,
+  as = 'div',
   tone = 'paper',
   padding = 'default',
   dashed = false,
   interactive = false,
   onClick,
   className = '',
+  ...rest
 }) => {
   const classes = [
     'riser-card',
@@ -57,15 +65,20 @@ export const Card: React.FC<CardProps> = ({
     className,
   ].filter(Boolean).join(' ');
 
+  /* id, aria-label and the rest pass through: a section a stat links to needs its id,
+     and a landmark needs its label. riser.events had pages hand-writing riser-card on a
+     <section> because the component could not carry either. */
+  const Element = as as React.ElementType;
   return (
-    <div
+    <Element
+      {...rest}
       className={classes}
       onClick={onClick}
-      role={interactive ? 'button' : undefined}
-      tabIndex={interactive ? 0 : undefined}
+      role={interactive ? 'button' : rest.role}
+      tabIndex={interactive ? 0 : rest.tabIndex}
     >
       {children}
-    </div>
+    </Element>
   );
 };
 
