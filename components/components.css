@@ -479,6 +479,8 @@
 /* ================================================== Filter dropdown */
 
 .riser-filter { position: relative; }
+.riser-filter--block,
+.riser-filter--block .riser-filter__trigger { width: 100%; }
 
 /* 44px, not 36px. Rule 8 gives the system two control heights — 44, and 28 inside a
    table row — and 36 is neither. It read as a bug rather than a variant wherever the

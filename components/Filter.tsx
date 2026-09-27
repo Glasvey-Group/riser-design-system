@@ -25,6 +25,9 @@ export interface FilterProps {
   /** Option shown first, selecting everything. Pass null to omit. */
   allLabel?: string | null;
   align?: 'left' | 'right';
+  /** Fill the width it is given, as Button's `block` does: two filters sharing a phone's
+   *  width each take half, instead of sitting at their labels' widths. */
+  block?: boolean;
   className?: string;
 }
 
@@ -37,6 +40,7 @@ export const Filter: React.FC<FilterProps> = ({
   label,
   allLabel = ALL,
   align = 'right',
+  block = false,
   className = '',
 }) => {
   const [open, setOpen] = useState(false);
@@ -62,7 +66,7 @@ export const Filter: React.FC<FilterProps> = ({
   const display = selected ? selected.value : allLabel ?? '';
 
   return (
-    <div className={`riser-filter ${className}`.trim()} ref={ref}>
+    <div className={['riser-filter', block && 'riser-filter--block', className].filter(Boolean).join(' ')} ref={ref}>
       <button
         type="button"
         className="riser-filter__trigger"

@@ -143,6 +143,7 @@ onChange: (id: string) => void
 label?: string
 allLabel?: string | null     // default 'All'
 align?: 'left' | 'right'
+block?: boolean              // fill the width it is given, like Button's block
 ```
 
 Promo built the same control inline inside DataGrid. DataGrid now renders this one.
