@@ -297,6 +297,28 @@
   background: var(--surface-hover) !important;
 }
 
+/* ---- Rich text editor toolbar on a touch screen. Every button is a 44px target (rule 8),
+   as every other control on the page is: they were 32x28, and the format menu's label
+   11px. The editor's toolbar is the Expand type, so what no longer fits in the row moves
+   to its overflow row rather than wrapping. ---- */
+@media (max-width: 960px) {
+  .e-richtexteditor .e-toolbar,
+  .e-richtexteditor .e-toolbar .e-toolbar-items,
+  .e-richtexteditor .e-toolbar .e-toolbar-item {
+    min-height: var(--control-height-lg) !important;
+  }
+
+  .e-richtexteditor .e-toolbar .e-toolbar-item .e-tbar-btn,
+  .e-richtexteditor .e-toolbar .e-toolbar-item .e-rte-dropdown-btn {
+    min-width: var(--control-height-lg) !important;
+    min-height: var(--control-height-lg) !important;
+  }
+
+  .e-richtexteditor .e-rte-dropdown-btn-text {
+    font-size: var(--text-small) !important;
+  }
+}
+
 /* ---- Motion. Nothing scales, nothing ripples. ---- */
 .e-control .e-ripple,
 .e-ripple-element,

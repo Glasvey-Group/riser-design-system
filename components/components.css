@@ -443,10 +443,13 @@
 
    Consuming apps had five of these, one per screen that needed a checkbox, and each had
    picked its own font-size and colour for the text. */
+/* The row is the target, 44px tall (rule 8): the box itself is 18px, and on a phone that
+   was all a thumb had to hit. */
 .riser-check-row {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-height: var(--control-height-lg);
   font-size: var(--text-body-size);
   color: var(--text-primary);
   cursor: pointer;
