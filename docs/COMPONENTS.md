@@ -151,7 +151,7 @@ Promo built the same control inline inside DataGrid. DataGrid now renders this o
 ## DataGrid — E `components/ui/DataGrid/DataGrid.tsx` (canonical)
 
 ```ts
-title: string
+title: string                // '' with searchable={false} and no filter: no header (a form section titles it)
 columns: ColumnConfig[]
 data: any[]
 pageSize?: number            // default 10 — page count only; the parent slices

@@ -139,6 +139,9 @@ export const DataGrid: React.FC<DataGridProps> = ({
   const windowWidth = useWindowWidth();
 
   const hasFilter = filterOptions.length > 0;
+  /* A grid inside a form section is titled by the section: with no title, search or
+     filter of its own it draws no header, rather than an empty heading and 16px under it. */
+  const hasHeader = Boolean(title) || searchable || hasFilter;
 
   const visibleColumns = useMemo(() => {
     if (windowWidth === 0) return columns;
@@ -246,6 +249,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
 
   return (
     <div className={`riser-grid ${className}`.trim()}>
+      {hasHeader ? (
       <div className="riser-grid__header">
         <div className="riser-grid__heading">
           <h2 className="riser-grid__title">{title}</h2>
@@ -273,6 +277,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
           ) : null}
         </div>
       </div>
+      ) : null}
 
       {notice}
 
