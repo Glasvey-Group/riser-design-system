@@ -712,6 +712,11 @@
 
 .riser-pagination__pages { display: flex; align-items: center; gap: var(--space-1); }
 
+/* The standalone pager is the page numbers alone, with no Prev and Next to spread
+   between, so it sits at the end of its row, as a form's actions do (rule 9). Spread
+   like DataGrid's, its one group landed at the start. A phone still centres it. */
+.riser-pagination--end { justify-content: flex-end; }
+
 /* A page number is a control, so 44px (rule 8); the row wraps on a phone rather than
    shrinking its targets. */
 .riser-pagination__page {

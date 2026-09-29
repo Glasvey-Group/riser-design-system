@@ -12,7 +12,8 @@ import React from 'react';
  *
  * The active page is marked by a 2px ink rule under the number, not a filled
  * pill. Numbers are mono with tabular figures so the row does not reflow as the
- * page count changes.
+ * page count changes. The row sits at the end of the list, right-aligned; on a
+ * phone it centres.
  */
 
 export interface PaginationProps {
@@ -50,7 +51,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   for (let i = start; i <= end; i += 1) pages.push(i);
 
   return (
-    <nav className={`riser-pagination ${className}`.trim()} aria-label="Pagination">
+    <nav className={`riser-pagination riser-pagination--end ${className}`.trim()} aria-label="Pagination">
       <div className="riser-pagination__pages">
         {showEdges ? (
           <button

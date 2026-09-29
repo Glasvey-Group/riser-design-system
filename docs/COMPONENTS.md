@@ -204,7 +204,9 @@ showEdges?: boolean     // first/last jumps — default true
 windowSize?: number     // default 3, as Events had it
 ```
 
-For paginated card lists. Grids use DataGrid's own pagination.
+For paginated card lists. Grids use DataGrid's own pagination. The row is right-aligned
+under the list, since it has no Prev and Next to spread between as DataGrid's does; on a
+phone it centres (v1.29.9).
 
 ## DetailView — E+P (identical contracts)
 
