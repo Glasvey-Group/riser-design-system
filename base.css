@@ -106,6 +106,7 @@ button:disabled { cursor: not-allowed; }
 .riser-detail__label,
 .riser-empty__label,
 .riser-grid__head-cell,
+.riser-grid__count,
 .riser-loading-screen__text,
 .riser-navbar__context,
 .riser-drawer__section-title,

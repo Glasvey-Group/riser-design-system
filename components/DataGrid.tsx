@@ -65,6 +65,11 @@ export interface DataGridProps {
   showPagination?: boolean;
   /** Total items in the database, not in `data`. */
   totalCount?: number;
+  /**
+   * What the count under the title counts, singular and plural: ['campaign', 'campaigns']
+   * reads "24 CAMPAIGNS". Without it the count is of results.
+   */
+  countNoun?: [string, string];
   /** 1-indexed. */
   activePageNumber?: number;
   onPageChange?: (pageIndex: number) => void;
@@ -123,6 +128,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
   pageSize = 10,
   showPagination = false,
   totalCount = 0,
+  countNoun = ['result', 'results'],
   activePageNumber = 1,
   onPageChange,
   emptyMessage = 'No data available',
@@ -264,7 +270,7 @@ export const DataGrid: React.FC<DataGridProps> = ({
         <div className="riser-grid__heading">
           <h2 className="riser-grid__title">{title}</h2>
           {showPagination && totalCount > 0 ? (
-            <span className="riser-grid__count">{totalCount}</span>
+            <span className="riser-grid__count">{totalCount} {totalCount === 1 ? countNoun[0] : countNoun[1]}</span>
           ) : null}
         </div>
 

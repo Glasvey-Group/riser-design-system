@@ -56,6 +56,8 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    that will drift, and a `.thing-group label` descendant rule outranks `.riser-field__label`
    and silently keeps the old size after the markup has been migrated. Reach for `Field`
    for anything in a form and `.riser-label` for a caption that is not part of a component.
+   A count is a label too: the number with what it counts, on its own line under the
+   title it counts for, "27 BRANDS", never a bare number beside the title.
 7. **An icon is the colour of what it sits in, and a button's only icon is a create's
    plus.** A leading Lucide `Plus` through `icon` when
    the button creates a new record — never a literal "+" in the label, which is a unicode

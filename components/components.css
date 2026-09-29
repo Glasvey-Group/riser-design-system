@@ -558,15 +558,13 @@
   margin-bottom: var(--space-4);
 }
 
-.riser-grid__heading { display: flex; align-items: baseline; gap: var(--space-2); }
-.riser-grid__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
-.riser-grid__count {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
-}
+/* The title, and on its own line under it what the grid holds: "24 CAMPAIGNS". A count is
+   a label with its noun (rule 6), never a bare number beside the title, which read as
+   anything or nothing. The title's margin is the component's, so an app's heading rule
+   cannot push the count away from it. */
+.riser-grid__heading { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); }
+.riser-grid__title { margin: 0; font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+.riser-grid__count { font-variant-numeric: tabular-nums; }
 .riser-grid__controls { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
 
 .riser-grid__table { width: 100%; }

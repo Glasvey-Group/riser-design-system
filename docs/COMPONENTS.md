@@ -157,6 +157,7 @@ data: any[]
 pageSize?: number            // default 10 — page count only; the parent slices
 showPagination?: boolean
 totalCount?: number          // total in the database, not in `data`
+countNoun?: [string, string] // ['campaign', 'campaigns'] → "24 CAMPAIGNS" under the title; default results
 activePageNumber?: number    // 1-indexed
 onPageChange?: (pageIndex: number) => void
 emptyMessage?: string
@@ -193,6 +194,10 @@ is now `notice`, and the fetching belongs to the screen.
 
 Below 500px the grid becomes stacked records, each cell labelled by its column through
 `data-label`.
+
+With `showPagination` the count sits on its own line under the title as a label with its
+noun, "24 CAMPAIGNS", never a bare number beside the title (v1.29.10). Pass `countNoun`;
+a grid without one counts results.
 
 ## Pagination — E `components/ui/Pagination.tsx`
 
