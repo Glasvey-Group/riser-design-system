@@ -843,6 +843,13 @@
 .riser-expander--open > .riser-expander__panel > .riser-expander__content {
   animation: riser-rise var(--duration-base) var(--ease-out) both;
 }
+
+/* Once settled the rise is over, so it goes: an animation that fills forwards keeps its
+   element a stacking context in Chrome, and a dropdown inside painted under whatever
+   followed the panel, riser.events' event cards under their filters. */
+.riser-expander--open.riser-expander--settled > .riser-expander__panel > .riser-expander__content {
+  animation: none;
+}
 /* ================================================== FormActions
    Where a form's buttons live. The modal's own actions row shares the treatment.
 
