@@ -68,7 +68,11 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    Select, Textarea and date picker, so a button on a field row lines up with the field
    beside it instead of floating short of it. `Button` defaults to this; there are only
    two heights and the other is `sm` (28px), for a control inside a table row or a chip.
-   Never reach for `md` — it is an alias kept so old call sites compile.
+   Never reach for `md` on `Button` — it is an alias of `lg`, kept so old call sites
+   compile. One case steps down that is not a `Button`: the icon toggles in a panel's
+   header, beside its title (a listing's filter and layout switch), are
+   `--control-height-md` (36px) below 500px. At 44px the group cannot share a phone's
+   line with the title and drops onto a line of its own.
 9. **A form's primary action is last, and the row is right-aligned.** Cancel then Save,
    never Save then Cancel: the eye finishes on the right, and that is where the action
    that commits belongs. Use `FormActions` (or `Modal`'s `primaryAction` /
@@ -129,7 +133,8 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    the package's widths, 360, 500, 768, 960, 1200 and 1440: stacking happens at 768, where
    the form grid stacks, and bleeding and the navbar's collapse happen at 960 with no local
    rule. No stylesheet shrinks text for a phone (the label token takes its 12px floor there
-   on its own), and no control is under 44px except inside a grid row or a chip. riser.events
+   on its own), and no control is under 44px except inside a grid row or a chip, and a panel
+   header's icon toggles below 500px (rule 8). riser.events
    had every panel choosing its own margin (10px auto, 0, 2rem), its own edge (bled, on the
    gutter, or `margin: 0` at 800px, which cancels the measure's centring and leaves the box
    short of the right edge) and its own breakpoint, fourteen of them, so one page showed
