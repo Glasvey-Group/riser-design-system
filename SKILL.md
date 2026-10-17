@@ -70,9 +70,9 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    two heights and the other is `sm` (28px), for a control inside a table row or a chip.
    Never reach for `md` on `Button` — it is an alias of `lg`, kept so old call sites
    compile. One case steps down that is not a `Button`: the icon toggles in a panel's
-   header, beside its title (a listing's filter and layout switch), are
-   `--control-height-md` (36px) below 500px. At 44px the group cannot share a phone's
-   line with the title and drops onto a line of its own.
+   header (a listing's filter and layout switch, on the count's line under its title) are
+   `--control-height-md` (36px) below 500px. At 44px the four take 185px of the 288px a
+   320px phone gives that line, and a four-figure count no longer fits beside them.
 9. **A form's primary action is last, and the row is right-aligned.** Cancel then Save,
    never Save then Cancel: the eye finishes on the right, and that is where the action
    that commits belongs. Use `FormActions` (or `Modal`'s `primaryAction` /
