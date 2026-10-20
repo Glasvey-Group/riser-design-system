@@ -61,6 +61,10 @@ from one rule in the package, so no app writes a phone padding for a panel.
 takes the whole card on a phone. The blocks of a page sit in
 `<div className="riser-stack riser-stack--page">`, which owns the gap between them.
 
+`CardHeader` and `CardFooter` take a `className` for what only the page knows about
+them, such as riser.events' order bar, a `CardFooter` that stays in view while its list
+scrolls (v1.30.0).
+
 ## SectionLabel
 
 ```ts
@@ -454,18 +458,49 @@ every render. It takes resolved strings now; do the joins in the screen or the l
 
 ```ts
 name, price, type?, description?
+priceNote?: string                 // under the price: "incl. $0.70 fee"
+salesWindow?: string               // formatted; drawn as a `when` Fact, "On sale …"
 status?: { label, tone }
 spec?: { label, value }[]         // quantity, order limits, sales window — mono, dashed rule
 flags?: string[]                   // refundable, service charge
 mode?: 'organizer' | 'buyer'
-quantity?, onQuantityChange?, maxQuantity?, minQuantity?
-action?: ReactNode
+layout?: 'card' | 'row'           // default 'card'
+quantity?, onQuantityChange?, maxQuantity?
+minQuantity?                       // the fewest a buyer takes when they take any; 0 is always allowed
+action?: ReactNode                 // card layout only
 ```
 
 The organiser card labelled every row with an emoji — 💰 price, 📦 quantity, 🛒 order
 limit, 📅 sales period, ↩️ refundable, 💳 service charge — and marked status with a "●"
 bullet. The brief is explicit: no emoji, and Unicode symbols are not icons. Mono caps
 labels do the work, which is also what makes the spec block scan as a spec block.
+
+`layout="row"` (v1.30.0) is one ticket in a buyer's list inside a panel, the event page's
+Tickets. It has no box of its own and a hairline between it and the next; the panel pads
+it. Below 768px the name has a line to itself and the price and the quantity share the
+next; from 768px all three share one. The last line is "More information", at the right,
+44px to touch, which swaps to "Hide information" and an up chevron (rule 11: the icon
+swaps, nothing rotates) and opens the description, the sales window and the flags in an
+`Expander` under a dashed rule.
+
+```tsx
+<Card as="section" className="riser-measure riser-measure--bleed">
+  <h2 className="riser-h2">Tickets</h2>
+  {tickets.map((t) => (
+    <TicketCard key={t.id} layout="row" mode="buyer" name={t.name} type="GA"
+      price="$7.70" priceNote="incl. $0.70 fee" salesWindow={window}
+      flags={['Up to 5 per order', 'No refunds']}
+      quantity={picked[t.id] ?? 0} onQuantityChange={(n) => pick(t.id, n)} maxQuantity={5} />
+  ))}
+</Card>
+```
+
+The stepper's − and + are 44px touch areas drawn as 28px squares with Lucide's Minus and
+Plus: they were text characters (rule 7) on 36px buttons (rule 8). It steps from 0 to
+`minQuantity` and back, and stops at `maxQuantity`; a caller whose ticket has fewer left
+than its minimum shows "Sold out" instead. A buyer ticket with no `onQuantityChange`
+shows its `status` where the stepper would be: "On sale Fri 12 Sep, 9:00 AM", "Sales
+ended", "Sold out". Never the `live` tone there: the page's orange is its Buy.
 
 ## Dropzone — P upload-audience screen
 

@@ -73,6 +73,9 @@ changing an existing Riser codebase, read `docs/MIGRATION.md` first — the old 
    header (a listing's filter and layout switch, on the count's line under its title) are
    `--control-height-md` (36px) below 500px. At 44px the four take 185px of the 288px a
    320px phone gives that line, and a four-figure count no longer fits beside them.
+   The touch area is the control, and its drawing may be smaller: `TicketCard`'s stepper
+   draws its − and + as `--control-height-sm` squares in the middle of 44px touch areas,
+   so it sits at the height of the price beside it and a thumb still gets 44px.
 9. **A form's primary action is last, and the row is right-aligned.** Cancel then Save,
    never Save then Cancel: the eye finishes on the right, and that is where the action
    that commits belongs. Use `FormActions` (or `Modal`'s `primaryAction` /

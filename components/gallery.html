@@ -403,6 +403,49 @@
         <div class="riser-ticket__flags"><span class="riser-label riser-label--ink">Refundable</span><span class="riser-label riser-label--ink">Service charge</span></div>
       </div>
     </div>
+    <div class="riser-stack" style="gap:var(--space-3);margin-top:var(--space-7)">
+      <span class="riser-label">TicketCard layout="row" — a buyer's list in a panel. The squares are drawn at 28px; each takes a 44px tap.</span>
+      <div class="riser-card" style="max-width:760px">
+        <h2 class="riser-h2">Tickets</h2>
+        <div class="riser-ticket riser-ticket--row">
+          <div class="riser-ticket__head"><h3 class="riser-ticket__title">Early bird</h3><span class="riser-label riser-ticket__type">GA</span></div>
+          <div class="riser-ticket__price">£13.20<span class="riser-ticket__price-note">incl. £1.20 fee</span></div>
+          <div class="riser-ticket__quantity" role="group" aria-label="Early bird quantity">
+            <button type="button" class="riser-ticket__step" aria-label="Remove one Early bird"><svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <output class="riser-ticket__count">2</output>
+            <button type="button" class="riser-ticket__step" aria-label="Add one Early bird"><svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+          </div>
+          <button type="button" class="riser-ticket__toggle" aria-expanded="true">Hide information<svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
+          <div class="riser-expander riser-expander--open riser-expander--settled riser-ticket__more"><div class="riser-expander__panel"><div class="riser-expander__content"><div class="riser-ticket__terms">
+            <p class="riser-small">The first hundred through the door.</p>
+            <span class="riser-fact riser-fact--sm riser-fact--when riser-small"><svg class="riser-icon riser-icon--sm riser-fact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><span class="riser-fact__text">On sale Mon 1 Sep 2026, 9:00 AM – Fri 12 Sep, 8:00 PM BST</span></span>
+            <div class="riser-ticket__flags"><span class="riser-label riser-label--ink">Up to 6 per order</span><span class="riser-label riser-label--ink">Refundable</span></div>
+          </div></div></div></div>
+        </div>
+        <div class="riser-ticket riser-ticket--row">
+          <div class="riser-ticket__head"><h3 class="riser-ticket__title">General admission</h3><span class="riser-label riser-ticket__type">GA</span></div>
+          <div class="riser-ticket__price">£18.00</div>
+          <div class="riser-ticket__quantity" role="group" aria-label="General admission quantity">
+            <button type="button" class="riser-ticket__step" aria-label="Remove one General admission" disabled><svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <output class="riser-ticket__count">0</output>
+            <button type="button" class="riser-ticket__step" aria-label="Add one General admission"><svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+          </div>
+          <button type="button" class="riser-ticket__toggle" aria-expanded="false">More information<svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="riser-ticket riser-ticket--row">
+          <div class="riser-ticket__head"><h3 class="riser-ticket__title">VIP balcony</h3><span class="riser-label riser-ticket__type">VIP</span></div>
+          <div class="riser-ticket__price">£45.00</div>
+          <span class="riser-badge riser-badge--stopped riser-ticket__status">Sold out</span>
+          <button type="button" class="riser-ticket__toggle" aria-expanded="false">More information<svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+        <div class="riser-ticket riser-ticket--row">
+          <div class="riser-ticket__head"><h3 class="riser-ticket__title">Last orders</h3><span class="riser-label riser-ticket__type">GA</span></div>
+          <div class="riser-ticket__price">£20.00</div>
+          <span class="riser-badge riser-badge--neutral riser-ticket__status">On sale Fri 12 Sep, 9:00 AM</span>
+          <button type="button" class="riser-ticket__toggle" aria-expanded="false">More information<svg class="riser-icon riser-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- DROPZONE / EMPTY -->

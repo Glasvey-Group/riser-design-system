@@ -1403,11 +1403,12 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 
 .riser-ticket__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
 .riser-ticket__header > * { min-width: 0; }
-.riser-ticket__title { font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+/* Margins are zeroed here, not left to the element: an app's own h3 and p rules (riser.events
+   gives every h3 a 16px bottom margin) otherwise land inside the card's spacing. */
+.riser-ticket__title { margin: 0; font-size: var(--text-h3); font-weight: var(--weight-bold); letter-spacing: var(--tracking-heading); }
+.riser-ticket__description { margin: 0; }
 
-.riser-ticket__type {
-  margin-top: var(--space-1);
-}
+.riser-ticket__header .riser-ticket__type { margin-top: var(--space-1); }
 
 .riser-ticket__price {
   font-family: var(--font-display);
@@ -1416,6 +1417,16 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
   font-variant-numeric: tabular-nums;
   letter-spacing: var(--tracking-heading);
   color: var(--text-primary);
+}
+
+/* What the price includes: "incl. $0.70 fee". A sentence, so the small size, not the label. */
+.riser-ticket__price-note {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--text-small);
+  font-weight: var(--weight-regular);
+  letter-spacing: normal;
+  color: var(--text-secondary);
 }
 
 /* Specification and measurement are marked with dashed hairlines. A ticket's
@@ -1433,25 +1444,131 @@ a.riser-fact:hover .riser-fact__text { text-decoration: underline; }
 
 .riser-ticket__flags { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
-.riser-ticket__quantity { display: inline-flex; align-items: stretch; border: var(--hairline) solid var(--border-dashed); }
-.riser-ticket__quantity button {
-  width: var(--control-height-md);
-  height: var(--control-height-md);
-  background: transparent;
+.riser-ticket__actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.riser-ticket__actions--end { justify-content: flex-end; }
+
+/* The stepper. Each − and + is a 44px touch area (rule 8) drawn as a 28px square, so the
+   stepper reads at the height of the price beside it. The group's negative margins put the
+   squares, not the touch areas, on the content's edges. */
+.riser-ticket__quantity {
+  display: inline-flex;
+  align-items: center;
+  margin-inline: calc((var(--control-height-sm) - var(--control-height-lg)) / 2);
+}
+.riser-ticket__step {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--control-height-lg);
+  height: var(--control-height-lg);
+  padding: 0;
   border: 0;
+  background: transparent;
   color: var(--text-primary);
+  cursor: pointer;
+}
+.riser-ticket__step::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--control-height-lg) - var(--control-height-sm)) / 2);
+  border: var(--hairline) solid var(--border-dashed);
+  background: var(--surface-raised);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.riser-ticket__step > .riser-icon { position: relative; }
+.riser-ticket__step:hover:not(:disabled)::before { border-color: var(--ink); }
+/* The focus ring goes round the square the eye sees, not the larger touch area. */
+.riser-ticket__step:focus-visible { outline: none; }
+.riser-ticket__step:focus-visible::before { outline: var(--rule-heavy) solid var(--focus-ring); outline-offset: 2px; }
+.riser-ticket__step:disabled { color: var(--text-disabled); cursor: default; }
+.riser-ticket__step:disabled::before { border-color: var(--border-disabled); }
+.riser-ticket__count {
+  min-width: 2ch;
+  text-align: center;
   font-family: var(--font-mono);
   font-size: var(--text-body-size);
-}
-.riser-ticket__quantity button:hover:not(:disabled) { background: var(--surface-hover); }
-.riser-ticket__quantity button:disabled { color: var(--text-disabled); }
-.riser-ticket__quantity output {
-  min-width: var(--control-height-md);
-  display: grid;
-  place-content: center;
-  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  border-inline: var(--hairline) solid var(--border-hairline);
+  color: var(--text-primary);
+}
+
+/* layout="row": one ticket in a buyer's list inside a panel. No box of its own and a
+   hairline between tickets; the panel's padding is theirs. From 768px the name, the price
+   and the quantity share a line. "More information" is always the last line, at the
+   right, and opens the terms under it. The control column has a floor so that a price
+   beside a stepper and one beside a short status line up down the list. */
+.riser-ticket--row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(calc(var(--control-height-lg) * 2), auto);
+  grid-template-areas:
+    "head price control"
+    "toggle toggle toggle"
+    "more more more";
+  align-items: center;
+  gap: 0 var(--space-6);
+  padding: var(--space-4) 0 var(--space-1);
+  border: 0;
+  background: none;
+}
+.riser-ticket--row + .riser-ticket--row { border-top: var(--hairline) solid var(--border-hairline); }
+
+.riser-ticket__head { grid-area: head; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3); min-width: 0; }
+
+.riser-ticket--row .riser-ticket__price {
+  grid-area: price;
+  justify-self: end;
+  text-align: right;
+  font-size: var(--text-body-size);
+  letter-spacing: normal;
+}
+
+.riser-ticket--row .riser-ticket__quantity { grid-area: control; justify-self: end; }
+.riser-ticket__status { grid-area: control; justify-self: end; align-self: center; white-space: normal; text-align: right; }
+
+.riser-ticket__toggle {
+  grid-area: toggle;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height-lg);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.riser-ticket__toggle:hover { color: var(--text-primary); }
+
+.riser-ticket__more { grid-area: more; }
+.riser-ticket__terms {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-4) var(--space-3);
+  border-top: var(--hairline) dashed var(--border-dashed);
+}
+/* The terms carry the dashed rule, so a spec inside them needs none of its own. */
+.riser-ticket__terms .riser-ticket__spec { padding-top: 0; border-top: 0; }
+
+/* The name takes a line of its own; the price and the quantity share the next. The price
+   column is the price's own width and the control takes the rest, so a long status wraps
+   beside the price instead of pushing it off a 320px screen. */
+@media (max-width: 768px) {
+  .riser-ticket--row {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "head head"
+      "price control"
+      "toggle toggle"
+      "more more";
+    column-gap: var(--space-4);
+  }
+  .riser-ticket__head { margin-bottom: var(--space-2); }
+  .riser-ticket--row .riser-ticket__price { justify-self: start; text-align: left; }
 }
 
 @media (max-width: 500px) { .riser-ticket__spec { grid-template-columns: 1fr; } }

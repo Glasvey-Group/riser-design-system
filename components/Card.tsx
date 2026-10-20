@@ -82,16 +82,20 @@ export const Card: React.FC<CardProps> = ({
   );
 };
 
-export const CardHeader: React.FC<{ title: React.ReactNode; actions?: React.ReactNode }> = ({
+export const CardHeader: React.FC<{ title: React.ReactNode; actions?: React.ReactNode; className?: string }> = ({
   title,
   actions,
+  className = '',
 }) => (
-  <div className="riser-card__header">
+  <div className={`riser-card__header ${className}`.trim()}>
     <h2 className="riser-card__title">{title}</h2>
     {actions ? <div className="riser-card__actions">{actions}</div> : null}
   </div>
 );
 
-export const CardFooter: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="riser-card__footer">{children}</div>
+/* className is for what only the page knows about its footer, such as riser.events'
+   order bar staying in view while its list scrolls. Without it the page had to hang a
+   wrapper round the footer to carry one rule. */
+export const CardFooter: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
+  <div className={`riser-card__footer ${className}`.trim()}>{children}</div>
 );
